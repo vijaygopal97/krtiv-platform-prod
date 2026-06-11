@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, trim: true },
   dob: { type: Date },
   interests: [{ type: String }],
+  role: { type: String, enum: ['user', 'admin'], default: 'user' },
   resetToken: { type: String },
   resetTokenExpiry: { type: Date },
 }, { timestamps: true });

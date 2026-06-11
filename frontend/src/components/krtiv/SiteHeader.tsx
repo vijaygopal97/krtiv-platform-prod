@@ -6,10 +6,12 @@ import { krtivLogo } from "@/lib/krtivPaths";
 export function SiteHeader({
   variant = "auto",
   isAuthenticated = false,
+  isAdmin = false,
 }: {
   /** "auto" = transparent over hero, frosted on scroll. "solid" = always frosted on ivory. */
   variant?: "auto" | "solid";
   isAuthenticated?: boolean;
+  isAdmin?: boolean;
 }) {
   const [scrolled, setScrolled] = useState(variant === "solid");
   const [open, setOpen] = useState(false);
@@ -83,8 +85,21 @@ export function SiteHeader({
               <span aria-hidden>→</span>
             </Link>
             {isAuthenticated ? (
-              <Link
-                href="/dashboard"
+              <>
+                {isAdmin && (
+                  <Link
+                    href="/admin/hero"
+                    className={`hidden md:inline-flex text-[13px] px-3 h-9 items-center rounded-full transition-colors ${
+                      isLight
+                        ? "border hairline text-[color:var(--ink)] hover:bg-[color:var(--bone)]"
+                        : "border border-white/25 text-white hover:bg-white/10"
+                    }`}
+                  >
+                    Hero CMS
+                  </Link>
+                )}
+                <Link
+                  href="/dashboard"
                 className={`text-[13px] px-4 h-9 inline-flex items-center rounded-full transition-colors ${
                   isLight
                     ? "bg-[color:var(--ink)] text-white hover:opacity-90"
@@ -93,6 +108,7 @@ export function SiteHeader({
               >
                 Dashboard
               </Link>
+              </>
             ) : (
               <Link
                 href="/login"

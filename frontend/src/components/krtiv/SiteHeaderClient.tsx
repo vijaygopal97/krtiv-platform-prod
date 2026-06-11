@@ -10,10 +10,18 @@ export function SiteHeaderClient({
   variant?: 'auto' | 'solid';
 }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     setIsAuthenticated(authService.isAuthenticated());
+    setIsAdmin(authService.isAdmin());
   }, []);
 
-  return <SiteHeader variant={variant} isAuthenticated={isAuthenticated} />;
+  return (
+    <SiteHeader
+      variant={variant}
+      isAuthenticated={isAuthenticated}
+      isAdmin={isAdmin}
+    />
+  );
 }

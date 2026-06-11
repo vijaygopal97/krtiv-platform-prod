@@ -1,13 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { authService } from '@/services/authService';
 import { AuthShell } from '@/components/krtiv/AuthShell';
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const nextPath = searchParams.get('next') || '/';
   const [formData, setFormData] = useState({ emailOrPhone: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -18,7 +20,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await authService.login(formData.emailOrPhone, formData.password);
-      router.push('/');
+      router.push(nextPath.startsWith('/') ? nextPath : '/');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Invalid email/phone or password');
     } finally {
@@ -83,5 +85,13 @@ export default function LoginPage() {
         New here? <Link href="/register" className="text-[color:var(--ink)] underline-offset-4 hover:underline">Create an account</Link>
       </p>
     </AuthShell>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<main className="min-h-screen grid place-items-center bg-[color:var(--ivory)]">Loading…</main>}>
+      <LoginForm />
+    </Suspense>
   );
 }

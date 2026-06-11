@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { headers, cookies } from 'next/headers';
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
-import { HeroSection } from '@/components/krtiv/HeroSection';
+import { CategoryHeroSection } from '@/components/krtiv/CategoryHeroSection';
 import { CategoryHeroVideo } from '@/components/krtiv/CategoryHeroVideo';
 import { ItineraryStory } from '@/components/krtiv/ItineraryStory';
 import { MaharashtraMap } from '@/components/krtiv/MaharashtraMap';
@@ -163,7 +163,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     <main className="bg-[color:var(--ivory)] text-[color:var(--ink)]">
       <PersistPreferredLang lang={preferredLanguage} shouldPersist={!fromCookie} />
       <SiteHeaderClient />
-      <HeroSection
+      <CategoryHeroSection
+        category={category}
         eyebrow={staticItinerary.title}
         title={staticItinerary.subtitle}
         subtitle={staticItinerary.description}

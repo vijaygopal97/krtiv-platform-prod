@@ -12,6 +12,7 @@ export interface User {
   phone?: string;
   dob?: string;
   interests?: string[];
+  role?: string;
   token: string;
 }
 
@@ -85,5 +86,9 @@ export const authService = {
 
   isAuthenticated(): boolean {
     return !!this.getCurrentUser();
+  },
+
+  isAdmin(): boolean {
+    return this.getCurrentUser()?.role === 'admin';
   },
 };

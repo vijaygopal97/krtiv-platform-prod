@@ -1,5 +1,10 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
+import { HeroBackgroundSlider } from "./HeroBackgroundSlider";
+import { ThemeAnimationLayer, type HeroThemeKey } from "./ThemeAnimationLayer";
+import type { HeroSlideRecord } from "@/lib/heroSlideTypes";
+import { resolveSlideImage } from "@/lib/heroSlidesApi";
 
 type HeroProps = {
   eyebrow?: string;
@@ -7,6 +12,9 @@ type HeroProps = {
   titleAccent?: string;
   subtitle?: string;
   image: string;
+  slides?: HeroSlideRecord[];
+  showThemeAnimation?: boolean;
+  themeAnimationTheme?: HeroThemeKey;
   primaryHref?: string;
   primaryLabel?: string;
   secondaryHref?: string;
@@ -44,11 +52,17 @@ export function HeroSection({
   exploreLabel = "Explore itinerary",
   videoSlot,
   children,
+  slides,
+  showThemeAnimation = false,
+  themeAnimationTheme = "home",
 }: HeroProps) {
   const [y, setY] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [reaction, setReaction] = useState<"up" | "down" | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const bgImage =
+    slides?.[0] ? resolveSlideImage(slides[0].imageUrl) : image;
 
   useEffect(() => {
     const onScroll = () => setY(window.scrollY);
@@ -72,31 +86,36 @@ export function HeroSection({
     }
   };
 
-  const poster = videoPoster ?? image;
+  const poster = videoPoster ?? bgImage;
   const hasLiveVideo = Boolean(videoSlot);
+  const useSlider = Boolean(slides && slides.length > 0);
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-[color:var(--ink)] text-white">
-      {/* Parallax background */}
-      <div
-        className="absolute inset-0 will-change-transform"
-        style={{ transform: `translate3d(0, ${y * 0.35}px, 0)` }}
-        aria-hidden
-      >
-        <img
-          src={image}
-          alt=""
-          className="w-full h-[120%] object-cover ken-burns"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/85" />
+      {useSlider ? (
+        <HeroBackgroundSlider slides={slides!} scrollY={y} />
+      ) : (
         <div
-          className="absolute inset-0 opacity-60"
-          style={{
-            background:
-              "radial-gradient(ellipse at 30% 40%, transparent 0%, rgba(0,0,0,0.6) 80%)",
-          }}
-        />
-      </div>
+          className="absolute inset-0 will-change-transform"
+          style={{ transform: `translate3d(0, ${y * 0.35}px, 0)` }}
+          aria-hidden
+        >
+          <img
+            src={image}
+            alt=""
+            className="w-full h-[120%] object-cover ken-burns"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/85" />
+          <div
+            className="absolute inset-0 opacity-60"
+            style={{
+              background:
+                "radial-gradient(ellipse at 30% 40%, transparent 0%, rgba(0,0,0,0.6) 80%)",
+            }}
+          />
+        </div>
+      )}
+      {showThemeAnimation && <ThemeAnimationLayer theme={themeAnimationTheme} />}
 
       {/* Content */}
       <div
@@ -119,7 +138,7 @@ export function HeroSection({
                   style={{ animationDelay: "200ms" }}
                 >
                   {title}{" "}
-                  {titleAccent && (
+                  {!useSlider && titleAccent && (
                     <span className="italic hero-title-accent">
                       {titleAccent}
                     </span>
@@ -302,7 +321,7 @@ export function HeroSection({
         </div>
 
         {/* Scroll cue */}
-        <div className="relative pb-10 flex justify-center">
+        <div className={`relative flex justify-center ${useSlider ? "pb-6" : "pb-10"}`}>
           <a
             href="#explore-by-categories"
             className="group flex flex-col items-center gap-2 text-white/70 hover:text-white transition"

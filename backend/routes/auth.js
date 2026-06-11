@@ -8,11 +8,22 @@ const JWT_SECRET = process.env.JWT_SECRET || 'kraik-dev-secret-change-in-product
 
 const generateToken = (user) => {
   return jwt.sign(
-    { id: user._id, email: user.email },
+    { id: user._id, email: user.email, role: user.role || 'user' },
     JWT_SECRET,
     { expiresIn: '7d' }
   );
 };
+
+const userPayload = (user, token) => ({
+  id: user._id.toString(),
+  email: user.email,
+  name: user.name,
+  phone: user.phone,
+  dob: user.dob,
+  interests: user.interests,
+  role: user.role || 'user',
+  token,
+});
 
 router.post('/register', async (req, res) => {
   try {
@@ -46,15 +57,7 @@ router.post('/register', async (req, res) => {
     const token = generateToken(user);
     res.status(201).json({
       success: true,
-      user: {
-        id: user._id.toString(),
-        email: user.email,
-        name: user.name,
-        phone: user.phone,
-        dob: user.dob,
-        interests: user.interests,
-        token,
-      },
+      user: userPayload(user, token),
     });
   } catch (err) {
     console.error('Register error:', err);
@@ -83,15 +86,7 @@ router.post('/login', async (req, res) => {
     const token = generateToken(user);
     res.json({
       success: true,
-      user: {
-        id: user._id.toString(),
-        email: user.email,
-        name: user.name,
-        phone: user.phone,
-        dob: user.dob,
-        interests: user.interests,
-        token,
-      },
+      user: userPayload(user, token),
     });
   } catch (err) {
     console.error('Login error:', err.message || err);
