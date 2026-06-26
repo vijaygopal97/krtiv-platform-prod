@@ -1,6 +1,7 @@
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
-import { HomeHeroSection } from '@/components/krtiv/HomeHeroSection';
+import { HomeHeroWithPlanner } from '@/components/krtiv/HomeHeroWithPlanner';
+import { FloatingInterestBubbles } from '@/components/krtiv/FloatingInterestBubbles';
 import { CategoryShowcase } from '@/components/krtiv/CategoryShowcase';
 import { IntroBand } from '@/components/krtiv/IntroBand';
 import { SignatureExperiences } from '@/components/krtiv/SignatureExperiences';
@@ -16,9 +17,10 @@ export default function HomePage() {
   return (
     <main className="bg-[color:var(--ivory)] text-[color:var(--ink)]">
       <SiteHeaderClient />
-      <HomeHeroSection />
+      <HomeHeroWithPlanner />
+      <FloatingInterestBubbles />
+      <CategoryShowcase showPlanner={false} />
       <IntroBand />
-      <CategoryShowcase />
       <SignatureExperiences />
       <CtaBandInteractive />
       <SiteFooter />

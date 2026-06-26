@@ -1,0 +1,59 @@
+:root {
+  --site-header-height: 4rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --site-header-height: 5rem;
+  }
+}
+
+.site-header {
+  transition:
+    background-color 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease,
+    backdrop-filter 300ms ease;
+}
+
+.site-header--transparent {
+  background: transparent;
+  box-shadow: none;
+  border-bottom-color: transparent;
+}
+
+.site-header--opaque {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/** Hero copy clears fixed header (all breakpoints). */
+.hero-content-offset {
+  padding-top: calc(var(--site-header-height) + max(1.75rem, env(safe-area-inset-top, 0px) + 1rem));
+}
+
+@media (min-width: 768px) {
+  .hero-content-offset {
+    padding-top: calc(var(--site-header-height) + 2.25rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-content-offset {
+    padding-top: calc(var(--site-header-height) + 2.75rem);
+  }
+}
+
+/** Non-hero pages: first section below fixed header. */
+.page-below-header {
+  padding-top: calc(var(--site-header-height) + 1.25rem);
+}
+
+@media (min-width: 768px) {
+  .page-below-header {
+    padding-top: calc(var(--site-header-height) + 1.75rem);
+  }
+}

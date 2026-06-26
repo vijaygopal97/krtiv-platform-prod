@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/authService';
 import { ScrollReveal } from '@/components/krtiv/ScrollReveal';
+import { PLAN_WITH_AI_HREF } from '@/lib/siteNavigation';
 import { krtivHeroImage } from '@/lib/krtivPaths';
 
 export function CtaBandInteractive() {
@@ -21,12 +22,10 @@ export function CtaBandInteractive() {
   const [formLoading, setFormLoading] = useState(false);
 
   const handleGenerateClick = useCallback(() => {
-    if (authService.isAuthenticated()) {
-      router.push('/dashboard');
-    } else {
-      setShowSignupLightbox(true);
+    if (typeof window !== 'undefined') {
+      window.location.href = PLAN_WITH_AI_HREF;
     }
-  }, [router]);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

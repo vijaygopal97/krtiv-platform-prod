@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/authService';
 import { AuthShell } from '@/components/krtiv/AuthShell';
+import GoogleSignInButton from '@/components/GoogleSignInButton';
+import FacebookSignInButton from '@/components/FacebookSignInButton';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -92,6 +94,26 @@ export default function RegisterPage() {
           {loading ? 'Creating account...' : 'Create account'}
         </button>
       </form>
+      <div className="relative my-8">
+        <div className="absolute inset-0 flex items-center" aria-hidden>
+          <div className="w-full border-t hairline" />
+        </div>
+        <p className="relative flex justify-center text-xs uppercase tracking-widest text-[color:var(--ink-soft)]">
+          <span className="bg-[color:var(--ivory)] px-3">or</span>
+        </p>
+      </div>
+      <GoogleSignInButton
+        mode="signup"
+        onSuccess={() => router.push('/dashboard')}
+        onError={(m) => setError(m)}
+      />
+      <div className="mt-3">
+        <FacebookSignInButton
+          onSuccess={() => router.push('/dashboard')}
+          onError={(m) => setError(m)}
+          disabled={loading}
+        />
+      </div>
       <p className="mt-8 text-sm text-[color:var(--ink-soft)] text-center">
         Already have an account? <Link href="/login" className="text-[color:var(--ink)] underline-offset-4 hover:underline">Sign in</Link>
       </p>

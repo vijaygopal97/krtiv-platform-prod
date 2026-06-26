@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SiteHeaderClient } from "@/components/krtiv/SiteHeaderClient";
+import { AdminShell } from "@/components/admin/AdminShell";
 import { SiteFooter } from "@/components/krtiv/SiteFooter";
 import { authService } from "@/services/authService";
 import {
@@ -148,24 +148,20 @@ export default function AdminHeroPage() {
 
   if (!ready) {
     return (
-      <main className="min-h-screen grid place-items-center bg-[color:var(--ivory)]">
+      <main className="min-h-screen bg-[color:var(--ivory)] pt-20 md:pt-24 grid place-items-center">
         <p className="text-[color:var(--ink-soft)]">Loading admin…</p>
       </main>
     );
   }
 
   return (
-    <main className="bg-[color:var(--ivory)] text-[color:var(--ink)] min-h-screen">
-      <SiteHeaderClient variant="solid" />
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-28 md:py-32">
+    <>
+    <AdminShell title="Hero CMS">
+      <div className="max-w-[1200px]">
+        <p className="lede mb-10 max-w-2xl text-[color:var(--ink-soft)]">
+          Manage homepage and category hero background slides. Hero copy stays fixed on each page — only the background image and bottom slide label rotate.
+        </p>
         <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
-          <div>
-            <p className="eyebrow">Admin</p>
-            <h1 className="display-md mt-2">Hero sliders</h1>
-            <p className="lede mt-3 max-w-2xl">
-              Manage homepage and category hero background slides. Hero copy stays fixed on each page — only the background image and bottom slide label rotate.
-            </p>
-          </div>
           <div className="flex flex-wrap items-center gap-3">
             <label className="text-sm text-[color:var(--ink-soft)]">
               Page
@@ -203,7 +199,7 @@ export default function AdminHeroPage() {
         <div className="grid lg:grid-cols-12 gap-10">
           <div className="lg:col-span-5">
             {editingId ? (
-              <div className="rounded-2xl border hairline bg-white p-6 shadow-sm sticky top-28">
+              <div className="rounded-2xl border hairline bg-white p-6 shadow-sm lg:sticky lg:top-28">
                 <h2 className="font-display text-xl mb-4">
                   {editingId === "new" ? "New slide" : "Edit slide"}
                 </h2>
@@ -410,7 +406,8 @@ export default function AdminHeroPage() {
           </Link>
         </p>
       </div>
+    </AdminShell>
       <SiteFooter />
-    </main>
+    </>
   );
 }

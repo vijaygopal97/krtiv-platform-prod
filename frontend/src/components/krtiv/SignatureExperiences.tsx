@@ -38,7 +38,7 @@ export function SignatureExperiences() {
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={120}>
-            <Link href="/#explore-by-categories" className="story-link hover:story-link-on">
+            <Link href="/explore#explore-smart-planner" className="story-link hover:story-link-on">
               See all journeys <span aria-hidden>→</span>
             </Link>
           </ScrollReveal>

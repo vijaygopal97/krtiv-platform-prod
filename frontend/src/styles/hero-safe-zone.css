@@ -1,0 +1,114 @@
+/* Hero overlay safe zone — keeps copy off the video focal area */
+
+.hero-safe-zone--lower {
+  justify-content: flex-end;
+}
+
+.hero-safe-zone--upper {
+  justify-content: flex-start;
+  padding-top: 0.5rem;
+}
+
+.hero-safe-zone--center {
+  justify-content: center;
+}
+
+.hero-safe-zone__copy {
+  position: relative;
+  width: 100%;
+  max-width: 48rem;
+}
+
+.hero-safe-zone--align-center .hero-safe-zone__copy {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.hero-copy-scrim {
+  position: relative;
+  isolation: isolate;
+  padding: 1.25rem 0.5rem 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .hero-copy-scrim {
+    padding: 1.5rem 1rem 0.5rem;
+  }
+}
+
+.hero-copy-scrim::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  left: 50%;
+  top: 50%;
+  width: min(120%, 56rem);
+  height: 140%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse 85% 75% at var(--hero-scrim-x, 50%) var(--hero-scrim-y, 80%),
+    rgba(12, 10, 8, var(--hero-scrim-strength, 0.55)) 0%,
+    rgba(12, 10, 8, calc(var(--hero-scrim-strength, 0.55) * 0.35)) 42%,
+    transparent 72%
+  );
+}
+
+.hero-video--pinned {
+  transform: none !important;
+}
+
+.hero-video--pinned .hero-video__el,
+.hero-video--pinned img {
+  object-position: var(--hero-video-object-position, 50% 45%);
+}
+
+.hero-video--safe-zone-light::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.28) 0%,
+    transparent 28%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+}
+
+@media (max-width: 767px) {
+  .hero-safe-zone--lower .hero-safe-zone__copy .display-xl,
+  .hero-safe-zone--lower .hero-safe-zone__copy .luxury-hero-heading {
+    font-size: clamp(1.75rem, 7vw, 2.35rem);
+    line-height: 1.12;
+  }
+
+  .hero-safe-zone--lower .hero-lede {
+    font-size: 0.95rem;
+    margin-top: 1rem;
+  }
+
+  .hero-safe-zone--lower .hero-cta-row {
+    margin-top: 1.5rem;
+  }
+
+  .hero-safe-zone--lower .hero-copy-scrim::before {
+    width: 140%;
+    height: 160%;
+  }
+}
+
+.hero-content-scroll {
+  transition:
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-content-scroll {
+    transition: none;
+  }
+}

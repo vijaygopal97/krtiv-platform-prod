@@ -51,6 +51,15 @@ const THEMES: Record<HeroThemeKey, ParticleSpec[]> = {
       durationRange: [18, 30],
       color: GOLD,
     },
+    {
+      count: 14,
+      symbol: "✦",
+      anim: "float-up",
+      sizeRange: [5, 11],
+      opacityRange: [0.2, 0.55],
+      durationRange: [14, 24],
+      color: GOLD,
+    },
   ],
   spiritual: [
     {
@@ -82,6 +91,15 @@ const THEMES: Record<HeroThemeKey, ParticleSpec[]> = {
       durationRange: [12, 22],
       color: MOSS,
     },
+    {
+      count: 12,
+      symbol: "✧",
+      anim: "float-up",
+      sizeRange: [4, 9],
+      opacityRange: [0.25, 0.6],
+      durationRange: [10, 18],
+      color: "color-mix(in oklab, var(--ivory) 70%, transparent)",
+    },
   ],
   culinary: [
     {
@@ -92,6 +110,15 @@ const THEMES: Record<HeroThemeKey, ParticleSpec[]> = {
       opacityRange: [0.1, 0.3],
       durationRange: [10, 18],
       color: "color-mix(in oklab, var(--ivory) 80%, transparent)",
+    },
+    {
+      count: 16,
+      symbol: "·",
+      anim: "drift-side",
+      sizeRange: [5, 12],
+      opacityRange: [0.2, 0.5],
+      durationRange: [16, 28],
+      color: MARIGOLD,
     },
   ],
   "art-culture": [
@@ -113,6 +140,15 @@ const THEMES: Record<HeroThemeKey, ParticleSpec[]> = {
       sizeRange: [40, 120],
       opacityRange: [0.1, 0.35],
       durationRange: [4, 9],
+      color: TEAL,
+    },
+    {
+      count: 14,
+      symbol: "✦",
+      anim: "float-up",
+      sizeRange: [4, 10],
+      opacityRange: [0.25, 0.65],
+      durationRange: [8, 16],
       color: TEAL,
     },
   ],
@@ -138,8 +174,33 @@ const THEMES: Record<HeroThemeKey, ParticleSpec[]> = {
   ],
 };
 
-function rand(a: number, b: number) {
-  return a + Math.random() * (b - a);
+/** Deterministic PRNG so SSR and client hydration match (no Math.random). */
+function hashSeed(...parts: (string | number)[]) {
+  let h = 2166136261;
+  for (const p of parts) {
+    const s = String(p);
+    for (let i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+  }
+  return h >>> 0;
+}
+
+function createSeededRng(seed: number) {
+  let state = seed || 1;
+  return (min: number, max: number) => {
+    state = (state + 0x6d2b79f5) | 0;
+    let t = Math.imul(state ^ (state >>> 15), 1 | state);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    const u = ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    return min + u * (max - min);
+  };
+}
+
+function roundStyle(n: number, digits = 4) {
+  const f = 10 ** digits;
+  return Math.round(n * f) / f;
 }
 
 export function resolveHeroThemeKey(category?: string): HeroThemeKey {
@@ -171,14 +232,15 @@ export function ThemeAnimationLayer({ theme = "home" }: Props) {
 
     specs.forEach((spec, si) => {
       for (let i = 0; i < spec.count; i++) {
+        const rng = createSeededRng(hashSeed(theme, si, i));
         list.push({
           key: `${theme}-${si}-${i}`,
           symbol: spec.symbol,
-          left: `${rand(0, 100)}%`,
-          size: rand(spec.sizeRange[0], spec.sizeRange[1]),
-          duration: rand(spec.durationRange[0], spec.durationRange[1]),
-          delay: -rand(0, spec.durationRange[1]),
-          opacity: rand(spec.opacityRange[0], spec.opacityRange[1]),
+          left: `${roundStyle(rng(0, 100))}%`,
+          size: roundStyle(rng(spec.sizeRange[0], spec.sizeRange[1]), 3),
+          duration: roundStyle(rng(spec.durationRange[0], spec.durationRange[1]), 3),
+          delay: -roundStyle(rng(0, spec.durationRange[1]), 3),
+          opacity: roundStyle(rng(spec.opacityRange[0], spec.opacityRange[1]), 4),
           anim: spec.anim,
           color: spec.color,
         });

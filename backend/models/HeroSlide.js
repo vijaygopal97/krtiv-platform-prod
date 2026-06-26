@@ -14,6 +14,10 @@ const heroSlideSchema = new mongoose.Schema(
     scope: { type: String, default: 'home', trim: true, index: true },
     sortOrder: { type: Number, default: 0 },
     active: { type: Boolean, default: true },
+    impressions: { type: Number, default: 0 },
+    clicks: { type: Number, default: 0 },
+    scheduledStart: { type: Date, default: null },
+    scheduledEnd: { type: Date, default: null },
   },
   { timestamps: true }
 );

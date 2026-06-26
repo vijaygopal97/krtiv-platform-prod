@@ -1,6 +1,8 @@
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
 import { ScrollReveal } from '@/components/krtiv/ScrollReveal';
+import SmartKeywordItinerary from '@/components/itinerary/SmartKeywordItinerary';
+import { SITE_HEADER_OFFSET_CLASS } from '@/lib/siteNavigation';
 
 export const metadata = { title: 'About — Maharashtra Tourism' };
 
@@ -8,7 +10,7 @@ export default function AboutPage() {
   return (
     <main className="bg-[color:var(--ivory)] text-[color:var(--ink)]">
       <SiteHeaderClient variant="solid" />
-      <section className="pt-40 pb-24 md:pt-48 md:pb-32">
+      <section className={`${SITE_HEADER_OFFSET_CLASS} pb-24 md:pb-32`}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
           <ScrollReveal>
             <p className="eyebrow">About us</p>
@@ -40,6 +42,13 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <SmartKeywordItinerary
+        context="explore"
+        heading="Plan your Maharashtra trip"
+        subheading="Select interests and generate your itinerary without leaving this page."
+        className="border-t hairline bg-white"
+        compact
+      />
       <SiteFooter />
     </main>
   );

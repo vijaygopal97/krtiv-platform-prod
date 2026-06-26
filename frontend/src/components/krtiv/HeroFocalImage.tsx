@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   getHeroFocalStyles,
   isMobileHeroViewport,
-} from "@/lib/heroFocalPosition";
+} from "@/lib/heroMobileFocalPosition";
 
 type Props = {
   src: string;
@@ -27,6 +27,7 @@ export function HeroFocalImage({
   const [frameSize, setFrameSize] = useState({ w: 0, h: 0 });
   const [imageSize, setImageSize] = useState({ w: 0, h: 0 });
   const [viewportW, setViewportW] = useState(0);
+  const [isLandscape, setIsLandscape] = useState(false);
 
   useEffect(() => {
     const el = frameRef.current;
@@ -35,16 +36,19 @@ export function HeroFocalImage({
     const update = () => {
       setFrameSize({ w: el.clientWidth, h: el.clientHeight });
       setViewportW(window.innerWidth);
+      setIsLandscape(window.innerWidth > window.innerHeight);
     };
 
     update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
     window.addEventListener("resize", update, { passive: true });
+    window.addEventListener("orientationchange", update, { passive: true });
 
     return () => {
       ro.disconnect();
       window.removeEventListener("resize", update);
+      window.removeEventListener("orientationchange", update);
     };
   }, []);
 
@@ -57,6 +61,7 @@ export function HeroFocalImage({
     focalX,
     focalY,
     isMobile,
+    isLandscape,
   });
 
   const motionClass = useMobileFocal
@@ -64,11 +69,11 @@ export function HeroFocalImage({
     : kenBurnsClass;
 
   return (
-    <div ref={frameRef} className="absolute inset-0 overflow-hidden">
+    <div ref={frameRef} className="hero-focal-frame absolute inset-0 overflow-hidden">
       <img
         src={src}
         alt={alt}
-        className={`hero-focal-image w-full h-full object-cover md:h-[120%] ${motionClass}`}
+        className={`hero-focal-image object-cover w-full h-full md:h-[120%] ${motionClass}`}
         style={{
           objectPosition,
           ...(useMobileFocal ? { transformOrigin } : {}),

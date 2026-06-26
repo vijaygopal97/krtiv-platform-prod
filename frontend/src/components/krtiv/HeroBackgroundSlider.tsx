@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { resolveSlideImage } from "@/lib/heroSlidesApi";
+import { resolveSlideImage, trackHeroSlide } from "@/lib/heroSlidesApi";
 import type { HeroSlideRecord } from "@/lib/heroSlideTypes";
 import { HeroFocalImage } from "@/components/krtiv/HeroFocalImage";
 
@@ -31,6 +31,11 @@ export function HeroBackgroundSlider({ slides, scrollY }: Props) {
     return () => window.clearInterval(id);
   }, [slides.length]);
 
+  useEffect(() => {
+    const slide = slides[index];
+    if (slide?._id) trackHeroSlide(slide._id, "impression");
+  }, [index, slides]);
+
   const goTo = (i: number) => {
     if (i === index) return;
     setPrevIndex(index);
@@ -44,10 +49,11 @@ export function HeroBackgroundSlider({ slides, scrollY }: Props) {
   return (
     <>
       <div
-        className="absolute inset-0 will-change-transform"
+        className="absolute inset-0 z-0 min-h-[100svh] will-change-transform"
         style={{ transform: `translate3d(0, ${scrollY * 0.35}px, 0)` }}
         aria-hidden
       >
+        <div className="hero-bg-stack hero-bg-pointer-layer absolute inset-0 min-h-[100svh]">
         {slides.map((slide, i) => {
           const visible = i === index || (isTransitioning && i === prevIndex);
           const active = i === index;
@@ -69,14 +75,15 @@ export function HeroBackgroundSlider({ slides, scrollY }: Props) {
             </div>
           );
         })}
-        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-black/55 via-black/35 to-black/85" />
+        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-black/30 via-black/12 to-black/38 md:from-black/22 md:via-black/8 md:to-black/28" />
         <div
-          className="absolute inset-0 z-[2] opacity-60"
+          className="absolute inset-0 z-[2] opacity-30 md:opacity-20"
           style={{
             background:
-              "radial-gradient(ellipse at 30% 40%, transparent 0%, rgba(0,0,0,0.6) 80%)",
+              "radial-gradient(ellipse at 30% 40%, transparent 0%, rgba(0,0,0,0.42) 80%)",
           }}
         />
+        </div>
       </div>
 
       {slides.length > 1 && (

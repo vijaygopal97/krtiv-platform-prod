@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { HeroSection } from "@/components/krtiv/HeroSection";
-import { HomeHeroVideo } from "@/components/krtiv/HomeHeroVideo";
 import { fetchPublicHeroSlides } from "@/lib/heroSlidesApi";
 import { getDefaultSlidesForScope, HOME_SCOPE } from "@/data/heroSlidesData";
 import { krtivHeroImage } from "@/lib/krtivPaths";
@@ -23,11 +22,8 @@ export function HomeHeroSection() {
   useEffect(() => {
     fetchPublicHeroSlides(HOME_SCOPE)
       .then((apiSlides) => {
-        if (apiSlides.length > 0) {
-          setSlides(apiSlides);
-          return;
-        }
-        setSlides(getDefaultSlidesForScope(HOME_SCOPE));
+        if (apiSlides.length > 0) setSlides(apiSlides);
+        else setSlides(getDefaultSlidesForScope(HOME_SCOPE));
       })
       .catch(() => setSlides(getDefaultSlidesForScope(HOME_SCOPE)))
       .finally(() => setLoaded(true));
@@ -35,20 +31,16 @@ export function HomeHeroSection() {
 
   return (
     <HeroSection
+      pageVideoScope={HOME_SCOPE}
       slides={loaded && slides.length > 0 ? slides : undefined}
       eyebrow={FALLBACK.eyebrow}
       title={FALLBACK.title}
       subtitle={FALLBACK.subtitle}
       image={FALLBACK.image}
-      videoTitle="Watch The Journey Through Maharashtra"
-      videoMeta="Featured · Maharashtra Tourism"
       primaryHref="/#itinerary-generator"
       primaryLabel="Plan with AI"
-      secondaryHref="/#explore-by-categories"
-      secondaryLabel="Explore the state"
-      exploreHref="/#explore-by-categories"
-      exploreLabel="Explore itineraries"
-      videoSlot={<HomeHeroVideo />}
+      secondaryHref="/explore#explore-smart-planner"
+      secondaryLabel="Things to Do"
       showThemeAnimation
       themeAnimationTheme="home"
     />

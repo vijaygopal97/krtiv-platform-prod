@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Trimbakeshwar Temple", "Jyotirlinga shrine, sacred architecture, spiritual heritage", "Begin your journey at one of the twelve Jyotirlingas of Lord Shiva. Surrounded by the Brahmagiri Hills, this revered temple is a cornerstone of Nashik's spiritual identity."],
+      ["AFTERNOON", "Brahmagiri Hills & Origin of the Godavari", "Pilgrimage trail, scenic views, sacred source", "Explore the hills believed to be the birthplace of the Godavari River and experience the blend of natural beauty and religious significance."],
+      ["EVENING", "Ramkund & Panchavati", "Holy ghats, Ramayana connection, evening prayers", "Walk through the sacred heart of Nashik, where legends from the Ramayana come alive amidst ancient temples and riverside rituals."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Sula Vineyards", "Wine tasting, vineyard tours, countryside views", "Discover Nashik's reputation as India's Wine Capital with a guided tour through lush vineyards and an introduction to the art of winemaking."],
+      ["AFTERNOON", "York Winery & Gangapur Backwaters", "Scenic landscapes, local wines, waterfront views", "Enjoy panoramic views of the surrounding countryside while sampling regional wines and relaxing by the tranquil backwaters."],
+      ["EVENING", "Sunset at Gangapur Dam", "Golden-hour views, photography, peaceful retreat", "Watch the sun set over the reservoir and experience a quieter side of Nashik away from the city's bustle."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Pandavleni Caves", "Ancient rock-cut caves, Buddhist heritage, hilltop views", "Climb to this remarkable group of caves dating back nearly two thousand years and admire inscriptions, sculptures, and sweeping views of the city."],
+      ["AFTERNOON", "Coin Museum & Local Heritage Circuit", "Numismatic history, cultural insights, educational experience", "Explore one of India's unique museums dedicated to the history of currency and gain deeper insights into the region's rich past."],
+      ["EVENING", "Godavari Riverfront Walk", "Local markets, temples, cultural atmosphere", "Conclude your Nashik experience with a leisurely stroll along the riverfront, soaking in the city's spiritual charm and vibrant local life."]
+    ]
+  }
+]

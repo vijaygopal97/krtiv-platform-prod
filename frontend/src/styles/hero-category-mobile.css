@@ -1,0 +1,87 @@
+/**
+ * Premium category heroes + sky canvas categories — mobile layout fixes.
+ */
+
+@media (max-width: 1023px) {
+  .category-hero-section {
+    overflow-x: clip;
+  }
+
+  .category-hero-section .category-hero-inner {
+    /* hero-content-offset on parent supplies header clearance */
+    padding-top: calc(var(--site-header-height) + max(2rem, env(safe-area-inset-top, 0px) + 1.25rem));
+    padding-bottom: 2rem;
+  }
+
+  .category-hero-section .hero-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .category-hero-section .hero-cta-row > a,
+  .category-hero-section .hero-cta-row > button {
+    width: 100%;
+    justify-content: center;
+    min-height: 3rem;
+  }
+
+  .category-hero-section .hero-video-card {
+    width: 100%;
+    max-width: min(90vw, 28rem);
+    margin-inline: auto;
+  }
+
+  .category-hero-section .hero-video-card .aspect-video {
+    max-height: min(52vw, 16rem);
+  }
+
+  .category-hero-section .hero-video-card [class*="video-player"],
+  .category-hero-section .hero-video-card .video-player-root {
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 767px) {
+  .category-hero-section .hero-theme-particle:nth-child(n + 14) {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .category-hero-section .krtiv-hero-interactive-btn {
+    transition:
+      transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 280ms ease;
+  }
+
+  .category-hero-section .krtiv-hero-interactive-btn:hover {
+    transform: scale(1.05);
+  }
+
+  .category-hero-section .krtiv-hero-interactive-btn--primary:hover {
+    box-shadow: 0 14px 40px -10px rgba(244, 180, 90, 0.95);
+  }
+
+  .category-hero-section .krtiv-hero-card-hover {
+    transition:
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 320ms ease;
+  }
+
+  .category-hero-section .krtiv-hero-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 36px 90px -24px rgba(0, 0, 0, 0.55);
+  }
+
+  .category-hero-section .krtiv-hero-card-hover .aspect-video img,
+  .category-hero-section .krtiv-hero-card-hover .aspect-video video {
+    transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .category-hero-section .krtiv-hero-card-hover:hover .aspect-video img,
+  .category-hero-section .krtiv-hero-card-hover:hover .aspect-video video {
+    transform: scale(1.03);
+  }
+}

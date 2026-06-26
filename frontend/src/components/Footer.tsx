@@ -47,7 +47,7 @@ export default function Footer() {
 
         <div className="mt-10 pt-8 border-t border-white/15 text-center">
           <p className="text-orange-200/90 text-sm">
-            Developed by <span className="text-white font-semibold">Convergent x SignPost</span>
+            Developed by <span className="text-white font-semibold">eFlag Corp.</span>
           </p>
         </div>
       </div>

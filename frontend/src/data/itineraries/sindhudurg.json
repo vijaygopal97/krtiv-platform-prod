@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Sindhudurg Fort", "Sea fort, Maratha heritage, coastal architecture", "Begin your journey at the magnificent island fort built by Chhatrapati Shivaji Maharaj. Explore its massive fortifications and discover the naval legacy that once safeguarded the Konkan coast."],
+      ["AFTERNOON", "Tarkarli Beach", "White sands, crystal-clear waters, water sports", "Relax on one of Maharashtra's most beautiful beaches, renowned for its pristine shoreline and clear waters ideal for swimming and adventure activities."],
+      ["EVENING", "Tarkarli Sunset Cruise", "Backwaters, coastal scenery, photography", "Sail through the tranquil waters as the sun sets over the Arabian Sea, offering spectacular views of the Konkan coastline."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Devbag Beach & Sangam Point", "River-sea confluence, boating, scenic landscapes", "Visit the picturesque meeting point of the Karli River and the Arabian Sea, where serene waters and stunning natural beauty create a unique coastal experience."],
+      ["AFTERNOON", "Scuba Diving & Snorkelling", "Marine life, underwater exploration, adventure", "Discover the vibrant underwater world of Sindhudurg through guided diving and snorkelling experiences in some of Maharashtra's clearest waters."],
+      ["EVENING", "Tsunami Island", "Water sports, beach activities, coastal recreation", "Enjoy a variety of exciting water-based adventures while taking in panoramic views of the surrounding beaches and estuaries."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Vijaydurg Fort", "Historic fortification, naval history, sea views", "Explore one of the strongest sea forts of the Maratha Empire, celebrated for its strategic location and remarkable defensive design."],
+      ["AFTERNOON", "Rock Garden, Malvan", "Coastal viewpoints, ocean vistas, relaxation", "Take in dramatic views of crashing waves against rocky shores and enjoy one of the region's most scenic coastal promenades."],
+      ["EVENING", "Malvan Food Trail", "Malvani cuisine, seafood specialties, local culture", "Conclude your journey by savouring authentic Malvani delicacies, famous for their bold flavours and rich culinary traditions."]
+    ]
+  }
+]

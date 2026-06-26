@@ -1,24 +1,56 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { krtivLogo } from "@/lib/krtivPaths";
+import { SiteNavMenus } from "@/components/krtiv/SiteNavMenus";
+import { PLAN_WITH_AI_HREF } from "@/lib/siteNavigation";
 
 export function SiteHeader({
   variant = "auto",
   isAuthenticated = false,
   isAdmin = false,
+  userName,
+  profilePicture,
+  onLogout,
 }: {
-  /** "auto" = transparent over hero, frosted on scroll. "solid" = always frosted on ivory. */
   variant?: "auto" | "solid";
   isAuthenticated?: boolean;
   isAdmin?: boolean;
+  userName?: string;
+  profilePicture?: string;
+  onLogout?: () => void;
 }) {
+  const pathname = usePathname() ?? "/";
+  const headerRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(variant === "solid");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const syncHeight = () => {
+      const h = el.offsetHeight;
+      if (h > 0) {
+        document.documentElement.style.setProperty("--site-header-height", `${h}px`);
+      }
+    };
+
+    syncHeight();
+    const ro = new ResizeObserver(syncHeight);
+    ro.observe(el);
+    window.addEventListener("resize", syncHeight, { passive: true });
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", syncHeight);
+    };
+  }, []);
+
+  useEffect(() => {
     if (variant === "solid") return;
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -36,49 +68,49 @@ export function SiteHeader({
   const linkHover = isLight
     ? "hover:text-[color:var(--saffron)]"
     : "hover:text-white/80";
+  const navTone = {
+    textColor,
+    linkHover,
+  };
 
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-          isLight ? "frosted border-b hairline" : "bg-transparent"
+        ref={headerRef}
+        className={`site-header fixed top-0 inset-x-0 z-[9998] ${
+          isLight ? "site-header--opaque" : "site-header--transparent"
         }`}
       >
-        <div className="max-w-[1440px] mx-auto px-5 md:px-10 h-16 md:h-20 flex items-center justify-between">
-          <Link href="/" className={`flex items-center ${textColor}`} aria-label="Home">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-5 md:px-10 h-16 md:h-20 flex items-center justify-between gap-2">
+          <Link href="/" className={`flex shrink-0 items-center ${textColor}`} aria-label="Home">
             <img
               src={krtivLogo()}
               alt=""
-              className="w-16 h-16 md:w-20 md:h-20 object-contain"
+              className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain"
             />
           </Link>
 
           <nav
-            className={`hidden lg:flex items-center gap-9 text-[13px] tracking-wide ${textColor}`}
+            className={`hidden lg:flex items-center gap-5 xl:gap-7 text-[13px] tracking-wide ${textColor}`}
           >
-            <Link href="/#explore-by-categories" className={`transition-colors ${linkHover}`}>
-              Explore
-            </Link>
-            <Link href="/category/historical" className={`transition-colors ${linkHover}`}>
-              Heritage
-            </Link>
-            <Link href="/category/adventure" className={`transition-colors ${linkHover}`}>
-              Adventure
-            </Link>
-            <Link href="/category/culinary" className={`transition-colors ${linkHover}`}>
-              Culinary
-            </Link>
-            <Link href="/about" className={`transition-colors ${linkHover}`}>
+            <SiteNavMenus tone={navTone} pathname={pathname} />
+            <Link href="/about" className={`min-h-[44px] inline-flex items-center transition-colors ${linkHover}`}>
               About
             </Link>
-            <Link href="/contact" className={`transition-colors ${linkHover}`}>
+            <Link href="/contact" className={`min-h-[44px] inline-flex items-center transition-colors ${linkHover}`}>
               Contact
+            </Link>
+            <Link
+              href="/contest-registration"
+              className={`min-h-[44px] inline-flex items-center transition-colors ${linkHover}`}
+            >
+              Contest
             </Link>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Link
-              href="/#itinerary-generator"
+              href={PLAN_WITH_AI_HREF}
               className={`hidden md:inline-flex items-center gap-2 text-[13px] tracking-wide transition-colors ${textColor} ${linkHover}`}
             >
               <span>Plan your trip</span>
@@ -87,32 +119,71 @@ export function SiteHeader({
             {isAuthenticated ? (
               <>
                 {isAdmin && (
-                  <Link
-                    href="/admin/hero"
-                    className={`hidden md:inline-flex text-[13px] px-3 h-9 items-center rounded-full transition-colors ${
-                      isLight
-                        ? "border hairline text-[color:var(--ink)] hover:bg-[color:var(--bone)]"
-                        : "border border-white/25 text-white hover:bg-white/10"
-                    }`}
-                  >
-                    Hero CMS
-                  </Link>
+                  <>
+                    <Link
+                      href="/admin/analytics"
+                      className={`hidden md:inline-flex text-[13px] px-3 h-9 items-center rounded-full transition-colors ${
+                        isLight
+                          ? "border hairline text-[color:var(--ink)] hover:bg-[color:var(--bone)]"
+                          : "border border-white/25 text-white hover:bg-white/10"
+                      }`}
+                    >
+                      Analytics
+                    </Link>
+                    <Link
+                      href="/admin/hero"
+                      className={`hidden md:inline-flex text-[13px] px-3 h-9 items-center rounded-full transition-colors ${
+                        isLight
+                          ? "border hairline text-[color:var(--ink)] hover:bg-[color:var(--bone)]"
+                          : "border border-white/25 text-white hover:bg-white/10"
+                      }`}
+                    >
+                      Hero CMS
+                    </Link>
+                  </>
                 )}
+                {profilePicture ? (
+                  <img
+                    src={profilePicture}
+                    alt=""
+                    width={36}
+                    height={36}
+                    className="hidden sm:block w-9 h-9 rounded-full border border-white/30 object-cover"
+                  />
+                ) : null}
+                {userName ? (
+                  <span className={`hidden md:inline text-[13px] max-w-[8rem] truncate ${textColor}`}>
+                    {userName.split(" ")[0]}
+                  </span>
+                ) : null}
                 <Link
                   href="/dashboard"
-                className={`text-[13px] px-4 h-9 inline-flex items-center rounded-full transition-colors ${
-                  isLight
-                    ? "bg-[color:var(--ink)] text-white hover:opacity-90"
-                    : "bg-white/15 backdrop-blur-md text-white border border-white/25 hover:bg-white/25"
-                }`}
-              >
-                Dashboard
-              </Link>
+                  className={`text-[12px] sm:text-[13px] px-3 sm:px-4 h-9 inline-flex items-center rounded-full transition-colors ${
+                    isLight
+                      ? "bg-[color:var(--ink)] text-white hover:opacity-90"
+                      : "bg-white/15 backdrop-blur-md text-white border border-white/25 hover:bg-white/25"
+                  }`}
+                >
+                  Dashboard
+                </Link>
+                {onLogout ? (
+                  <button
+                    type="button"
+                    onClick={onLogout}
+                    className={`text-[13px] px-3 h-9 rounded-full border transition-colors ${
+                      isLight
+                        ? "hairline text-[color:var(--ink-soft)] hover:bg-[color:var(--bone)]"
+                        : "border-white/25 text-white/90 hover:bg-white/10"
+                    }`}
+                  >
+                    Logout
+                  </button>
+                ) : null}
               </>
             ) : (
               <Link
                 href="/login"
-                className={`text-[13px] px-4 h-9 inline-flex items-center rounded-full transition-colors ${
+                className={`text-[12px] sm:text-[13px] px-3 sm:px-4 h-9 inline-flex items-center rounded-full transition-colors ${
                   isLight
                     ? "bg-[color:var(--ink)] text-white hover:opacity-90"
                     : "bg-white text-[color:var(--ink)] hover:bg-white/90"
@@ -124,8 +195,9 @@ export function SiteHeader({
             <button
               type="button"
               aria-label="Open menu"
+              aria-expanded={open}
               onClick={() => setOpen(true)}
-              className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-full ${
+              className={`lg:hidden inline-flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 rounded-full ${
                 isLight ? "text-[color:var(--ink)]" : "text-white"
               }`}
             >
@@ -137,67 +209,65 @@ export function SiteHeader({
         </div>
       </header>
 
-      {/* Mobile drawer */}
       <div
-        className={`fixed inset-0 z-[60] lg:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[10001] lg:hidden transition-opacity duration-300 ${
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
+        <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} aria-hidden />
         <div
-          className="absolute inset-0 bg-black/40"
-          onClick={() => setOpen(false)}
-          aria-hidden
-        />
-        <div
-          className={`absolute inset-y-0 right-0 w-[88%] max-w-sm bg-[color:var(--ivory)] shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          className={`absolute inset-y-0 right-0 w-full max-w-[min(100%,24rem)] bg-[color:var(--ivory)] shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col z-[10002] ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between h-16 px-5 border-b hairline">
+          <div className="flex shrink-0 items-center justify-between h-16 px-4 sm:px-5 border-b hairline">
             <span className="font-display text-lg">Menu</span>
             <button
+              type="button"
               aria-label="Close menu"
-              onClick={() => setOpen(false)}
-              className="w-10 h-10 inline-flex items-center justify-center text-[color:var(--ink)]"
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpen(false);
+              }}
+              className="min-w-[44px] min-h-[44px] inline-flex items-center justify-center text-[color:var(--ink)]"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
               </svg>
             </button>
           </div>
-          <nav className="flex flex-col p-5 gap-1 text-lg font-display">
-            {[
-              ["Explore", "/#explore-by-categories"],
-              ["Heritage", "/category/historical"],
-              ["Adventure", "/category/adventure"],
-              ["Spiritual", "/category/spiritual"],
-              ["Culinary", "/category/culinary"],
-              ["Art & Culture", "/category/art-culture"],
-              ["Urban", "/category/urban"],
-              ["Weddings", "/category/weddings"],
-              ["About", "/about"],
-              ["Contact", "/contact"],
-            ].map(([label, href]) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className="py-3 border-b hairline last:border-0 hover:text-[color:var(--saffron)] transition-colors"
-              >
-                {label}
-              </Link>
-            ))}
+          <nav className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-5 font-display">
+            <SiteNavMenus tone={navTone} pathname={pathname} mobile onNavigate={() => setOpen(false)} />
+            <div className="mt-4 pt-4 border-t hairline space-y-1">
+              {[
+                ["About", "/about"],
+                ["Contact", "/contact"],
+                ["Contest", "/contest-registration"],
+                ["Plan your trip", PLAN_WITH_AI_HREF],
+              ].map(([label, href]) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className="block py-3 min-h-[44px] text-lg hover:text-[color:var(--saffron)] transition-colors"
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
           </nav>
-          <div className="px-5 mt-2 flex gap-3">
+          <div className="shrink-0 p-4 sm:p-5 flex gap-3 border-t hairline safe-area-pb">
             <Link
               href="/login"
-              className="flex-1 text-center py-3 rounded-full border hairline text-sm"
+              onClick={() => setOpen(false)}
+              className="flex-1 text-center py-3 min-h-[44px] flex items-center justify-center rounded-full border hairline text-sm"
             >
               Sign in
             </Link>
             <Link
               href="/register"
-              className="flex-1 text-center py-3 rounded-full bg-[color:var(--ink)] text-white text-sm"
+              onClick={() => setOpen(false)}
+              className="flex-1 text-center py-3 min-h-[44px] flex items-center justify-center rounded-full bg-[color:var(--ink)] text-white text-sm"
             >
               Create account
             </Link>

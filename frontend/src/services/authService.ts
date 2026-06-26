@@ -1,4 +1,5 @@
 import { getApiBase as getApiBasePath } from '@/lib/basePath';
+import { friendlyAuthMessage } from '@/lib/authErrors';
 
 const getApiBase = () => {
   if (typeof window !== 'undefined') return getApiBasePath();
@@ -13,10 +14,68 @@ export interface User {
   dob?: string;
   interests?: string[];
   role?: string;
+  authProvider?: 'local' | 'google' | 'facebook';
+  profilePicture?: string;
+  lastLoginAt?: string;
   token: string;
 }
 
 export const authService = {
+  async loginWithGoogle(credential: string): Promise<{ success: boolean; user: User }> {
+    const res = await fetch(`${getApiBase()}/auth/google`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ credential }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(friendlyAuthMessage(res.status, data.message));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('user', JSON.stringify(data.user));
+    }
+    return data;
+  },
+
+  async loginWithFacebook(accessToken: string): Promise<{ success: boolean; user: User }> {
+    const res = await fetch(`${getApiBase()}/auth/facebook`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ accessToken }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(friendlyAuthMessage(res.status, data.message, 'facebook'));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('user', JSON.stringify(data.user));
+    }
+    return data;
+  },
+
+  /** Validate stored JWT with the server; clears session if expired. */
+  async refreshSession(): Promise<User | null> {
+    const current = this.getCurrentUser();
+    if (!current?.token) return null;
+    try {
+      const res = await fetch(`${getApiBase()}/auth/session`, {
+        headers: { Authorization: `Bearer ${current.token}` },
+        credentials: 'same-origin',
+      });
+      if (!res.ok) {
+        this.logout();
+        return null;
+      }
+      const data = await res.json();
+      if (data?.user) {
+        const merged = { ...current, ...data.user, token: current.token };
+        localStorage.setItem('user', JSON.stringify(merged));
+        return merged;
+      }
+    } catch {
+      /* keep local session if offline */
+    }
+    return current;
+  },
+
   async login(emailOrPhone: string, password: string): Promise<{ success: boolean; user: User }> {
     const res = await fetch(`${getApiBase()}/auth/login`, {
       method: 'POST',

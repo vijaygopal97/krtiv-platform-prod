@@ -1,0 +1,23 @@
+/* Subtle ambient canvas — above gradient, below hero content (z-index 2). */
+.category-hero-ambient,
+.category-hero-sky {
+  isolation: isolate;
+}
+
+.category-hero-ambient canvas,
+.category-hero-sky canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.category-hero-section .hero-ambience-root {
+  opacity: 0.62;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-hero-ambient,
+  .category-hero-sky {
+    opacity: 0.9;
+  }
+}

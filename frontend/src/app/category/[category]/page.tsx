@@ -3,19 +3,16 @@ import { headers, cookies } from 'next/headers';
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
 import { CategoryHeroSection } from '@/components/krtiv/CategoryHeroSection';
-import { CategoryHeroVideo } from '@/components/krtiv/CategoryHeroVideo';
 import { ItineraryStory } from '@/components/krtiv/ItineraryStory';
-import { MaharashtraMap } from '@/components/krtiv/MaharashtraMap';
 import { CategoryShowcase } from '@/components/krtiv/CategoryShowcase';
 import { CtaBandInteractive } from '@/components/krtiv/CtaBandInteractive';
+import SmartKeywordItinerary from '@/components/itinerary/SmartKeywordItinerary';
 import { getItinerary, type CategoryItinerary } from '@/components/krtiv/data';
 import PersistPreferredLang from '@/components/PersistPreferredLang';
 import {
   getCategoryApiName,
-  getBestVideo,
   getBestItinerary,
   CATEGORY_SLUG_TO_IMAGE,
-  EMPTY_VIDEO_ENGAGEMENT,
 } from '@/lib/signpostApi';
 import { parsePreferredLangCookie, getPreferredLanguage, PREFERRED_LANG_COOKIE, type VideoLanguage } from '@/lib/geo';
 import { parseItineraryText, parsedToTimelineDays } from '@/lib/parseItinerary';
@@ -88,13 +85,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     bestItinerary = categoryApiName ? await getBestItinerary(categoryApiName).catch(() => null) : null;
   }
 
-  let bestVideo: Awaited<ReturnType<typeof getBestVideo>> = null;
-  try {
-    bestVideo = categoryApiName ? await getBestVideo(categoryApiName, preferredLanguage) : null;
-  } catch {
-    bestVideo = null;
-  }
-
   let itineraryForStory: CategoryItinerary = { ...staticItinerary, hero: categoryImage };
 
   if (bestItinerary?.itinerary) {
@@ -129,35 +119,18 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     }
   }
 
-  const heroTitle = `Experience ${staticItinerary.title} Tourism in Maharashtra`;
-
-  let videoSlot = null;
-  if (bestVideo?.url) {
-    const pathOk = Boolean(bestVideo.videoPath && String(bestVideo.videoPath).trim());
-    if (bestVideo.threadId && pathOk) {
-      videoSlot = (
-        <CategoryHeroVideo
-          kind="signpost"
-          defaultThumbnail={categoryImage}
-          video={{
-            ...bestVideo,
-            videoPath: String(bestVideo.videoPath).trim(),
-            engagement: bestVideo.engagement ?? EMPTY_VIDEO_ENGAGEMENT,
-            heroTitle,
-          }}
-        />
-      );
-    } else {
-      videoSlot = (
-        <CategoryHeroVideo
-          kind="url"
-          url={bestVideo.url}
-          title={heroTitle}
-          defaultThumbnail={categoryImage}
-        />
-      );
-    }
-  }
+  const plannerHeading =
+    category === 'historical'
+      ? 'Plan Your Historical & Heritage Journey'
+      : category === 'adventure'
+        ? 'Plan Your Adventure & Ecotourism Journey'
+      : `Plan your ${staticItinerary.title} journey`;
+  const plannerSubheading =
+    category === 'historical'
+      ? "Select the heritage experiences that interest you most, and we'll create a personalized itinerary through Maharashtra's rich history and cultural legacy."
+      : category === 'adventure'
+        ? "Select the adventure experiences that excite you most, and we'll create a personalized itinerary filled with nature, exploration, and unforgettable experiences."
+      : 'Select interest tags for this category and click Generate My Itinerary.';
 
   return (
     <main className="bg-[color:var(--ivory)] text-[color:var(--ink)]">
@@ -169,20 +142,24 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         title={staticItinerary.subtitle}
         subtitle={staticItinerary.description}
         image={categoryImage}
-        primaryHref="/#itinerary-generator"
-        primaryLabel="Plan with AI"
-        secondaryHref="#itinerary"
-        secondaryLabel="Read the itinerary"
-        videoTitle={heroTitle}
-        videoMeta="Featured"
-        videoPoster={categoryImage}
-        exploreHref="#itinerary"
-        exploreLabel="Explore itinerary"
-        videoSlot={videoSlot}
+        primaryHref="#category-smart-itinerary"
+        primaryLabel="Generate itinerary"
+        secondaryHref="#itinerary-map"
+        secondaryLabel="See the map"
       />
-      <ItineraryStory itinerary={itineraryForStory} />
-      <MaharashtraMap itinerary={itineraryForStory} />
-      <CategoryShowcase />
+      <SmartKeywordItinerary
+        context={category}
+        heading={plannerHeading}
+        subheading={plannerSubheading}
+        className="bg-white border-b hairline"
+        compact
+      />
+      <ItineraryStory
+        itinerary={itineraryForStory}
+        sidePanel="map"
+        mapPanelId="itinerary-map"
+      />
+      <CategoryShowcase showPlanner={false} />
       <CtaBandInteractive />
       <SiteFooter />
     </main>

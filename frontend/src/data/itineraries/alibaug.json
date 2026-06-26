@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Kolaba Fort", "Sea fort, Maratha heritage, coastal views", "Begin your Alibaug journey at the iconic sea fort built during the reign of Chhatrapati Shivaji Maharaj. Walk across the shoreline at low tide and explore its historic ramparts overlooking the Arabian Sea."],
+      ["AFTERNOON", "Alibaug Beach", "Golden sands, seaside promenade, local cuisine", "Relax on Alibaug's most popular beach, where gentle waves, coastal breezes, and beachside eateries create the perfect afternoon escape."],
+      ["EVENING", "Varsoli Beach Sunset", "Quiet shoreline, photography, scenic views", "Unwind at one of the region's most peaceful beaches and watch the sun set over the Arabian Sea in a tranquil setting."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Kanakeshwar Temple", "Hilltop shrine, forest trail, panoramic views", "Venture into the hills to visit this ancient temple surrounded by lush greenery and rewarding views of the Konkan coastline."],
+      ["AFTERNOON", "Kihim Beach", "Coastal biodiversity, birdwatching, nature retreat", "Discover a quieter side of Alibaug at Kihim Beach, known for its natural beauty, rich birdlife, and serene atmosphere."],
+      ["EVENING", "Mandwa Beach", "Waterfront cafés, sea breeze, coastal charm", "Enjoy a leisurely evening by the shore with spectacular views across Mumbai Harbour and a vibrant coastal ambience."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Murud-Janjira Fort", "Island fortress, naval history, architectural marvel", "Take a boat ride to one of India's most formidable sea forts, famed for remaining unconquered despite numerous invasions."],
+      ["AFTERNOON", "Kashid Beach", "White sands, clear waters, water sports", "Spend the afternoon at one of the Konkan coast's most picturesque beaches, ideal for relaxation and seaside recreation."],
+      ["EVENING", "Revdanda Fort & Beach", "Portuguese heritage, coastal ruins, sunset views", "Conclude your trip exploring the remnants of a historic coastal fort before enjoying a peaceful sunset along the beach."]
+    ]
+  }
+]

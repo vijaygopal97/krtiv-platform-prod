@@ -5,7 +5,12 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/kraik";
 const nextConfig: NextConfig = {
   basePath: basePath === "" ? "" : basePath,
   async rewrites() {
-    return [{ source: "/api/:path*", destination: `${apiUrl}/api/:path*` }];
+    const apiRewrite = { source: "/api/:path*", destination: `${apiUrl}/api/:path*` };
+    const kraikApiRewrite = {
+      source: "/kraik/api/:path*",
+      destination: `${apiUrl}/api/:path*`,
+    };
+    return [apiRewrite, kraikApiRewrite];
   },
   async headers() {
     return [

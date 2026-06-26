@@ -3,25 +3,40 @@ import Link from "next/link";
 import { useState } from "react";
 import type { CategoryItinerary } from "./data";
 import { ScrollReveal } from "./ScrollReveal";
+import { MaharashtraMapVisual } from "./MaharashtraMapVisual";
 
 export function ItineraryStory({
   itinerary,
+  sectionId = "itinerary",
+  heading,
+  sidePanel = "image",
+  mapPanelId = "itinerary-map",
+  seamlessTop = false,
 }: {
   itinerary: CategoryItinerary;
+  sectionId?: string;
+  heading?: string;
+  /** Embedded interactive map instead of a photo card (Places to Go & Things to Do). */
+  sidePanel?: "image" | "map";
+  mapPanelId?: string;
+  /** Omit top rule when preceded by hero bridge (Places to Go). */
+  seamlessTop?: boolean;
 }) {
   const [activeDay, setActiveDay] = useState(0);
 
   return (
     <section
-      id="itinerary"
-      className="relative bg-[color:var(--ivory)] py-24 md:py-36 border-t hairline"
+      id={sectionId}
+      className={`relative bg-[color:var(--ivory)] ${
+        seamlessTop ? 'pt-4 md:pt-8 pb-24 md:pb-36' : 'py-24 md:py-36 border-t hairline'
+      }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
         <div className="grid md:grid-cols-12 gap-12 items-end mb-16">
           <ScrollReveal className="md:col-span-7">
             <p className="eyebrow">{itinerary.region}</p>
             <h2 className="display-lg mt-4 text-balance">
-              {itinerary.subtitle}
+              {heading ?? itinerary.subtitle}
             </h2>
           </ScrollReveal>
           <ScrollReveal className="md:col-span-5" delay={120}>
@@ -54,8 +69,21 @@ export function ItineraryStory({
         </div>
 
         {/* Active day panel */}
-        <div className="grid md:grid-cols-12 gap-10">
-          <div className="md:col-span-5 md:sticky md:top-28 self-start">
+        <div className="grid md:grid-cols-12 gap-10 lg:gap-12">
+          <div
+            className={`${
+              sidePanel === "map" ? "md:col-span-6" : "md:col-span-5"
+            } md:sticky md:top-28 self-start order-1`}
+          >
+            {sidePanel === "map" ? (
+              <MaharashtraMapVisual
+                id={mapPanelId}
+                itinerary={itinerary}
+                activeDay={activeDay}
+                onActiveDayChange={setActiveDay}
+                aspectClassName="aspect-[4/3] sm:aspect-[5/4] md:aspect-[4/5] min-h-[280px]"
+              />
+            ) : (
             <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden bg-[color:var(--bone)]">
               <img
                 key={itinerary.days[activeDay].image}
@@ -73,9 +101,10 @@ export function ItineraryStory({
                 </h3>
               </div>
             </div>
+            )}
           </div>
 
-          <div className="md:col-span-7">
+          <div className={`${sidePanel === "map" ? "md:col-span-6" : "md:col-span-7"} order-2`}>
             <ol className="space-y-0">
               {itinerary.days[activeDay].activities.map((a, idx) => (
                 <li
@@ -87,9 +116,9 @@ export function ItineraryStory({
                     <p className="text-[11px] tracking-[0.25em] uppercase text-[color:var(--ink-soft)]">
                       {a.time}
                     </p>
-                    <p className="mt-2 text-sm text-[color:var(--ink-soft)]">
-                      {a.duration}
-                    </p>
+                    {a.duration ? (
+                      <p className="mt-2 text-sm text-[color:var(--ink-soft)]">{a.duration}</p>
+                    ) : null}
                   </div>
                   <div>
                     <div className="flex items-center gap-3">

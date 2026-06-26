@@ -127,5 +127,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+/** POST /api/hero-slides/track — public hero banner metrics */
+router.post('/track', async (req, res) => {
+  try {
+    const slideId = req.body?.slideId;
+    const event = req.body?.event === 'click' ? 'click' : 'impression';
+    if (!slideId) {
+      return res.status(400).json({ success: false, message: 'slideId required' });
+    }
+    const inc = event === 'click' ? { clicks: 1 } : { impressions: 1 };
+    await HeroSlide.findByIdAndUpdate(slideId, { $inc: inc });
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Hero track:', err);
+    res.status(500).json({ success: false, message: 'Track failed' });
+  }
+});
+
 export { allDefaultSlides, HOME_SLIDES, CATEGORY_SLIDES };
 export default router;

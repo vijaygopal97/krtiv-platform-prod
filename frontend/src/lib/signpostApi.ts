@@ -153,6 +153,8 @@ export interface ItineraryJobRequest {
     originCity: string;
     durationDays: string;
     preferredLocations: string[];
+    tourismKeywords?: string[];
+    categoryFocus?: string;
   };
 }
 

@@ -5,11 +5,13 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { authService } from '@/services/authService';
 import { AuthShell } from '@/components/krtiv/AuthShell';
+import GoogleSignInButton from '@/components/GoogleSignInButton';
+import FacebookSignInButton from '@/components/FacebookSignInButton';
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const nextPath = searchParams.get('next') || '/';
+  const nextPath = searchParams.get('next') || '/dashboard';
   const [formData, setFormData] = useState({ emailOrPhone: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -81,6 +83,27 @@ function LoginForm() {
           {loading ? 'Signing in...' : 'Sign in'}
         </button>
       </form>
+      <div className="relative my-8">
+        <div className="absolute inset-0 flex items-center" aria-hidden>
+          <div className="w-full border-t hairline" />
+        </div>
+        <p className="relative flex justify-center text-xs uppercase tracking-widest text-[color:var(--ink-soft)]">
+          <span className="bg-[color:var(--ivory)] px-3">or</span>
+        </p>
+      </div>
+      <GoogleSignInButton
+        mode="signin"
+        onSuccess={() => router.push(nextPath.startsWith('/') ? nextPath : '/dashboard')}
+        onError={(m) => setError(m)}
+        disabled={loading}
+      />
+      <div className="mt-3">
+        <FacebookSignInButton
+          onSuccess={() => router.push(nextPath.startsWith('/') ? nextPath : '/dashboard')}
+          onError={(m) => setError(m)}
+          disabled={loading}
+        />
+      </div>
       <p className="mt-8 text-sm text-[color:var(--ink-soft)] text-center">
         New here? <Link href="/register" className="text-[color:var(--ink)] underline-offset-4 hover:underline">Create an account</Link>
       </p>

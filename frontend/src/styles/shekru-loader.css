@@ -1,0 +1,63 @@
+.shekru-loader {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.shekru-loader__body {
+  animation: shekru-bounce 1.2s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.shekru-loader__tail {
+  animation: shekru-tail 0.6s ease-in-out infinite alternate;
+  transform-origin: 70% 50%;
+}
+
+.shekru-loader__eye {
+  animation: shekru-blink 3s infinite;
+}
+
+@keyframes shekru-bounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+@keyframes shekru-tail {
+  from {
+    transform: rotate(-12deg);
+  }
+  to {
+    transform: rotate(18deg);
+  }
+}
+
+@keyframes shekru-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+.shekru-loader--walking .shekru-loader__body {
+  animation: shekru-walk 0.5s steps(2) infinite;
+}
+
+@keyframes shekru-walk {
+  0% {
+    transform: translateX(-4px);
+  }
+  100% {
+    transform: translateX(4px);
+  }
+}

@@ -1,0 +1,73 @@
+/**
+ * Category showcase — touch carousel only (<1024px). Desktop rail is unchanged in TSX.
+ */
+
+@media (max-width: 1023px) {
+  .category-touch-outer {
+    overflow-x: clip;
+    padding-inline: max(16px, env(safe-area-inset-left, 0px))
+      max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  .category-touch-rail {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    gap: 0;
+    margin: 0;
+    padding: 0 0 0.5rem;
+    list-style: none;
+  }
+
+  .category-touch-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    box-sizing: border-box;
+  }
+
+  .category-touch-card-frame {
+    width: 92%;
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .category-touch-card-arrow {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .category-touch-rail {
+    gap: 1.25rem;
+    scroll-padding-inline: 0;
+  }
+
+  .category-touch-slide {
+    flex: 0 0 calc((100% - 1.25rem) / 2);
+    width: calc((100% - 1.25rem) / 2);
+    max-width: calc((100% - 1.25rem) / 2);
+    scroll-snap-align: start;
+  }
+
+  .category-touch-card-frame {
+    width: 100%;
+  }
+}
+
+.category-touch-nav-btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.category-touch-nav-btn:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}

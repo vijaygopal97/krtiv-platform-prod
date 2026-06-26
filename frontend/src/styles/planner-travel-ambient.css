@@ -1,0 +1,332 @@
+/* AI Trip Planner — premium ambient background */
+.planner-section-premium {
+  background: linear-gradient(
+    165deg,
+    #faf6f0 0%,
+    #f5efe6 38%,
+    #f8f4ec 72%,
+    #faf8f3 100%
+  );
+}
+
+.planner-travel-ambient {
+  --planner-orange: #f58220;
+  --planner-orange-soft: rgba(245, 130, 32, 0.18);
+  --planner-gold: rgba(234, 160, 72, 0.55);
+  --planner-icon-opacity: 0.18;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  color: var(--planner-orange);
+}
+
+.planner-travel-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 85% 75% at 50% 45%,
+    transparent 42%,
+    rgba(26, 20, 16, 0.04) 100%
+  );
+  z-index: 2;
+}
+
+.planner-travel-center-glow {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: min(92%, 42rem);
+  height: 70%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse 100% 80% at 50% 50%,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 252, 248, 0.2) 45%,
+    transparent 72%
+  );
+  z-index: 1;
+}
+
+.planner-travel-route {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  color: var(--planner-gold);
+  opacity: 0.45;
+}
+
+.planner-travel-route--left {
+  opacity: 0.5;
+}
+
+.planner-travel-route--right {
+  opacity: 0.38;
+}
+
+.planner-travel-route__path {
+  stroke: currentColor;
+  stroke-width: 0.4;
+  stroke-dasharray: 1.8 2.2;
+  vector-effect: non-scaling-stroke;
+  fill: none;
+}
+
+.planner-travel-route__dot,
+.planner-travel-route__pin {
+  color: var(--planner-orange);
+  filter: drop-shadow(0 0 6px rgba(245, 130, 32, 0.45));
+}
+
+.planner-travel-icon-wrap {
+  position: absolute;
+  z-index: 3;
+  will-change: transform;
+}
+
+.planner-travel-icon {
+  position: relative;
+  width: var(--icon-size, 48px);
+  height: var(--icon-size, 48px);
+  opacity: var(--planner-icon-opacity);
+  --anim-delay: 0s;
+  --float-duration: 12s;
+  animation: planner-travel-float var(--float-duration) ease-in-out infinite;
+  animation-delay: var(--anim-delay, 0s);
+  will-change: transform, opacity;
+  transition:
+    opacity 0.45s ease,
+    filter 0.45s ease,
+    color 0.35s ease;
+  filter: drop-shadow(0 1px 0 rgba(245, 130, 32, 0.08));
+}
+
+.planner-travel-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  shape-rendering: geometricPrecision;
+}
+
+.planner-travel-icon--desktop-only {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .planner-travel-icon--desktop-only {
+    display: block;
+  }
+}
+
+.planner-icon--gentleRotate {
+  animation:
+    planner-travel-float var(--float-duration) ease-in-out infinite,
+    planner-gentle-rotate 22s ease-in-out infinite;
+  animation-delay: var(--anim-delay, 0s), calc(var(--anim-delay, 0s) + 0.5s);
+}
+
+.planner-icon--fadePulse {
+  animation:
+    planner-travel-float var(--float-duration) ease-in-out infinite,
+    planner-fade-pulse 6.5s ease-in-out infinite;
+  animation-delay: var(--anim-delay, 0s), var(--anim-delay, 0s);
+}
+
+.planner-icon--glowPulse {
+  animation:
+    planner-travel-float var(--float-duration) ease-in-out infinite,
+    planner-glow-pulse 5s ease-in-out infinite;
+  animation-delay: var(--anim-delay, 0s), var(--anim-delay, 0s);
+}
+
+.planner-travel-icon.is-selected {
+  opacity: 0.32;
+  color: #e86f10;
+  filter: drop-shadow(0 0 10px rgba(245, 130, 32, 0.35));
+}
+
+.planner-travel-icon.is-active {
+  opacity: 0.38 !important;
+  color: #f58220;
+  filter: drop-shadow(0 0 14px rgba(245, 130, 32, 0.5));
+  animation: planner-interest-flash 1.5s ease-out forwards;
+}
+
+.planner-travel-particle {
+  position: absolute;
+  width: var(--particle-size, 4px);
+  height: var(--particle-size, 4px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 130, 32, 0.55) 0%, rgba(245, 130, 32, 0.08) 70%);
+  opacity: 0.12;
+  z-index: 2;
+  animation:
+    planner-particle-drift 18s ease-in-out infinite,
+    planner-particle-twinkle 4s ease-in-out infinite;
+  animation-delay: var(--anim-delay, 0s), var(--anim-delay, 0s);
+  box-shadow: 0 0 8px rgba(245, 130, 32, 0.15);
+}
+
+.planner-travel-particle::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 6px 1px rgba(234, 160, 72, 0.12);
+  animation: planner-sparkle-flash 5.5s ease-in-out infinite;
+  animation-delay: calc(var(--anim-delay, 0s) + 1s);
+}
+
+@keyframes planner-travel-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -10px;
+  }
+}
+
+@keyframes planner-gentle-rotate {
+  0%,
+  100% {
+    rotate: -3deg;
+  }
+  50% {
+    rotate: 3deg;
+  }
+}
+
+@keyframes planner-fade-pulse {
+  0%,
+  100% {
+    opacity: 0.14;
+  }
+  50% {
+    opacity: 0.22;
+  }
+}
+
+@keyframes planner-glow-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgba(245, 130, 32, 0.12));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(245, 130, 32, 0.28));
+  }
+}
+
+@keyframes planner-particle-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  33% {
+    translate: 4px -8px;
+  }
+  66% {
+    translate: -3px 6px;
+  }
+}
+
+@keyframes planner-particle-twinkle {
+  0%,
+  100% {
+    opacity: 0.08;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+
+@keyframes planner-sparkle-flash {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  45% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0;
+  }
+}
+
+@keyframes planner-interest-flash {
+  0% {
+    opacity: 0.38;
+    scale: 1.08;
+  }
+  100% {
+    opacity: 0.2;
+    scale: 1;
+  }
+}
+
+/* Wizard shell — glass card + soft float */
+.planner-form-stack {
+  position: relative;
+  z-index: 10;
+}
+
+.planner-card-float {
+  animation: planner-card-float 7s ease-in-out infinite;
+  animation-delay: 0.9s;
+}
+
+.planner-form-card {
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.65) !important;
+  box-shadow:
+    0 4px 24px -4px rgba(26, 20, 16, 0.08),
+    0 16px 48px -16px rgba(245, 130, 32, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+@keyframes planner-card-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .planner-travel-icon,
+  .planner-travel-particle,
+  .planner-travel-route__dot,
+  .planner-travel-route__pin,
+  .planner-card-float {
+    animation: none !important;
+  }
+
+  .planner-travel-particle::after {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .planner-travel-icon {
+    --planner-icon-opacity: 0.16;
+  }
+
+  .planner-travel-center-glow {
+    width: 100%;
+    height: 65%;
+  }
+}

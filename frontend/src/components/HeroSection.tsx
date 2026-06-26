@@ -88,12 +88,12 @@ export function HeroSection({
           alt=""
           className="w-full h-[120%] object-cover ken-burns"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/38 via-black/24 to-black/50 md:from-black/28 md:via-black/16 md:to-black/36" />
         <div
-          className="absolute inset-0 opacity-60"
+          className="absolute inset-0 opacity-35 md:opacity-25"
           style={{
             background:
-              "radial-gradient(ellipse at 30% 40%, transparent 0%, rgba(0,0,0,0.6) 80%)",
+              "radial-gradient(ellipse at 30% 40%, transparent 0%, rgba(0,0,0,0.42) 80%)",
           }}
         />
       </div>

@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Mahalaxmi Temple", "Shakti Peetha, temple architecture, spiritual heritage", "Begin your journey at one of Maharashtra's most revered temples. Admire the intricate stone carvings and experience the spiritual atmosphere that has drawn devotees for centuries."],
+      ["AFTERNOON", "Bhavani Mandap", "Royal palace complex, Maratha history, heritage architecture", "Explore the historic court of the Kolhapur rulers and discover the city's deep connection to the Maratha legacy."],
+      ["EVENING", "Rankala Lake", "Lakeside promenade, sunset views, local recreation", "Enjoy a peaceful walk along the waterfront as the sun sets over one of Kolhapur's most beloved landmarks."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "New Palace Museum", "Royal artifacts, vintage collections, palace architecture", "Step into the residence of the Kolhapur royal family and explore fascinating exhibits showcasing weapons, photographs, and memorabilia from a bygone era."],
+      ["AFTERNOON", "Town Hall Museum", "Archaeological treasures, sculptures, cultural heritage", "Discover artifacts that tell the story of the region's rich history, from ancient dynasties to the Maratha period."],
+      ["EVENING", "Kolhapuri Food Trail", "Tambda Rassa, Pandhra Rassa, local flavours", "Experience Kolhapur's legendary cuisine and discover why the city is celebrated as one of Maharashtra's culinary capitals."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Panhala Fort", "Maratha stronghold, historic battlements, panoramic views", "Explore one of Maharashtra's most significant hill forts, closely associated with Chhatrapati Shivaji Maharaj and the history of the Maratha Empire."],
+      ["AFTERNOON", "Jyotiba Temple", "Hilltop shrine, pilgrimage destination, scenic landscapes", "Visit this revered temple set amidst rolling hills, offering both spiritual significance and stunning views of the surrounding countryside."],
+      ["EVENING", "Shalini Palace", "Waterfront heritage architecture, lakeside setting, photography", "Conclude your journey by admiring the grandeur of this royal-era palace, beautifully positioned along the shores of Rankala Lake."]
+    ]
+  }
+]

@@ -1,0 +1,381 @@
+/**
+ * Heritage / Adventure / Culinary hero ambience + desktop pointer parallax hooks.
+ */
+
+.category-hero-section {
+  --hero-px: 0px;
+  --hero-py: 0px;
+}
+
+@media (min-width: 1024px) {
+  .category-hero-section .hero-bg-pointer-layer {
+    transform: translate3d(
+      calc(var(--hero-px) * 0.45),
+      calc(var(--hero-py) * 0.35),
+      0
+    );
+  }
+
+  .hero-ambience-root {
+    transform: translate3d(
+      calc(var(--hero-px) * 0.25),
+      calc(var(--hero-py) * 0.2),
+      0
+    );
+  }
+}
+
+.hero-ambience {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Heritage */
+.hero-ambience--heritage-rays {
+  inset: -20% -10%;
+  background: linear-gradient(
+    118deg,
+    transparent 40%,
+    rgba(255, 220, 150, 0.07) 48%,
+    transparent 56%
+  );
+  animation: hero-heritage-rays 22s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+}
+
+.hero-ambience--heritage-glow {
+  inset: 0;
+  background: radial-gradient(
+    ellipse 55% 45% at 62% 38%,
+    rgba(255, 190, 90, 0.14),
+    transparent 68%
+  );
+  animation: hero-heritage-glow 14s ease-in-out infinite alternate;
+}
+
+.hero-ambience--heritage-dust {
+  inset: 0;
+  opacity: 0.35;
+  background-image: radial-gradient(
+    circle at 20% 80%,
+    rgba(255, 215, 120, 0.35) 0 1px,
+    transparent 2px
+  );
+  background-size: 48px 48px;
+  animation: hero-dust-drift 40s linear infinite;
+}
+
+/* Adventure */
+.hero-ambience--adventure-cloud {
+  top: 8%;
+  width: 55%;
+  height: 22%;
+  border-radius: 999px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.14),
+    transparent 70%
+  );
+  filter: blur(12px);
+}
+
+.hero-ambience--cloud-a {
+  left: -15%;
+  animation: hero-cloud-drift-a 48s linear infinite;
+}
+
+.hero-ambience--cloud-b {
+  right: -20%;
+  top: 18%;
+  width: 48%;
+  opacity: 0.75;
+  animation: hero-cloud-drift-b 62s linear infinite;
+}
+
+.hero-ambience--adventure-fog {
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(
+    to top,
+    rgba(180, 200, 210, 0.22),
+    transparent
+  );
+  animation: hero-fog-pulse 16s ease-in-out infinite alternate;
+}
+
+.hero-ambience--adventure-fireflies {
+  inset: 0;
+  opacity: 0.5;
+  background-image: radial-gradient(
+    circle at 30% 40%,
+    rgba(200, 255, 180, 0.9) 0 1px,
+    transparent 2px
+  );
+  background-size: 120px 120px;
+  animation: hero-fireflies 8s ease-in-out infinite alternate;
+}
+
+/* Culinary */
+.hero-ambience--culinary-glow {
+  inset: 0;
+  background: radial-gradient(
+    ellipse 50% 40% at 50% 65%,
+    rgba(255, 160, 70, 0.16),
+    transparent 70%
+  );
+  animation: hero-culinary-glow 12s ease-in-out infinite alternate;
+}
+
+.hero-ambience--culinary-steam {
+  bottom: 0;
+  width: 40%;
+  height: 55%;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.12),
+    transparent 75%
+  );
+  filter: blur(18px);
+  opacity: 0.55;
+}
+
+.hero-ambience--steam-a {
+  left: 18%;
+  animation: hero-steam-rise 11s ease-in-out infinite;
+}
+
+.hero-ambience--steam-b {
+  right: 22%;
+  animation: hero-steam-rise 14s ease-in-out infinite reverse;
+}
+
+.hero-ambience--culinary-spice {
+  inset: 0;
+  opacity: 0.28;
+  background-image: radial-gradient(
+    circle at 70% 30%,
+    rgba(255, 200, 120, 0.5) 0 1.5px,
+    transparent 3px
+  );
+  background-size: 64px 64px;
+  animation: hero-spice-float 36s linear infinite;
+}
+
+@keyframes hero-heritage-rays {
+  0% {
+    transform: translateX(-3%) rotate(-2deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(4%) rotate(1deg);
+    opacity: 0.85;
+  }
+}
+
+@keyframes hero-heritage-glow {
+  0% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-dust-drift {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-8%);
+  }
+}
+
+@keyframes hero-cloud-drift-a {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(35%);
+  }
+}
+
+@keyframes hero-cloud-drift-b {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-30%);
+  }
+}
+
+@keyframes hero-fog-pulse {
+  0% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes hero-fireflies {
+  0% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0.65;
+  }
+}
+
+@keyframes hero-culinary-glow {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-steam-rise {
+  0% {
+    transform: translateY(8%) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translateY(-6%) scale(1.08);
+    opacity: 0.3;
+  }
+}
+
+@keyframes hero-spice-float {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-6%, -10%);
+  }
+}
+
+/* Urban */
+.hero-ambience--urban-skyline {
+  inset: auto 0 0 0;
+  height: 42%;
+  background: linear-gradient(
+    to top,
+    rgba(15, 25, 40, 0.55) 0%,
+    rgba(0, 180, 220, 0.08) 35%,
+    transparent 100%
+  );
+  animation: hero-urban-skyline 18s ease-in-out infinite alternate;
+}
+
+.hero-ambience--urban-neon {
+  inset: 0;
+  background: radial-gradient(
+    ellipse 45% 35% at 72% 28%,
+    rgba(0, 220, 255, 0.12),
+    transparent 68%
+  );
+  mix-blend-mode: screen;
+  animation: hero-urban-neon 10s ease-in-out infinite alternate;
+}
+
+.hero-ambience--urban-rain {
+  inset: -10% 0 0 0;
+  opacity: 0.2;
+  background: repeating-linear-gradient(
+    105deg,
+    transparent 0 40px,
+    rgba(180, 220, 255, 0.06) 40px 41px
+  );
+  animation: hero-urban-rain 12s linear infinite;
+}
+
+.hero-ambience--urban-bokeh {
+  inset: 0;
+  opacity: 0.35;
+  background-image: radial-gradient(
+    circle at 25% 35%,
+    rgba(120, 220, 255, 0.55) 0 2px,
+    transparent 3px
+  );
+  background-size: 90px 90px;
+  animation: hero-urban-bokeh 24s ease-in-out infinite alternate;
+}
+
+@keyframes hero-urban-skyline {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-urban-neon {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes hero-urban-rain {
+  0% {
+    transform: translateY(-4%);
+  }
+  100% {
+    transform: translateY(6%);
+  }
+}
+
+@keyframes hero-urban-bokeh {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.25;
+  }
+  100% {
+    transform: translate(3%, -4%);
+    opacity: 0.45;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-ambience--adventure-cloud,
+  .hero-ambience--heritage-rays {
+    opacity: 0.65;
+  }
+
+  .hero-ambience--adventure-fireflies,
+  .hero-ambience--heritage-dust,
+  .hero-ambience--culinary-spice,
+  .hero-ambience--urban-rain,
+  .hero-ambience--urban-bokeh {
+    display: none;
+  }
+
+  .hero-ambience--urban-neon {
+    opacity: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-ambience,
+  .hero-ambience--heritage-rays,
+  .hero-ambience--adventure-cloud,
+  .hero-ambience--culinary-steam,
+  .hero-ambience--urban-rain,
+  .hero-ambience--urban-neon {
+    animation: none !important;
+  }
+
+  .category-hero-section .hero-bg-pointer-layer,
+  .hero-ambience-root {
+    transform: none !important;
+  }
+}

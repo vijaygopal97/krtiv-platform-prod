@@ -1,0 +1,348 @@
+/* AI Trip Planner — lightweight CSS micro-interactions */
+
+.planner-section-enter {
+  animation: planner-fade-in 0.7s ease-out both;
+}
+
+.planner-heading-enter {
+  animation: planner-fade-in 0.65s ease-out both;
+}
+
+.planner-heading-enter-delay {
+  animation: planner-fade-in 0.65s ease-out 0.12s both;
+}
+
+.planner-card-enter {
+  animation: planner-slide-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+@keyframes planner-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes planner-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.planner-progress-track {
+  height: 3px;
+  background: rgba(26, 20, 16, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.planner-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--saffron), var(--terracotta, #b5562d));
+  border-radius: inherit;
+  transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.planner-step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(26, 20, 16, 0.15);
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease;
+}
+
+.planner-step-dot--active {
+  background: var(--ink);
+  transform: scale(1.25);
+}
+
+.planner-step-dot--done {
+  background: var(--saffron);
+}
+
+.planner-interest-chip {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.planner-interest-chip__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.375rem;
+  height: 1.375rem;
+  color: rgba(180, 120, 50, 0.75);
+  transition: color 0.25s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.planner-interest-chip__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.planner-interest-chip:hover .planner-interest-chip__icon {
+  color: var(--saffron);
+  transform: scale(1.08);
+}
+
+.planner-interest-chip__icon--selected,
+.planner-interest-chip[aria-pressed='true'] .planner-interest-chip__icon {
+  color: currentColor;
+  opacity: 0.95;
+}
+
+.planner-interest-chip__label {
+  line-height: 1.25;
+  text-align: left;
+}
+
+.planner-interest-chip[aria-pressed='true'] {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 0 1px rgba(234, 160, 72, 0.35),
+    0 12px 28px -14px rgba(26, 20, 16, 0.35);
+}
+
+.planner-chip-check {
+  display: inline-flex;
+  width: 1.1em;
+  margin-left: 0.15em;
+  animation: planner-check-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes planner-check-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-20deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+.planner-chip-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(234, 160, 72, 0.35);
+  transform: scale(0);
+  animation: planner-ripple 0.55s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes planner-ripple {
+  to {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+.planner-stagger-item {
+  animation: planner-fade-in 0.45s ease-out both;
+}
+
+.planner-btn-continue {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.planner-btn-continue:hover:not(:disabled) {
+  transform: scale(1.03);
+  box-shadow: 0 12px 32px -16px rgba(26, 20, 16, 0.45);
+}
+
+.planner-btn-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: planner-spin 0.7s linear infinite;
+}
+
+@keyframes planner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.planner-fieldset-enter {
+  animation: planner-fieldset-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes planner-fieldset-in {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.planner-float-icon {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.22;
+  color: var(--saffron);
+  animation: planner-float-drift var(--drift-duration, 14s) ease-in-out infinite;
+  animation-delay: var(--drift-delay, 0s);
+}
+
+@keyframes planner-float-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(6px, -10px) rotate(4deg);
+  }
+  66% {
+    transform: translate(-8px, 6px) rotate(-3deg);
+  }
+}
+
+.shekru-planner-mascot {
+  position: fixed;
+  z-index: 35;
+  bottom: 1rem;
+  right: 1rem;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .shekru-planner-mascot {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}
+
+.shekru-planner-mascot__sprite {
+  width: 72px;
+  height: 72px;
+  filter: drop-shadow(0 8px 20px rgba(26, 20, 16, 0.15));
+}
+
+@media (min-width: 640px) {
+  .shekru-planner-mascot__sprite {
+    width: 88px;
+    height: 88px;
+  }
+}
+
+.shekru-planner-mascot__sprite .shekru-loader {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.shekru-planner-mascot--idle .shekru-loader__body {
+  animation: shekru-planner-float 3s ease-in-out infinite;
+}
+
+@keyframes shekru-planner-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.shekru-planner-mascot--celebrate .shekru-loader__body {
+  animation: shekru-celebrate-jump 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes shekru-celebrate-jump {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-16px) rotate(-8deg);
+  }
+  55% {
+    transform: translateY(-4px) rotate(10deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.shekru-planner-mascot--walking .shekru-loader__body {
+  animation: shekru-walk 0.45s steps(2) infinite;
+}
+
+.shekru-planner-mascot__bubble {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 0.5rem;
+  max-width: 200px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(26, 20, 16, 0.08);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink);
+  box-shadow: 0 12px 40px -20px rgba(26, 20, 16, 0.35);
+  animation: planner-fade-in 0.35s ease-out both;
+}
+
+.planner-confetti-piece {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 50;
+  animation: planner-confetti-fall var(--fall-duration, 2.2s) ease-out forwards;
+}
+
+@keyframes planner-confetti-fall {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 40px), var(--ty, 100vh)) rotate(720deg);
+  }
+}
+
+.planner-success-banner {
+  animation: planner-fade-in 0.6s ease-out both;
+}
+
+.planner-result-reveal > * {
+  animation: planner-slide-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.planner-result-reveal > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.planner-result-reveal > *:nth-child(3) {
+  animation-delay: 0.16s;
+}

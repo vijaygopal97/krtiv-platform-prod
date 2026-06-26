@@ -17,6 +17,15 @@ export async function fetchPublicHeroSlides(scope = 'home'): Promise<HeroSlideRe
   return data.slides as HeroSlideRecord[];
 }
 
+export function trackHeroSlide(slideId: string, event: 'impression' | 'click') {
+  if (!slideId) return;
+  void fetch(`${getApiBase()}/hero-slides/track`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ slideId, event }),
+  }).catch(() => {});
+}
+
 export async function fetchAdminHeroSlides(token: string, scope?: string): Promise<HeroSlideRecord[]> {
   const qs = scope ? `?scope=${encodeURIComponent(scope)}` : '';
   const res = await fetch(`${getApiBase()}/admin/hero-slides${qs}`, {

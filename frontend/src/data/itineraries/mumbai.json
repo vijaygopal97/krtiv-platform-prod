@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Gateway of India & Colaba Heritage Walk", "Iconic landmark, colonial architecture, waterfront views", "Begin your Mumbai journey at the city's most recognizable monument. Stroll through the historic streets of Colaba and soak in the blend of colonial charm and modern city life."],
+      ["AFTERNOON", "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya & Kala Ghoda", "Museum collections, art district, heritage buildings", "Explore one of India's finest museums before wandering through Kala Ghoda's vibrant art precinct, known for its galleries, cafés, and cultural landmarks."],
+      ["EVENING", "Marine Drive & Girgaon Chowpatty", "Queen's Necklace, sunset views, street food", "Watch the city lights illuminate Mumbai's iconic coastline before indulging in local favourites like bhel puri and pav bhaji at Chowpatty Beach."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Elephanta Caves", "UNESCO World Heritage Site, rock-cut sculptures, ferry ride", "Take a scenic ferry across Mumbai Harbour to discover ancient cave temples renowned for their magnificent sculptures dedicated to Lord Shiva."],
+      ["AFTERNOON", "Chhatrapati Shivaji Maharaj Terminus & Crawford Market", "Victorian Gothic architecture, bustling markets, local culture", "Admire one of India's most celebrated railway stations before immersing yourself in the sights, sounds, and flavours of Mumbai's historic marketplace."],
+      ["EVENING", "Bandra Fort & Bandstand Promenade", "Sea views, heritage fort, city skyline", "Unwind along Bandra's scenic waterfront and enjoy sweeping views of the Arabian Sea and the iconic Bandra-Worli Sea Link."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Siddhivinayak Temple & Haji Ali Dargah", "Spiritual landmarks, architecture, cultural heritage", "Visit two of Mumbai's most revered places of worship, reflecting the city's rich spiritual diversity and enduring traditions."],
+      ["AFTERNOON", "Juhu Beach & ISKCON Temple", "Beachfront atmosphere, local snacks, peaceful retreat", "Experience Mumbai's laid-back coastal side with a stroll along Juhu Beach, followed by a visit to the serene ISKCON Temple."],
+      ["EVENING", "Worli Sea Face & City Skyline", "Ocean views, promenade, urban landscape", "Conclude your Mumbai adventure with a relaxing walk along the waterfront, taking in spectacular views of the city's ever-evolving skyline."]
+    ]
+  }
+]

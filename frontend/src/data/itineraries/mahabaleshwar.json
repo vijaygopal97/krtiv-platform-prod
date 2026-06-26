@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Arthur's Seat Point", "Panoramic valley views, dramatic cliffs, photography", "Start your journey at Mahabaleshwar's most famous viewpoint, often called the \"Queen of the Points.\" Admire breathtaking views of deep valleys and the rugged Sahyadri landscape."],
+      ["AFTERNOON", "Venna Lake", "Boating, lakeside promenade, family activities", "Enjoy a relaxing boat ride on the serene waters of Venna Lake, surrounded by lush greenery and vibrant local stalls."],
+      ["EVENING", "Sunset at Bombay Point", "Golden-hour vistas, mountain scenery, relaxation", "Watch the sun set behind rolling hills as the sky transforms into shades of orange and gold, creating one of Mahabaleshwar's most memorable experiences."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Mahabaleshwar Temple & Panchganga Temple", "Ancient temples, spiritual heritage, sacred origins", "Visit the historic temples that form the spiritual heart of the hill station and learn about the legendary origins of the Krishna River."],
+      ["AFTERNOON", "Mapro Garden", "Strawberry delights, local produce, garden setting", "Discover Mahabaleshwar's famous strawberry culture while enjoying fresh fruit products, scenic gardens, and family-friendly attractions."],
+      ["EVENING", "Lingmala Waterfall", "Waterfall views, nature trails, scenic beauty", "Take in the refreshing sights and sounds of one of the region's most picturesque waterfalls nestled amidst dense greenery."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Wilson Point", "Highest point, sunrise views, panoramic landscapes", "Experience sweeping views from the highest point in Mahabaleshwar, offering a spectacular perspective of the surrounding mountains and valleys."],
+      ["AFTERNOON", "Elephant's Head Point & Kate's Point", "Unique rock formations, valley overlooks, photography", "Explore iconic viewpoints known for their dramatic cliffs, distinctive natural formations, and stunning vistas across the Western Ghats."],
+      ["EVENING", "Mahabaleshwar Market", "Local shopping, handmade products, strawberry specialties", "Conclude your trip by browsing local markets for handicrafts, preserves, and the region's famous strawberry products."]
+    ]
+  }
+]

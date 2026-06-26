@@ -3,12 +3,15 @@
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
 import { ScrollReveal } from '@/components/krtiv/ScrollReveal';
+import { ContactSocialSection } from '@/components/krtiv/ContactSocialSection';
+import SmartKeywordItinerary from '@/components/itinerary/SmartKeywordItinerary';
+import { SITE_HEADER_OFFSET_CLASS } from '@/lib/siteNavigation';
 
 export default function ContactPage() {
   return (
     <main className="bg-[color:var(--ivory)] text-[color:var(--ink)]">
       <SiteHeaderClient variant="solid" />
-      <section className="pt-40 pb-16 md:pt-48 md:pb-20">
+      <section className={`${SITE_HEADER_OFFSET_CLASS} pb-16 md:pb-20`}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
           <ScrollReveal>
             <p className="eyebrow">Contact</p>
@@ -47,21 +50,18 @@ export default function ContactPage() {
               </button>
             </form>
           </ScrollReveal>
-          <ScrollReveal className="md:col-span-5 space-y-4" delay={120}>
-            {[
-              { label: 'Email', value: 'info@maharashtratourism.com', href: 'mailto:info@maharashtratourism.com' },
-              { label: 'Phone', value: '+91 123 456 7890', href: 'tel:+911234567890' },
-              { label: 'Office', value: 'Mantralaya, Mumbai 400032', href: '#' },
-              { label: 'Hours', value: 'Mon–Sat, 9 AM – 6 PM IST', href: '#' },
-            ].map((c) => (
-              <a key={c.label} href={c.href} className="block bg-white rounded-2xl border hairline p-6 hover:border-[color:var(--ink)] transition group">
-                <p className="eyebrow">{c.label}</p>
-                <p className="mt-2 text-lg font-display text-[color:var(--ink)] group-hover:text-[color:var(--saffron)] transition">{c.value}</p>
-              </a>
-            ))}
+          <ScrollReveal className="md:col-span-5" delay={120}>
+            <ContactSocialSection />
           </ScrollReveal>
         </div>
       </section>
+      <SmartKeywordItinerary
+        context="explore"
+        heading="While you&apos;re here — plan your journey"
+        subheading="Pick keywords and click Generate My Itinerary for an instant AI day-by-day plan."
+        className="border-t hairline bg-[color:var(--bone)]"
+        compact
+      />
       <SiteFooter />
     </main>
   );

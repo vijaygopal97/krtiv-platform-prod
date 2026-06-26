@@ -74,6 +74,10 @@ router.post('/itinerary-jobs', (req, res) => {
       preferredLocations: Array.isArray(body.userProfile?.preferredLocations)
         ? body.userProfile.preferredLocations.map((x) => String(x).trim()).filter(Boolean)
         : [],
+      tourismKeywords: Array.isArray(body.userProfile?.tourismKeywords)
+        ? body.userProfile.tourismKeywords.map((x) => String(x).trim()).filter(Boolean)
+        : [],
+      categoryFocus: String(body.userProfile?.categoryFocus ?? '').trim(),
     },
   };
   return proxyToSignPost('/api/v1/itinerary-jobs', res, {

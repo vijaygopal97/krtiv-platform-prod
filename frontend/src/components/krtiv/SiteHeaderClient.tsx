@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { authService } from '@/services/authService';
+import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { authService, type User } from '@/services/authService';
 import { SiteHeader } from '@/components/krtiv/SiteHeader';
 
 export function SiteHeaderClient({
@@ -9,19 +10,43 @@ export function SiteHeaderClient({
 }: {
   variant?: 'auto' | 'solid';
 }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    setIsAuthenticated(authService.isAuthenticated());
-    setIsAdmin(authService.isAdmin());
+    let cancelled = false;
+    (async () => {
+      const sessionUser = await authService.refreshSession();
+      if (!cancelled) {
+        setUser(sessionUser);
+        setReady(true);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
+
+  const handleLogout = useCallback(() => {
+    authService.logout();
+    setUser(null);
+    router.push('/');
+    router.refresh();
+  }, [router]);
+
+  if (!ready) {
+    return <SiteHeader variant={variant} isAuthenticated={false} isAdmin={false} />;
+  }
 
   return (
     <SiteHeader
       variant={variant}
-      isAuthenticated={isAuthenticated}
-      isAdmin={isAdmin}
+      isAuthenticated={!!user}
+      isAdmin={user?.role === 'admin'}
+      userName={user?.name}
+      profilePicture={user?.profilePicture}
+      onLogout={user ? handleLogout : undefined}
     />
   );
 }

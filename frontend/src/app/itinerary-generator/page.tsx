@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
 
 export default function ItineraryGeneratorPage() {
-  redirect('/dashboard');
+  redirect('/explore#explore-smart-planner');
 }

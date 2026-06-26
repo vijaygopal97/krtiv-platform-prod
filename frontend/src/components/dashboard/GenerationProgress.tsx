@@ -1,5 +1,7 @@
 'use client';
 
+import { ShekruLoader } from '@/components/krtiv/ShekruLoader';
+
 const STEPS = [
   { label: 'Analyzing preferences', icon: '🎯' },
   { label: 'Finding locations', icon: '📍' },
@@ -17,13 +19,11 @@ export default function GenerationProgress({ progress = 50 }: GenerationProgress
   const currentStep = pct < 25 ? 0 : pct < 50 ? 1 : pct < 75 ? 2 : 3;
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-md mx-auto pointer-events-none" aria-live="polite" aria-busy="true">
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#FF9933] to-orange-600 rounded-full mb-4 animate-pulse">
-          <span className="text-4xl">✨</span>
-        </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-1">Creating your journey</h3>
-        <p className="text-sm text-gray-600">AI is crafting your perfect Maharashtra itinerary</p>
+        <ShekruLoader variant="walking" />
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1 mt-4">Planning your Maharashtra journey…</h3>
+        <p className="text-sm text-gray-600">Shekru and our AI are crafting your itinerary</p>
       </div>
 
       <div className="mb-6">

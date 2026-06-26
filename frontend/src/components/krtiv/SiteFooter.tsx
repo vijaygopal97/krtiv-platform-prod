@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { CATEGORIES } from "./data";
 import { krtivLogo, krtivVisitLogo } from "@/lib/krtivPaths";
+import { PLAN_WITH_AI_HREF, PLACES_TO_GO_LABEL, THINGS_TO_DO_LABEL, THINGS_TO_DO_HREF } from "@/lib/siteNavigation";
 
 export function SiteFooter() {
   return (
@@ -48,9 +49,14 @@ export function SiteFooter() {
           </div>
 
           <div className="md:col-span-3">
-            <p className="eyebrow text-white/40">Explore</p>
+            <p className="eyebrow text-white/40">{THINGS_TO_DO_LABEL}</p>
             <ul className="mt-5 space-y-3 text-[15px]">
-              {CATEGORIES.slice(0, 6).map((c) => (
+              <li>
+                <Link href={THINGS_TO_DO_HREF} className="text-white/75 hover:text-white transition">
+                  All experiences
+                </Link>
+              </li>
+              {CATEGORIES.slice(0, 5).map((c) => (
                 <li key={c.slug}>
                   <Link
                     href={`/category/${c.slug}`}
@@ -66,8 +72,14 @@ export function SiteFooter() {
           <div className="md:col-span-2">
             <p className="eyebrow text-white/40">Plan</p>
             <ul className="mt-5 space-y-3 text-[15px]">
+              <li>
+                <Link href="/places-to-go" className="text-white/75 hover:text-white">
+                  {PLACES_TO_GO_LABEL}
+                </Link>
+              </li>
               <li><Link href="/dashboard" className="text-white/75 hover:text-white">Itinerary builder</Link></li>
-              <li><Link href="/#itinerary-generator" className="text-white/75 hover:text-white">AI planner</Link></li>
+              <li><Link href={PLAN_WITH_AI_HREF} className="text-white/75 hover:text-white">AI planner</Link></li>
+              <li><Link href="/contest-registration" className="text-white/75 hover:text-white">Contest</Link></li>
               <li><Link href="/about" className="text-white/75 hover:text-white">About</Link></li>
               <li><Link href="/contact" className="text-white/75 hover:text-white">Contact</Link></li>
             </ul>
@@ -92,7 +104,7 @@ export function SiteFooter() {
 
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row gap-4 items-center justify-between text-xs text-white/45">
           <p className="text-center md:text-left max-w-full break-words [overflow-wrap:anywhere]">
-            © {new Date().getFullYear()} Maharashtra Tourism · Developed by Convergent × SignPost
+            © {new Date().getFullYear()} Maharashtra Tourism · Developed by eFlag Corp.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-white">Privacy</a>
