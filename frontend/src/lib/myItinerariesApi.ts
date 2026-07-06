@@ -19,6 +19,7 @@ export interface SavedItineraryRecord {
   isFavorite?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  source?: 'smart-keywords' | 'dashboard' | 'import';
 }
 
 export async function fetchMyItineraries(favoritesOnly = false): Promise<SavedItineraryRecord[]> {
@@ -40,16 +41,32 @@ export async function saveItinerary(payload: {
   isFavorite?: boolean;
   jobId?: string;
   source?: 'smart-keywords' | 'dashboard';
-}): Promise<SavedItineraryRecord | null> {
+}): Promise<{ item: SavedItineraryRecord | null; error?: string }> {
   const base = getApiBase().replace(/\/$/, '');
-  const res = await fetch(`${base}/my/itineraries`, {
-    method: 'POST',
-    headers: authHeaders(),
-    body: JSON.stringify(payload),
-  });
-  if (!res.ok) return null;
+  const user = authService.getCurrentUser();
+  if (!user?.token) {
+    return { item: null, error: 'Please sign in to save itineraries.' };
+  }
+  let res: Response;
+  try {
+    res = await fetch(`${base}/my/itineraries`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    return { item: null, error: 'Network error. Check your connection and try again.' };
+  }
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    if (res.status === 401) {
+      return { item: null, error: 'Session expired. Log out and sign in again.' };
+    }
+    const msg = typeof data.message === 'string' ? data.message : `Save failed (${res.status}).`;
+    return { item: null, error: msg };
+  }
   const data = await res.json();
-  return data.item ?? null;
+  return { item: data.item ?? null, error: data.item ? undefined : 'Save failed.' };
 }
 
 export async function toggleFavoriteItinerary(id: string, isFavorite: boolean): Promise<boolean> {

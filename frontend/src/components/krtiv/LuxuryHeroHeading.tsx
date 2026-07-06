@@ -1,5 +1,7 @@
+import type { ReactNode } from 'react';
+
 type Props = {
-  highlight: string;
+  highlight: ReactNode;
   /** Center within hero (circuit pages + home). */
   centered?: boolean;
   className?: string;

@@ -1,16 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { CATEGORIES } from "./data";
 import { krtivLogo, krtivVisitLogo } from "@/lib/krtivPaths";
-import { PLAN_WITH_AI_HREF, PLACES_TO_GO_LABEL, THINGS_TO_DO_LABEL, THINGS_TO_DO_HREF } from "@/lib/siteNavigation";
+import { FooterSocialLinks } from "@/components/krtiv/FooterSocialLinks";
+import { FooterExperiencesNav } from "@/components/krtiv/FooterExperiencesNav";
+import { Editable } from "@/components/cms/Editable";
+
+const footerLinkClass =
+  "text-white/75 hover:text-white transition-colors duration-300 ease-out focus:outline-none focus-visible:text-white focus-visible:underline underline-offset-4";
 
 export function SiteFooter() {
   return (
     <footer className="bg-[color:var(--ink)] text-white/85">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 pt-20 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-10 min-w-0">
-          <div className="md:col-span-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-12 md:gap-10 min-w-0">
+          <div className="sm:col-span-2 lg:col-span-5">
             <div className="flex flex-wrap items-center gap-4 md:gap-5">
               <Link href="/" className="inline-flex shrink-0" aria-label="Home">
                 <img
@@ -26,8 +30,11 @@ export function SiteFooter() {
               />
             </div>
             <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/65">
-              The official invitation to explore Maharashtra — its forts, ghats,
-              coasts and quiet villages — designed for the unhurried traveler.
+              <Editable
+                cmsKey="global.footer.tagline"
+                defaultValue="The official invitation to explore Maharashtra — its forts, ghats, coasts and quiet villages — designed for the unhurried traveler."
+                as="span"
+              />
             </p>
 
             <form
@@ -41,77 +48,69 @@ export function SiteFooter() {
               />
               <button
                 type="submit"
-                className="inline-flex items-center justify-center rounded-full bg-white text-[color:var(--ink)] text-sm px-4 h-9 hover:bg-white/90 transition"
+                className="inline-flex items-center justify-center rounded-full bg-white text-[color:var(--ink)] text-sm px-4 h-9 hover:bg-white/90 transition duration-300"
               >
                 Subscribe
               </button>
             </form>
           </div>
 
-          <div className="md:col-span-3">
-            <p className="eyebrow text-white/40">{THINGS_TO_DO_LABEL}</p>
+          <div className="lg:col-span-3 min-w-0">
+            <p className="eyebrow text-white/40">
+              <Editable cmsKey="global.footer.experiencesLabel" defaultValue="Experiences" as="span" />
+            </p>
+            <FooterExperiencesNav />
+          </div>
+
+          <div className="lg:col-span-2">
+            <p className="eyebrow text-white/40">
+              <Editable cmsKey="global.footer.planLabel" defaultValue="Plan" as="span" />
+            </p>
             <ul className="mt-5 space-y-3 text-[15px]">
               <li>
-                <Link href={THINGS_TO_DO_HREF} className="text-white/75 hover:text-white transition">
-                  All experiences
+                <Link href="/dashboard" className={footerLinkClass}>
+                  Itinerary builder
                 </Link>
               </li>
-              {CATEGORIES.slice(0, 5).map((c) => (
-                <li key={c.slug}>
-                  <Link
-                    href={`/category/${c.slug}`}
-                    className="text-white/75 hover:text-white transition"
-                  >
-                    {c.title}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link href="/about" className={footerLinkClass}>
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className={footerLinkClass}>
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
-          <div className="md:col-span-2">
-            <p className="eyebrow text-white/40">Plan</p>
-            <ul className="mt-5 space-y-3 text-[15px]">
-              <li>
-                <Link href="/places-to-go" className="text-white/75 hover:text-white">
-                  {PLACES_TO_GO_LABEL}
-                </Link>
-              </li>
-              <li><Link href="/dashboard" className="text-white/75 hover:text-white">Itinerary builder</Link></li>
-              <li><Link href={PLAN_WITH_AI_HREF} className="text-white/75 hover:text-white">AI planner</Link></li>
-              <li><Link href="/contest-registration" className="text-white/75 hover:text-white">Contest</Link></li>
-              <li><Link href="/about" className="text-white/75 hover:text-white">About</Link></li>
-              <li><Link href="/contact" className="text-white/75 hover:text-white">Contact</Link></li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-2 min-w-0">
-            <p className="eyebrow text-white/40">Visit</p>
-            <ul className="mt-5 space-y-3 text-[15px] text-white/75">
-              <li className="break-words">Mantralaya, Mumbai</li>
-              <li className="break-words">+91 22 0000 0000</li>
-              <li className="min-w-0 break-words [overflow-wrap:anywhere]">
-                <a
-                  href="mailto:info@maharashtratourism.com"
-                  className="hover:text-white transition break-words [overflow-wrap:anywhere]"
-                >
-                  info@maharashtratourism.com
-                </a>
-              </li>
-            </ul>
+          <div className="sm:col-span-2 lg:col-span-2 min-w-0">
+            <p className="eyebrow text-white/40">Contact</p>
+            <div className="mt-5">
+              <FooterSocialLinks />
+            </div>
           </div>
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row gap-4 items-center justify-between text-xs text-white/45">
           <p className="text-center md:text-left max-w-full break-words [overflow-wrap:anywhere]">
-            © {new Date().getFullYear()} Maharashtra Tourism · Developed by eFlag Corp.
+            <Editable
+              cmsKey="global.footer.copyright"
+              defaultValue={`© ${new Date().getFullYear()} Developed by eFlag Corp`}
+              as="span"
+            />
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-white">Terms</a>
+            <a href="#" className={`${footerLinkClass} text-xs text-white/45 hover:text-white`}>
+              Privacy
+            </a>
+            <a href="#" className={`${footerLinkClass} text-xs text-white/45 hover:text-white`}>
+              Terms
+            </a>
             <select
               defaultValue="en"
-              className="bg-transparent border border-white/15 rounded-full px-3 py-1 text-white/70"
+              className="bg-transparent border border-white/15 rounded-full px-3 py-1 text-white/70 transition-colors duration-300 hover:border-white/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--saffron)]"
               aria-label="Language"
             >
               <option value="en">English</option>

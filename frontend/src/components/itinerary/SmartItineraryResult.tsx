@@ -1,12 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import CompactItineraryView from '@/components/dashboard/CompactItineraryView';
+import { MaharashtraMapVisual } from '@/components/krtiv/MaharashtraMapVisual';
+import {
+  getItineraryGeoPoints,
+  parsedItineraryToMapShape,
+} from '@/components/krtiv/maharashtraMapUtils';
 import type { ParsedItinerary } from '@/lib/parseItinerary';
 import type { ItineraryExtras } from '@/lib/itineraryExtras';
 import { authService } from '@/services/authService';
 import { saveItinerary } from '@/lib/myItinerariesApi';
 import { downloadItineraryPdf } from '@/lib/itineraryPdf';
+import { AI_ITINERARY_DISCLAIMER_SHORT } from '@/lib/aiItineraryDisclaimer';
 
 type Props = {
   title: string;
@@ -42,6 +48,10 @@ export default function SmartItineraryResult({
   const [saveMsg, setSaveMsg] = useState('');
   const [saving, setSaving] = useState(false);
   const [pdfMsg, setPdfMsg] = useState('');
+  const [activeMapDay, setActiveMapDay] = useState(0);
+
+  const mapItinerary = useMemo(() => parsedItineraryToMapShape(parsed), [parsed]);
+  const mapPoints = useMemo(() => getItineraryGeoPoints(mapItinerary), [mapItinerary]);
 
   const handleSave = async (favorite: boolean) => {
     if (!authService.isAuthenticated()) {
@@ -50,7 +60,7 @@ export default function SmartItineraryResult({
     }
     setSaving(true);
     setSaveMsg('');
-    const item = await saveItinerary({
+    const { item, error: saveErr } = await saveItinerary({
       title,
       itineraryText: rawText,
       keywords,
@@ -62,11 +72,11 @@ export default function SmartItineraryResult({
       source: 'smart-keywords',
     });
     setSaving(false);
-    setSaveMsg(item ? (favorite ? 'Added to favorites.' : 'Itinerary saved.') : 'Could not save. Try again.');
+    setSaveMsg(item ? (favorite ? 'Added to favorites.' : 'Itinerary saved.') : saveErr || 'Could not save. Try again.');
   };
 
   const handleShare = async () => {
-    const text = `${title}\n\n${rawText.slice(0, 2000)}${rawText.length > 2000 ? '…' : ''}`;
+    const text = `${title}\n\n${rawText.slice(0, 2000)}${rawText.length > 2000 ? '…' : ''}\n\n---\n${AI_ITINERARY_DISCLAIMER_SHORT}`;
     if (navigator.share) {
       try {
         await navigator.share({ title, text });
@@ -94,6 +104,7 @@ export default function SmartItineraryResult({
       keywords,
       categoryFocus,
       userName: user?.name,
+      aiGenerated: true,
     });
     if (!res.ok) {
       setPdfMsg(res.message);
@@ -127,7 +138,23 @@ export default function SmartItineraryResult({
       {saveMsg && <p className="text-sm text-[color:var(--ink-soft)]">{saveMsg}</p>}
       {pdfMsg && <p className="text-sm text-red-700">{pdfMsg}</p>}
 
-      <CompactItineraryView title={title} parsed={parsed} />
+      {mapPoints.length > 0 && (
+        <div className="rounded-[20px] border hairline bg-[color:var(--bone)] p-4 md:p-6">
+          <p className="eyebrow text-[color:var(--saffron)]">On the map</p>
+          <h3 className="font-display text-2xl mt-2 text-[color:var(--ink)]">Your route across Maharashtra</h3>
+          <p className="text-sm text-[color:var(--ink-soft)] mt-2 mb-5">
+            Tap a numbered stop to highlight that day on the map.
+          </p>
+          <MaharashtraMapVisual
+            itinerary={mapItinerary}
+            activeDay={activeMapDay}
+            onActiveDayChange={setActiveMapDay}
+            aspectClassName="aspect-[4/3] min-h-[300px]"
+          />
+        </div>
+      )}
+
+      <CompactItineraryView title={title} parsed={parsed} showAiDisclaimer />
 
       <div className="grid md:grid-cols-2 gap-4">
         <ExtraBlock label="Food recommendations" value={extras.foodRecommendations} />

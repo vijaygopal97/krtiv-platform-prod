@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Pune or Satara departure", "Ghats climb, monsoon cloud build-up, corn stalls en route", "Leave early to beat weekend traffic on the Pune–Satara highway. As you turn toward Thoseghar village, the air cools and mist drifts through teak — the first hint of the Konkan escarpment. Stop for chai at a roadside stall if the cloud base is low."],
+      ["AFTERNOON", "Thoseghar main viewpoint", "200 m cascade, forest platform, gorge acoustics", "Park at the designated lot and walk to the principal viewing platform. In peak monsoon the main fall thunders into the gorge — allow time for mist to clear between showers. Smaller tiered falls are visible along the ravine to your left."],
+      ["EVENING", "Satara town check-in", "Kandi pedhe, historic core stroll", "Settle into Satara for the night — the city makes a practical base for Kaas Plateau and Sajjangad. Sample the famous milk sweets and plan tomorrow’s ridge drive to Chalkewadi."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Chalkewadi windmill ridge", "Valley panoramas, turbines on the plateau edge", "A short drive above Thoseghar brings you to open grassland dotted with wind turbines — when clouds lift, the view sweeps across the entire Konkan drop. Excellent for wide-angle photography at golden hour."],
+      ["AFTERNOON", "Sajjangad fort (optional)", "Ramdas Swami shrine, Satara overview", "Drive to Sajjangad — the fort of Samarth Ramdas above Satara — for history and breeze above the plains. Allow two hours including the stepped climb from the parking area."],
+      ["EVENING", "Second Thoseghar visit", "Evening mist, softer light on water", "Return to the falls as afternoon crowds thin. Monsoon evenings often bring returning mist — the gorge glows diffuse white and the sound of water fills the forest."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Kaas Plateau (seasonal)", "UNESCO biodiversity, endemic wildflowers", "If visiting September–October, pre-book Kaas Plateau entry — boardwalks cross carpets of Smithia and Utricularia blooms. Strict carrying limits apply to protect the fragile ecosystem."],
+      ["AFTERNOON", "Mahabaleshwar extension or Pune return", "Hill station cool air, strawberry farms", "Extend west to Mahabaleshwar for plateau weather and Mapro lunch, or descend toward Pune via the expressway. Allow extra time if rain has slowed ghats traffic."],
+      ["EVENING", "Homebound", "Highway dinner, monsoon memories", "Thoseghar rewards repeat visits each monsoon — water volume changes daily with rainfall upstream."]
+    ]
+  }
+]

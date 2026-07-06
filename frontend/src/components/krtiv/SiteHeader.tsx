@@ -5,11 +5,18 @@ import { useEffect, useRef, useState } from "react";
 import { krtivLogo } from "@/lib/krtivPaths";
 import { SiteNavMenus } from "@/components/krtiv/SiteNavMenus";
 import { PLAN_WITH_AI_HREF } from "@/lib/siteNavigation";
+import {
+  FEATURE_HEADER_ABOUT_LINK,
+  FEATURE_HEADER_CONTEST_LINK,
+} from "@/lib/featureFlags";
+import { EditModeToggle } from "@/components/cms/EditModeToggle";
+import { Editable } from "@/components/cms/Editable";
 
 export function SiteHeader({
   variant = "auto",
   isAuthenticated = false,
   isAdmin = false,
+  isContentEditor = false,
   userName,
   profilePicture,
   onLogout,
@@ -17,6 +24,7 @@ export function SiteHeader({
   variant?: "auto" | "solid";
   isAuthenticated?: boolean;
   isAdmin?: boolean;
+  isContentEditor?: boolean;
   userName?: string;
   profilePicture?: string;
   onLogout?: () => void;
@@ -94,21 +102,30 @@ export function SiteHeader({
             className={`hidden lg:flex items-center gap-5 xl:gap-7 text-[13px] tracking-wide ${textColor}`}
           >
             <SiteNavMenus tone={navTone} pathname={pathname} />
-            <Link href="/about" className={`min-h-[44px] inline-flex items-center transition-colors ${linkHover}`}>
-              About
-            </Link>
+            {FEATURE_HEADER_ABOUT_LINK ? (
+              <Link href="/about" className={`min-h-[44px] inline-flex items-center transition-colors ${linkHover}`}>
+                About
+              </Link>
+            ) : null}
             <Link href="/contact" className={`min-h-[44px] inline-flex items-center transition-colors ${linkHover}`}>
-              Contact
+              <Editable cmsKey="nav.main.contact" defaultValue="Contact" as="span" />
             </Link>
-            <Link
-              href="/contest-registration"
-              className={`min-h-[44px] inline-flex items-center transition-colors ${linkHover}`}
-            >
-              Contest
-            </Link>
+            {FEATURE_HEADER_CONTEST_LINK ? (
+              <Link
+                href="/contest-registration"
+                className={`min-h-[44px] inline-flex items-center transition-colors ${linkHover}`}
+              >
+                Contest
+              </Link>
+            ) : null}
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            {isContentEditor ? (
+              <div className={`hidden md:block ${textColor}`}>
+                <EditModeToggle />
+              </div>
+            ) : null}
             <Link
               href={PLAN_WITH_AI_HREF}
               className={`hidden md:inline-flex items-center gap-2 text-[13px] tracking-wide transition-colors ${textColor} ${linkHover}`}
@@ -239,11 +256,18 @@ export function SiteHeader({
           <nav className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-5 font-display">
             <SiteNavMenus tone={navTone} pathname={pathname} mobile onNavigate={() => setOpen(false)} />
             <div className="mt-4 pt-4 border-t hairline space-y-1">
+            {isContentEditor ? (
+              <div className="pb-4 mb-2 border-b hairline">
+                <EditModeToggle />
+              </div>
+            ) : null}
               {[
-                ["About", "/about"],
-                ["Contact", "/contact"],
-                ["Contest", "/contest-registration"],
-                ["Plan your trip", PLAN_WITH_AI_HREF],
+                ...(FEATURE_HEADER_ABOUT_LINK ? ([["About", "/about"]] as const) : []),
+                ["Contact", "/contact"] as const,
+                ...(FEATURE_HEADER_CONTEST_LINK
+                  ? ([["Contest", "/contest-registration"]] as const)
+                  : []),
+                ["Plan your trip", PLAN_WITH_AI_HREF] as const,
               ].map(([label, href]) => (
                 <Link
                   key={href}

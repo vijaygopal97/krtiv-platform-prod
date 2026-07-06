@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Gateway of India & ferry to Elephanta", "Harbour crossing, island approach, ticket logistics", "Board the MTDC or private ferry from Apollo Bunder — the hour-long crossing sets the mood. Buy cave tickets at the island jetty and consider the toy train uphill."],
+      ["AFTERNOON", "Cave 1 — Trimurti & Shaivite panels", "Colossal three-faced Shiva, Ravana lifting Kailasa, Ardhanarishvara", "The main cave’s 6-metre Trimurti is among India’s greatest sculptural achievements. Allow time for the side shrines and damaged but powerful relief panels."],
+      ["EVENING", "Colaba heritage walk", "Colonial façades, cafés, Kala Ghoda galleries", "Return to the city for a gentle walk through South Mumbai’s art district — a human-scale contrast to the island’s ancient rock-cut drama."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Elephanta minor caves & cannon hill", "Caves 2–5, island viewpoints, harbour panorama", "Explore the smaller caves and climb to the hilltop cannons for views back toward the Mumbai skyline — especially clear in winter months."],
+      ["AFTERNOON", "Chhatrapati Shivaji Maharaj Terminus", "Victorian Gothic exterior, UNESCO twin site", "Pair Elephanta with CSMT — Maharashtra’s harbour caves and railway cathedral bookend Mumbai’s UNESCO story."],
+      ["EVENING", "Marine Drive & Art Deco promenade", "Queen’s Necklace, Oval Maidan skyline", "Stroll the seafront at dusk where UNESCO-listed Art Deco apartments face the Gothic towers of the maidan."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Fort & Kala Ghoda museums", "CSMVS, Jehangir Art Gallery, street architecture", "Deepen your Mumbai heritage day with museum collections that contextualise the island sculptures and colonial city planning."],
+      ["AFTERNOON", "Banganga tank & Walkeshwar", "Ancient tank, temple cluster, Malabar Hill", "Discover one of Mumbai’s oldest sacred landscapes — a quiet enclave above the harbour that predates the colonial city."],
+      ["EVENING", "Sunset at Nariman Point", "Business district skyline, Arabian Sea", "Close your UNESCO-focused Mumbai circuit with the modern skyline framed against the same harbour waters that carried pilgrims to Elephanta for centuries."]
+    ]
+  }
+]

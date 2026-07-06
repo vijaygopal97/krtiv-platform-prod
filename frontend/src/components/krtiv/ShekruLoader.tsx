@@ -1,5 +1,7 @@
 'use client';
 
+import { FEATURE_SHEKRU_MASCOT } from '@/lib/featureFlags';
+
 type Props = {
   variant?: 'idle' | 'walking';
   className?: string;
@@ -12,6 +14,10 @@ export function ShekruLoader({
   className = '',
   label = 'Shekru is planning your trip',
 }: Props) {
+  if (!FEATURE_SHEKRU_MASCOT) {
+    return null;
+  }
+
   return (
     <div
       className={`shekru-loader ${variant === 'walking' ? 'shekru-loader--walking' : ''} ${className}`}

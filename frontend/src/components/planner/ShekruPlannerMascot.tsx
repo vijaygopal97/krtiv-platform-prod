@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ShekruLoader } from '@/components/krtiv/ShekruLoader';
+import { FEATURE_SHEKRU_MASCOT } from '@/lib/featureFlags';
 
 export type MascotMode = 'idle' | 'celebrate' | 'walking';
 
@@ -21,6 +22,7 @@ export function ShekruPlannerMascot({ mode, message, celebrateToken = 0 }: Props
   const [bubble, setBubble] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!FEATURE_SHEKRU_MASCOT) return;
     if (celebrateToken === 0 || mode !== 'celebrate') return;
     const text =
       message ??
@@ -30,6 +32,10 @@ export function ShekruPlannerMascot({ mode, message, celebrateToken = 0 }: Props
     const t = window.setTimeout(() => setBubble(null), 2800);
     return () => window.clearTimeout(t);
   }, [celebrateToken, mode, message]);
+
+  if (!FEATURE_SHEKRU_MASCOT) {
+    return null;
+  }
 
   const modeClass =
     mode === 'walking'

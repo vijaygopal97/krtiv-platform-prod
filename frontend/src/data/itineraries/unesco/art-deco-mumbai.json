@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Marine Drive Art Deco walk", "Ziggurat motifs, nautical reliefs, Queen’s Necklace", "Begin at Girgaon Chowpatty and walk south along the Backbay — identify Streamline Moderne balconies, porthole windows, and pastel façades that earned Mumbai the world’s second-largest Art Deco inventory."],
+      ["AFTERNOON", "Oval Maidan & Fort Gothic face-off", "Victorian public buildings, cricket greens, UNESCO ensemble", "Stand on the maidan where the 19th-century Gothic university and high court face the 1930s Art Deco row — the core of the 2018 UNESCO inscription."],
+      ["EVENING", "Chowpatty street food & sea breeze", "Bhel puri, sunset, promenade life", "Experience the living city that inhabits these heritage streets — the ensemble is valued as an urban cultural landscape, not frozen architecture."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Regal Cinema & Colaba Art Deco", "Cinema architecture, Causeway shopping", "Study the streamlined cinema halls and shop-house Deco in Colaba — many façades survive above street-level signage."],
+      ["AFTERNOON", "Chhatrapati Shivaji Maharaj Terminus", "Partner UNESCO site, Victorian Gothic anchor", "Cross to the Fort side of the maidan to see how Gothic and Deco were deliberately juxtaposed in British Bombay’s civic planning."],
+      ["EVENING", "Kala Ghoda & Rampart Row", "Galleries, cafés, heritage plaques", "An evening in the arts quarter where conservation groups run heritage walks and document Deco details."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Elephanta ferry & harbour perspective", "Island UNESCO site, skyline context", "View the Art Deco skyline from the harbour — the sea approach reveals how the Backbay ensemble steps down toward the water."],
+      ["AFTERNOON", "Worli & Prabhadevi Deco pockets", "Residential apartments, temple street contrast", "Explore lesser-known Deco neighbourhoods north of the peninsula with a local architecture guide."],
+      ["EVENING", "Bandra Bandstand promenade", "Sea link views, contemporary Mumbai", "Close with the modern city’s relationship to its coast — a reminder that UNESCO protection here celebrates a still-evolving metropolis."]
+    ]
+  }
+]

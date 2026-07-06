@@ -1,6 +1,6 @@
 .hero-itinerary-bridge {
   position: relative;
-  min-height: 220px;
+  min-height: 152px;
   overflow: hidden;
   background: linear-gradient(
     180deg,
@@ -12,13 +12,13 @@
 
 @media (min-width: 768px) {
   .hero-itinerary-bridge {
-    min-height: 280px;
+    min-height: 168px;
   }
 }
 
 @media (min-width: 1024px) {
   .hero-itinerary-bridge {
-    min-height: 320px;
+    min-height: 176px;
   }
 }
 
@@ -26,13 +26,13 @@
   position: relative;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 2.5rem;
-  min-height: inherit;
+  padding: 1.25rem 1.25rem 0;
+  min-height: 0;
 }
 
 @media (min-width: 768px) {
   .hero-itinerary-bridge__inner {
-    padding: 2rem 2.5rem 3rem;
+    padding: 1.5rem 2.5rem 0;
   }
 }
 
@@ -212,7 +212,7 @@
   left: 0;
   right: 0;
   bottom: -1px;
-  height: 48px;
+  height: 32px;
   color: var(--ivory);
   opacity: 0.95;
   animation: hib-wave-shift 12s ease-in-out infinite;

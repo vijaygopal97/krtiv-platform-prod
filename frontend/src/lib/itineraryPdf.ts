@@ -1,6 +1,7 @@
 import type { ParsedItinerary } from '@/lib/parseItinerary';
 import type { ItineraryExtras } from '@/lib/itineraryExtras';
 import { krtivLogo } from '@/lib/krtivPaths';
+import { AI_ITINERARY_DISCLAIMER_TEXT } from '@/lib/aiItineraryDisclaimer';
 
 export type ItineraryPdfInput = {
   title: string;
@@ -10,6 +11,8 @@ export type ItineraryPdfInput = {
   keywords: string[];
   categoryFocus: string;
   userName?: string;
+  /** When true, include AI transparency notice (default: true for planner exports). */
+  aiGenerated?: boolean;
 };
 
 const SLOT_LABELS: Record<string, string> = {
@@ -119,6 +122,10 @@ export function buildItineraryPrintDocument(input: ItineraryPdfInput): string {
   const keywords = (input.keywords || []).filter(Boolean);
   const schedule = dayScheduleHtml(input.parsed);
   const scheduleOrRaw = schedule || rawFallbackHtml(input.rawText);
+  const showAi = input.aiGenerated !== false;
+  const aiDisclaimerHtml = showAi
+    ? `<div class="ai-disclaimer" role="note" aria-label="AI-generated itinerary disclaimer"><strong>⚠️ AI-generated itinerary</strong>${escapeHtml(AI_ITINERARY_DISCLAIMER_TEXT)}</div>`
+    : '';
 
   const recommendations = [
     recommendationBlock('Best time to visit', input.extras.bestTimeToVisit),
@@ -266,6 +273,18 @@ export function buildItineraryPrintDocument(input: ItineraryPdfInput): string {
       color: #666;
       page-break-inside: avoid;
     }
+    .ai-disclaimer {
+      margin: 16px 0 20px;
+      padding: 12px 14px;
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      font-size: 9.5pt;
+      line-height: 1.45;
+      color: #78350f;
+      page-break-inside: avoid;
+    }
+    .ai-disclaimer strong { display: block; margin-bottom: 4px; }
     @media print {
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .page { padding: 12mm 14mm 18mm; max-width: none; }
@@ -298,6 +317,8 @@ export function buildItineraryPrintDocument(input: ItineraryPdfInput): string {
       <dt>Region</dt><dd>${escapeHtml(region)}</dd>
       <dt>Travel theme</dt><dd>${escapeHtml(theme)}</dd>
     </dl>
+
+    ${aiDisclaimerHtml}
 
     <h2 class="section-title">Day-wise schedule</h2>
     ${scheduleOrRaw}

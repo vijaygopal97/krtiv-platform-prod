@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Mumbai/Pune to Raigad base", "Konkan approach, Pachad village", "Drive to Pachad at the foot of Raigad — ropeway base opens early. Weekends queue heavily; arrive before 8 am on Shiv Jayanti or holidays."],
+      ["AFTERNOON", "Ropeway or Maha Darwaja climb", "Citadel entry, throne platform", "Ascend to the Rajyabhishek mandap where Shivaji Maharaj was crowned — the emotional heart of Maratha history. Explore queen’s chambers and granary ruins."],
+      ["EVENING", "Takmak Tok sunset", "Cliff edge views, Konkan panorama", "Walk carefully to the execution cliff viewpoint — dramatic when clouds part at dusk. Descend before fog thickens."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Fort photography loop", "Ramparts, temples, mist", "Second morning catches different light on the stone walls — monsoon mist is atmospheric; winter offers sharper Konkan views."],
+      ["AFTERNOON", "Mahad or Pali village", "Konkan descent, coastal lunch", "Descend toward the coast for Konkan fish thali — Raigad’s story continues in the villages that supplied the fort."],
+      ["EVENING", "Beach sunset", "Quiet Konkan shore", "Stay overnight on the coast or return to Pune/Mumbai."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Rajgad or Torna extension", "UNESCO Maratha fort trail", "Strong hikers add neighbouring forts from the UNESCO Maratha Military Landscapes circuit."],
+      ["AFTERNOON", "Return to city", "Expressway descent", "Allow traffic buffer on Sunday evenings from Lonavala side."],
+      ["EVENING", "Home", "Heritage weekend complete", "Raigad is Maharashtra’s symbolic capital — allow a full day on the fort minimum."]
+    ]
+  }
+]

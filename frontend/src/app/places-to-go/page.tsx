@@ -19,7 +19,8 @@ export default function PlacesToGoIndexPage() {
             <p className="eyebrow">{PLACES_TO_GO_LABEL}</p>
             <h1 className="display-xl mt-5 max-w-3xl text-balance">Where Maharashtra unfolds</h1>
             <p className="lede mt-6 max-w-2xl">
-              Choose a destination for a suggested three-day itinerary, map, and local tips.
+              Curated three-day itineraries across Maharashtra — from UNESCO heritage and wine country to
+              wildlife safaris and the seven wonders of the state.
             </p>
           </ScrollReveal>
           <ul className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">

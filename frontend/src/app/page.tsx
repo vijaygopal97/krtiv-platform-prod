@@ -1,6 +1,7 @@
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
 import { HomeHeroWithPlanner } from '@/components/krtiv/HomeHeroWithPlanner';
+import { TravelStoriesSection } from '@/components/travelStories/TravelStoriesSection';
 import { FloatingInterestBubbles } from '@/components/krtiv/FloatingInterestBubbles';
 import { CategoryShowcase } from '@/components/krtiv/CategoryShowcase';
 import { IntroBand } from '@/components/krtiv/IntroBand';
@@ -20,6 +21,7 @@ export default function HomePage() {
       <HomeHeroWithPlanner />
       <FloatingInterestBubbles />
       <CategoryShowcase showPlanner={false} />
+      <TravelStoriesSection />
       <IntroBand />
       <SignatureExperiences />
       <CtaBandInteractive />

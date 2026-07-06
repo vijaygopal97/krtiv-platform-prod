@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { PLACES_NAV } from '@/lib/siteNavigation';
 import '@/styles/hero-itinerary-bridge.css';
 
-const ROTATION_NAMES = PLACES_NAV.map((p) => p.label);
+const DEFAULT_ROTATION_NAMES = PLACES_NAV.map((p) => p.label);
 
 const FLOAT_ICONS = [
   { glyph: '📍', top: '18%', left: '8%', dur: '16s', delay: '0s' },
@@ -25,9 +25,12 @@ const PARTICLES = Array.from({ length: 14 }, (_, i) => ({
 
 type Props = {
   currentDestination: string;
+  /** Override rotating names (e.g. Maharashtra districts on curated pages). */
+  rotationNames?: readonly string[];
 };
 
-export function PlaceHeroItineraryBridge({ currentDestination }: Props) {
+export function PlaceHeroItineraryBridge({ currentDestination, rotationNames }: Props) {
+  const names = rotationNames ?? DEFAULT_ROTATION_NAMES;
   const rootRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -54,18 +57,20 @@ export function PlaceHeroItineraryBridge({ currentDestination }: Props) {
   }, []);
 
   useEffect(() => {
-    const start = ROTATION_NAMES.indexOf(currentDestination);
+    const start = names.indexOf(currentDestination);
     if (start >= 0) setNameIndex(start);
-  }, [currentDestination]);
+  }, [currentDestination, names]);
+
+  const nameCount = names.length;
 
   useEffect(() => {
     const t = window.setInterval(() => {
-      setNameIndex((i) => (i + 1) % ROTATION_NAMES.length);
+      setNameIndex((i) => (i + 1) % nameCount);
     }, 3200);
     return () => window.clearInterval(t);
-  }, []);
+  }, [nameCount]);
 
-  const displayName = ROTATION_NAMES[nameIndex] ?? currentDestination;
+  const displayName = names[nameIndex] ?? currentDestination;
   const isCurrent = displayName === currentDestination;
 
   return (

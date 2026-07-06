@@ -39,7 +39,7 @@ export default function Hero({ category, categoryData, categoryVideo }: HeroProp
   }, []);
 
   const defaultContent = {
-    badge: 'DISCOVER INCREDIBLE MAHARASHTRA',
+    badge: 'EXPERIENCE MAHARASHTRA',
     title: 'You will find India here',
     subtitle: 'Maharashtra',
     image: assetPath('/hero-image.jpeg'),

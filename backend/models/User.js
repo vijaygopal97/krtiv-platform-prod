@@ -8,7 +8,11 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, trim: true },
   dob: { type: Date },
   interests: [{ type: String }],
-  role: { type: String, enum: ['user', 'admin'], default: 'user' },
+  role: {
+    type: String,
+    enum: ['user', 'admin', 'super_admin', 'content_admin'],
+    default: 'user',
+  },
   authProvider: { type: String, enum: ['local', 'google', 'facebook'], default: 'local' },
   googleId: { type: String, unique: true, sparse: true, trim: true },
   facebookId: { type: String, unique: true, sparse: true, trim: true },

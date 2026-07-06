@@ -4,6 +4,7 @@ import { destinationPath, PLACES_NAV } from '@/lib/siteNavigation';
 import { resolveDestinationSlug } from '@/lib/destinationRedirects';
 import { approvedItineraryDays } from '@/data/placeApprovedItineraries';
 import { placeHeroPosterPath } from '@/data/placeHeroPosters';
+import { getDestinationHeroImageUrl } from '@/data/destinationHeroImages';
 
 export type DestinationRecord = CategoryItinerary & {
   map: { lat: number; lng: number; zoom?: number };
@@ -192,7 +193,7 @@ const META: Meta[] = [
 
 function build(meta: Meta): DestinationRecord {
   const posterPath = placeHeroPosterPath(meta.slug) ?? meta.poster;
-  const hero = assetPath(posterPath);
+  const hero = getDestinationHeroImageUrl(meta.slug) || assetPath(posterPath);
   const nearbyDestinations = meta.nearby
     .filter((s) => s !== 'goa' && META.some((m) => m.slug === resolveDestinationSlug(s)))
     .map((s) => {

@@ -1,6 +1,7 @@
 'use client';
 
 import { ShekruLoader } from '@/components/krtiv/ShekruLoader';
+import { FEATURE_SHEKRU_MASCOT } from '@/lib/featureFlags';
 
 const STEPS = [
   { label: 'Analyzing preferences', icon: '🎯' },
@@ -21,9 +22,13 @@ export default function GenerationProgress({ progress = 50 }: GenerationProgress
   return (
     <div className="w-full max-w-md mx-auto pointer-events-none" aria-live="polite" aria-busy="true">
       <div className="text-center mb-8">
-        <ShekruLoader variant="walking" />
+        {FEATURE_SHEKRU_MASCOT ? <ShekruLoader variant="walking" /> : null}
         <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1 mt-4">Planning your Maharashtra journey…</h3>
-        <p className="text-sm text-gray-600">Shekru and our AI are crafting your itinerary</p>
+        <p className="text-sm text-gray-600">
+          {FEATURE_SHEKRU_MASCOT
+            ? 'Shekru and our AI are crafting your itinerary'
+            : 'Our AI is crafting your itinerary'}
+        </p>
       </div>
 
       <div className="mb-6">

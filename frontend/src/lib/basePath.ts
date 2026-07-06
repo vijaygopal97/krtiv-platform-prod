@@ -14,6 +14,11 @@ export const basePath = envBasePath() ?? '/kraik';
 
 /** API prefix: matches nginx (/api) or local dev (/kraik/api via Next rewrite). */
 export function getApiBase(): string {
+  const explicitApi = process.env.NEXT_PUBLIC_API_URL;
+  if (explicitApi && typeof window !== 'undefined') {
+    const u = explicitApi.replace(/\/$/, '');
+    return u.endsWith('/api') ? u : `${u}/api`;
+  }
   const fromEnv = envBasePath();
   if (fromEnv !== undefined) {
     return fromEnv ? `${fromEnv}/api` : '/api';

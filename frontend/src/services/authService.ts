@@ -6,6 +6,23 @@ const getApiBase = () => {
   return process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:5001/api';
 };
 
+const LOGGED_OUT_KEY = 'krtiv_auth_logged_out';
+
+let sessionEpoch = 0;
+
+function markLoggedIn(): void {
+  if (typeof window !== 'undefined') {
+    sessionStorage.removeItem(LOGGED_OUT_KEY);
+  }
+}
+
+function persistUser(user: User): void {
+  if (typeof window === 'undefined') return;
+  if (sessionStorage.getItem(LOGGED_OUT_KEY)) return;
+  localStorage.setItem('user', JSON.stringify(user));
+  window.dispatchEvent(new Event('krtiv-auth-changed'));
+}
+
 export interface User {
   id: string;
   email: string;
@@ -30,9 +47,8 @@ export const authService = {
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(friendlyAuthMessage(res.status, data.message));
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('user', JSON.stringify(data.user));
-    }
+    markLoggedIn();
+    persistUser(data.user);
     return data;
   },
 
@@ -45,14 +61,17 @@ export const authService = {
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(friendlyAuthMessage(res.status, data.message, 'facebook'));
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('user', JSON.stringify(data.user));
-    }
+    markLoggedIn();
+    persistUser(data.user);
     return data;
   },
 
   /** Validate stored JWT with the server; clears session if expired. */
   async refreshSession(): Promise<User | null> {
+    if (typeof window !== 'undefined' && sessionStorage.getItem(LOGGED_OUT_KEY)) {
+      return null;
+    }
+    const epoch = sessionEpoch;
     const current = this.getCurrentUser();
     if (!current?.token) return null;
     try {
@@ -60,18 +79,22 @@ export const authService = {
         headers: { Authorization: `Bearer ${current.token}` },
         credentials: 'same-origin',
       });
+      if (epoch !== sessionEpoch) return null;
+      if (sessionStorage.getItem(LOGGED_OUT_KEY)) return null;
       if (!res.ok) {
         this.logout();
         return null;
       }
       const data = await res.json();
+      if (epoch !== sessionEpoch) return null;
+      if (sessionStorage.getItem(LOGGED_OUT_KEY)) return null;
       if (data?.user) {
         const merged = { ...current, ...data.user, token: current.token };
-        localStorage.setItem('user', JSON.stringify(merged));
+        persistUser(merged);
         return merged;
       }
     } catch {
-      /* keep local session if offline */
+      if (epoch !== sessionEpoch || sessionStorage.getItem(LOGGED_OUT_KEY)) return null;
     }
     return current;
   },
@@ -84,9 +107,8 @@ export const authService = {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Invalid email/phone or password');
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('user', JSON.stringify(data.user));
-    }
+    markLoggedIn();
+    persistUser(data.user);
     return data;
   },
 
@@ -103,9 +125,8 @@ export const authService = {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Registration failed');
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('user', JSON.stringify(data.user));
-    }
+    markLoggedIn();
+    persistUser(data.user);
     return data;
   },
 
@@ -132,15 +153,25 @@ export const authService = {
   },
 
   logout(): void {
+    sessionEpoch += 1;
     if (typeof window !== 'undefined') {
       localStorage.removeItem('user');
+      sessionStorage.setItem(LOGGED_OUT_KEY, '1');
+      window.dispatchEvent(new Event('krtiv-auth-changed'));
     }
   },
 
   getCurrentUser(): User | null {
     if (typeof window === 'undefined') return null;
+    if (sessionStorage.getItem(LOGGED_OUT_KEY)) return null;
     const userStr = localStorage.getItem('user');
-    return userStr ? JSON.parse(userStr) : null;
+    if (!userStr) return null;
+    try {
+      return JSON.parse(userStr) as User;
+    } catch {
+      localStorage.removeItem('user');
+      return null;
+    }
   },
 
   isAuthenticated(): boolean {
@@ -148,6 +179,25 @@ export const authService = {
   },
 
   isAdmin(): boolean {
-    return this.getCurrentUser()?.role === 'admin';
+    const role = this.getCurrentUser()?.role;
+    return role === 'admin' || role === 'super_admin';
+  },
+
+  isContentEditor(): boolean {
+    const role = this.getCurrentUser()?.role;
+    return role === 'admin' || role === 'super_admin' || role === 'content_admin';
+  },
+
+  async adminLogin(email: string, password: string): Promise<{ success: boolean; user: User }> {
+    const res = await fetch(`${getApiBase()}/auth/admin/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.message || 'Invalid admin credentials');
+    markLoggedIn();
+    persistUser(data.user);
+    return data;
   },
 };

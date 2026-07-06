@@ -15,7 +15,17 @@ const ROUTE_LEFT =
 const ROUTE_RIGHT =
   'M 92,94 C 95,72 95,48 92,26 C 90,12 88,6 86,4';
 
-export function PlannerTravelAmbient() {
+type PlannerTravelAmbientProps = {
+  /** Element observed for visibility / parallax (default: home planner section). */
+  observeRootSelector?: string;
+  /** Lower icon/route opacity for content-heavy pages (e.g. Contact). */
+  subtle?: boolean;
+};
+
+export function PlannerTravelAmbient({
+  observeRootSelector = '#floating-interest-bubbles',
+  subtle = false,
+}: PlannerTravelAmbientProps = {}) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [sectionActive, setSectionActive] = useState(false);
   const { selectedInterests, flashToken, lastFlashInterest } = usePlannerAmbient();
@@ -24,7 +34,7 @@ export function PlannerTravelAmbient() {
   const [pulseIds, setPulseIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    const el = sectionRef.current?.closest('#floating-interest-bubbles');
+    const el = document.querySelector(observeRootSelector);
     if (!el) return;
     const io = new IntersectionObserver(
       ([entry]) => setSectionActive(entry.isIntersecting && entry.intersectionRatio > 0.12),
@@ -32,7 +42,7 @@ export function PlannerTravelAmbient() {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [observeRootSelector]);
 
   useEffect(() => {
     if (!lastFlashInterest || flashToken === 0) return;
@@ -46,7 +56,13 @@ export function PlannerTravelAmbient() {
   const particles = useMemo(() => PLANNER_PARTICLES, []);
 
   return (
-    <div ref={sectionRef} className="planner-travel-ambient" aria-hidden>
+    <div
+      ref={sectionRef}
+      className={['planner-travel-ambient', subtle ? 'planner-travel-ambient--subtle' : '']
+        .filter(Boolean)
+        .join(' ')}
+      aria-hidden
+    >
       <div className="planner-travel-vignette" />
       <div className="planner-travel-center-glow" />
 

@@ -1,9 +1,12 @@
 /** Primary nav labels and routes. */
 
 export const THINGS_TO_DO_LABEL = 'Things to Do';
-export const PLACES_TO_GO_LABEL = 'Places to Go';
+export const CURATED_ITINERARIES_LABEL = 'Curated Itineraries';
+/** @deprecated Use CURATED_ITINERARIES_LABEL — kept for existing imports */
+export const PLACES_TO_GO_LABEL = CURATED_ITINERARIES_LABEL;
 
 export const THINGS_TO_DO_HREF = '/explore#explore-by-categories';
+export const CURATED_ITINERARIES_HREF = '/places-to-go';
 
 /** Home + header — AI trip planner (no login). */
 export const PLAN_WITH_AI_HREF = '/#floating-interest-bubbles';
@@ -49,6 +52,107 @@ export const PLACES_NAV: PlaceNavItem[] = [
   { slug: 'chandrapur', label: 'Chandrapur', href: '/places-to-go/chandrapur' },
 ];
 
+export type CuratedNavChild = {
+  label: string;
+  href: string;
+  /** Short UNESCO / trail context shown in nested menus */
+  detail?: string;
+};
+
+export type CuratedNavItem = {
+  slug: string;
+  label: string;
+  href: string;
+  /** UNESCO — verified destination pages only */
+  children?: CuratedNavChild[];
+};
+
+/**
+ * Curated Itineraries header menu.
+ * UNESCO children are limited to Places-to-Go destinations that are UNESCO-listed in Maharashtra.
+ */
+export const CURATED_NAV: CuratedNavItem[] = [
+  {
+    slug: 'unesco',
+    label: 'UNESCO World Heritage Sites',
+    href: '/curated-itineraries/unesco',
+    children: [
+      { label: 'Ajanta Caves', href: '/curated-itineraries/unesco/ajanta-caves', detail: 'Buddhist rock-cut art · 1983' },
+      { label: 'Ellora Caves', href: '/curated-itineraries/unesco/ellora-caves', detail: 'Kailasa temple · 1983' },
+      { label: 'Elephanta Caves', href: '/curated-itineraries/unesco/elephanta-caves', detail: 'Shaivite island caves · 1987' },
+      { label: 'CSMT', href: '/curated-itineraries/unesco/csmt', detail: 'Victorian Gothic terminus · 2004' },
+      { label: 'Western Ghats', href: '/curated-itineraries/unesco/western-ghats', detail: 'Sahyadri biodiversity · 2012' },
+      { label: 'Art Deco Mumbai', href: '/curated-itineraries/unesco/art-deco-mumbai', detail: 'Victorian & Art Deco ensembles · 2018' },
+      {
+        label: 'Maratha Fort Landscapes',
+        href: '/curated-itineraries/unesco/maratha-military-landscapes',
+        detail: 'Hill-fort serial site · 2024',
+      },
+    ],
+  },
+  {
+    slug: 'seven-wonders',
+    label: 'Timeless Icons of Maharashtra',
+    href: '/curated-itineraries/seven-wonders',
+    children: [
+      { label: 'Ajanta Caves', href: '/curated-itineraries/seven-wonders/ajanta-caves', detail: 'Ancient Buddhist murals' },
+      { label: 'Ellora Caves', href: '/curated-itineraries/seven-wonders/ellora-caves', detail: 'Monolithic Kailasa' },
+      { label: 'Lonar Crater', href: '/curated-itineraries/seven-wonders/lonar-crater', detail: 'Meteorite impact lake' },
+      { label: 'Raigad Fort', href: '/curated-itineraries/seven-wonders/raigad-fort', detail: 'Maratha capital' },
+      { label: 'Kaas Plateau', href: '/curated-itineraries/seven-wonders/kas-plateau', detail: 'Valley of flowers' },
+      { label: 'Daulatabad Fort', href: '/curated-itineraries/seven-wonders/daulatabad-fort', detail: 'Deccan citadel' },
+      { label: 'Global Vipassana Pagoda', href: '/curated-itineraries/seven-wonders/global-vipassana-pagoda', detail: 'Stone meditation dome' },
+    ],
+  },
+  {
+    slug: 'weekend-getaways',
+    label: 'Weekend Getaways',
+    href: '/curated-itineraries/weekend-getaways',
+    children: [
+      { label: 'Mumbai', href: '/curated-itineraries/weekend-getaways/mumbai', detail: 'City break · sea & street life' },
+      { label: 'Pune', href: '/curated-itineraries/weekend-getaways/pune', detail: 'Culture & Sahyadri gateway' },
+      { label: 'Nashik', href: '/curated-itineraries/weekend-getaways/nashik', detail: 'Wine country & ghats' },
+      { label: 'Shirdi', href: '/curated-itineraries/weekend-getaways/shirdi', detail: 'Pilgrimage retreat' },
+      { label: 'Mahabaleshwar', href: '/curated-itineraries/weekend-getaways/mahabaleshwar', detail: 'Hill station & strawberries' },
+      { label: 'Lonavala', href: '/curated-itineraries/weekend-getaways/lonavala', detail: 'Mist & monsoon waterfalls' },
+      { label: 'Alibaug', href: '/curated-itineraries/weekend-getaways/alibaug', detail: 'Coastal ferry weekends' },
+      { label: 'Kolhapur', href: '/curated-itineraries/weekend-getaways/kolhapur', detail: 'Temples & Kolhapuri spice' },
+      { label: 'Nagpur', href: '/curated-itineraries/weekend-getaways/nagpur', detail: 'Orange city hub' },
+      { label: 'Sindhudurg', href: '/curated-itineraries/weekend-getaways/sindhudurg', detail: 'Konkan beaches & forts' },
+    ],
+  },
+  {
+    slug: 'wine-trail',
+    label: 'Wine Trail',
+    href: '/curated-itineraries/wine-trail',
+  },
+  {
+    slug: 'nature-trails',
+    label: 'Nature Trails',
+    href: '/curated-itineraries/nature-trails',
+    children: [
+      { label: 'Tadoba Tiger Reserve', href: '/curated-itineraries/nature-trails/tadoba-tiger-reserve', detail: 'Wildlife safari' },
+      { label: 'Bhandardara Fireflies', href: '/curated-itineraries/nature-trails/bhandardara-fireflies', detail: 'Night forest walk' },
+      { label: 'Flamingo Watching', href: '/curated-itineraries/nature-trails/flamingo-watching', detail: 'Wetland birding' },
+      { label: 'Navegaon National Park', href: '/curated-itineraries/nature-trails/navegaon-national-park', detail: 'Forest & lake' },
+      { label: 'Karnala Bird Sanctuary', href: '/curated-itineraries/nature-trails/karnala-bird-sanctuary', detail: 'Bird sanctuary' },
+      { label: 'Thoseghar Waterfalls', href: '/curated-itineraries/nature-trails/thoseghar-waterfalls', detail: 'Waterfall viewpoints' },
+    ],
+  },
+  {
+    slug: 'monsoon-trails',
+    label: 'Monsoon Trails',
+    href: '/curated-itineraries/monsoon-trails',
+    children: [
+      { label: 'Must-Visit Waterfalls', href: '/curated-itineraries/monsoon-trails/must-visit-waterfalls', detail: 'Monsoon cascades' },
+      { label: 'Scenic Monsoon Drives', href: '/curated-itineraries/monsoon-trails/scenic-monsoon-drives', detail: 'Ghat road trips' },
+      { label: 'Historic Forts in Mist', href: '/curated-itineraries/monsoon-trails/historic-forts-in-mist', detail: 'Fort treks' },
+      { label: 'Walk Through the Clouds', href: '/curated-itineraries/monsoon-trails/walk-through-clouds', detail: 'Hill stations & ghats' },
+      { label: 'One-Day Treks Near Mumbai', href: '/curated-itineraries/monsoon-trails/one-day-treks-near-mumbai', detail: 'Day hikes' },
+    ],
+  },
+];
+
 export function destinationPath(slug: string) {
   return `/places-to-go/${slug}`;
 }
@@ -57,5 +161,33 @@ export function isActiveNavPath(pathname: string, href: string) {
   const path = href.split('#')[0];
   if (path === '/explore') return pathname === '/explore';
   if (path === '/places-to-go') return pathname === '/places-to-go' || pathname.startsWith('/places-to-go/');
+  if (path.startsWith('/curated-itineraries')) {
+    return pathname === path || pathname.startsWith(`${path}/`);
+  }
   return pathname === path || pathname.startsWith(`${path}/`);
+}
+
+/** Shared link lists for header and footer menus. */
+export function getThingsNavLinks() {
+  return CIRCUIT_NAV.map((c) => ({ label: c.label, href: c.href }));
+}
+
+export function getPlacesNavLinks() {
+  return PLACES_NAV.map((p) => ({ label: p.label, href: p.href }));
+}
+
+/** Flat list of all curated links (for active-state checks). */
+export function getAllCuratedHrefs(): string[] {
+  const hrefs: string[] = [CURATED_ITINERARIES_HREF];
+  for (const item of CURATED_NAV) {
+    hrefs.push(item.href);
+    for (const child of item.children ?? []) {
+      hrefs.push(child.href);
+    }
+  }
+  return hrefs;
+}
+
+export function isCuratedSectionActive(pathname: string) {
+  return getAllCuratedHrefs().some((href) => isActiveNavPath(pathname, href));
 }

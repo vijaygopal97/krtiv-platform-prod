@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { HeroBackgroundSlider } from "./HeroBackgroundSlider";
+import { PlaceHeroBackgroundSlider } from "@/components/places/PlaceHeroBackgroundSlider";
 import { HeroFocalImage } from "./HeroFocalImage";
 import { HeroVideo, HeroVideoSoundToggle, type HeroVideoHandle } from "./HeroVideo";
 import {
@@ -16,6 +17,8 @@ import { usePageHeroVideo } from "@/hooks/usePageHeroVideo";
 import type { HeroSlideRecord } from "@/lib/heroSlideTypes";
 import { resolveSlideImage } from "@/lib/heroSlidesApi";
 import { LuxuryHeroHeading } from "@/components/krtiv/LuxuryHeroHeading";
+import { Editable } from "@/components/cms/Editable";
+import { useCmsOptional } from "@/components/cms/CmsContext";
 import { RotatingLuxuryHeroHeading } from "@/components/krtiv/RotatingLuxuryHeroHeading";
 
 type HeroProps = {
@@ -25,7 +28,11 @@ type HeroProps = {
   subtitle?: string;
   heroLedeClassName?: string;
   image: string;
+  /** Accessible label for the hero background photograph. */
+  imageAlt?: string;
   slides?: HeroSlideRecord[];
+  /** Places to Go: destination slideshow with dots / pause. */
+  heroSliderMode?: "category" | "place";
   showThemeAnimation?: boolean;
   themeAnimationTheme?: HeroThemeKey;
   primaryHref?: string;
@@ -46,6 +53,8 @@ type HeroProps = {
    */
   pinnedReveal?: boolean;
   children?: React.ReactNode;
+  /** When set, hero copy is CMS-editable (e.g. `home`, `contact`). */
+  cmsPage?: string;
 };
 
 export function HeroSection({
@@ -55,12 +64,14 @@ export function HeroSection({
   subtitle,
   heroLedeClassName,
   image,
+  imageAlt = "",
   primaryHref = "/#itinerary-generator",
   primaryLabel = "Plan with AI",
-  secondaryHref = "/#explore-by-categories",
+  secondaryHref,
   secondaryLabel = "Explore the state",
   children,
   slides,
+  heroSliderMode = "category",
   pageVideoScope,
   luxuryHighlight,
   luxuryHeadingCentered = false,
@@ -68,11 +79,46 @@ export function HeroSection({
   showThemeAnimation = false,
   themeAnimationTheme = "home",
   pinnedReveal = false,
+  cmsPage,
 }: HeroProps) {
   const [y, setY] = useState(0);
   const [pin, setPin] = useState({ scrolled: 0, progress: 0 });
   const sectionRef = useRef<HTMLElement>(null);
   const heroVideoRef = useRef<HeroVideoHandle>(null);
+
+  const cmsKey = (field: string) => (cmsPage ? `${cmsPage}.hero.${field}` : '');
+
+  const renderText = (
+    field: string,
+    value: string,
+    as: 'p' | 'h2' | 'span',
+    className?: string,
+    extra?: { style?: CSSProperties }
+  ) => {
+    if (!cmsPage) {
+      const Comp = as;
+      return (
+        <Comp className={className} {...extra}>
+          {value}
+        </Comp>
+      );
+    }
+    return (
+      <Editable
+        cmsKey={cmsKey(field)}
+        defaultValue={value}
+        as={as}
+        className={className}
+        {...extra}
+      />
+    );
+  };
+
+  const cms = useCmsOptional();
+  const highlightFallback =
+    typeof luxuryHighlight === "string" ? luxuryHighlight : "India";
+  const resolvedHighlight =
+    cmsPage && cms ? cms.getText(cmsKey("highlight"), highlightFallback) : highlightFallback;
 
   const categoryAmbientHero =
     showThemeAnimation && isCategoryHeroAmbientTheme(themeAnimationTheme);
@@ -168,7 +214,11 @@ export function HeroSection({
           <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/30" />
         </div>
       ) : useSlider ? (
-        <HeroBackgroundSlider slides={slides!} scrollY={bgScrollY} />
+        heroSliderMode === "place" ? (
+          <PlaceHeroBackgroundSlider slides={slides!} scrollY={bgScrollY} />
+        ) : (
+          <HeroBackgroundSlider slides={slides!} scrollY={bgScrollY} />
+        )
       ) : (
         <div
           className="absolute inset-0 z-0 min-h-[100svh] will-change-transform"
@@ -178,11 +228,11 @@ export function HeroSection({
           <div className="hero-bg-stack hero-bg-pointer-layer absolute inset-0 min-h-[100svh]">
             <HeroFocalImage
               src={image}
-              alt=""
+              alt={imageAlt}
               focalX={50}
               focalY={42}
               kenBurnsClass="ken-burns"
-              loading="eager"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-black/35 md:from-black/35 md:via-black/10 md:to-black/30" />
           </div>
@@ -224,20 +274,35 @@ export function HeroSection({
             <div
               className={`${luxuryHighlight ? "w-full max-w-4xl mx-auto flex flex-col items-center" : "max-w-3xl"}`}
             >
-              <p
-                className={`hero-eyebrow animate-[krtiv-fade_900ms_ease-out_both] ${luxuryHighlight ? "mx-auto" : ""}`}
-                style={{ animationDelay: "120ms" }}
-              >
-                {eyebrow}
-              </p>
+              {renderText(
+                'eyebrow',
+                eyebrow,
+                'p',
+                `hero-eyebrow animate-[krtiv-fade_900ms_ease-out_both] ${luxuryHighlight ? 'mx-auto' : ''}`,
+                { style: { animationDelay: '120ms' } }
+              )}
               {luxuryHighlight ? (
                 luxuryHighlightRotate ? (
                   <RotatingLuxuryHeroHeading
-                    highlight={luxuryHighlight}
+                    highlight={resolvedHighlight}
                     centered={luxuryHeadingCentered}
                   />
                 ) : (
-                  <LuxuryHeroHeading highlight={luxuryHighlight} centered={luxuryHeadingCentered} />
+                  <LuxuryHeroHeading
+                    highlight={
+                      cmsPage ? (
+                        <Editable
+                          cmsKey={cmsKey('highlight')}
+                          defaultValue={typeof luxuryHighlight === 'string' ? luxuryHighlight : 'India'}
+                          as="span"
+                          className="luxury-hero-heading__keyword-text"
+                        />
+                      ) : (
+                        luxuryHighlight
+                      )
+                    }
+                    centered={luxuryHeadingCentered}
+                  />
                 )
               ) : (
                 <h1
@@ -250,16 +315,16 @@ export function HeroSection({
                   )}
                 </h1>
               )}
-              {subtitle && (
-                <p
-                  className={`hero-lede mt-6 max-w-2xl animate-[krtiv-rise_1100ms_cubic-bezier(0.22,1,0.36,1)_both] ${
-                    luxuryHighlight ? "mx-auto text-center" : ""
-                  } ${heroLedeClassName ?? ""}`}
-                  style={{ animationDelay: "360ms" }}
-                >
-                  {subtitle}
-                </p>
-              )}
+              {subtitle &&
+                renderText(
+                  'subtitle',
+                  subtitle,
+                  'h2',
+                  `hero-lede mt-6 max-w-2xl animate-[krtiv-rise_1100ms_cubic-bezier(0.22,1,0.36,1)_both] ${
+                    luxuryHighlight ? 'mx-auto text-center' : ''
+                  } ${heroLedeClassName ?? ''}`,
+                  { style: { animationDelay: '360ms' } }
+                )}
 
               <div
                 className={`mt-10 flex flex-wrap items-center gap-3 hero-cta-row animate-[krtiv-rise_1100ms_cubic-bezier(0.22,1,0.36,1)_both] ${
@@ -295,20 +360,32 @@ export function HeroSection({
                   >
                     ✦
                   </span>
-                  <span className="relative">{primaryLabel}</span>
+                  <span className="relative">
+                    {cmsPage ? (
+                      <Editable cmsKey={cmsKey('primaryCta')} defaultValue={primaryLabel} as="span" />
+                    ) : (
+                      primaryLabel
+                    )}
+                  </span>
                   <span aria-hidden className="relative transition-transform group-hover:translate-x-0.5">
                     →
                   </span>
                 </a>
 
+                {secondaryHref ? (
                 <a
                   href={secondaryHref}
                   className={`inline-flex items-center gap-2 h-12 px-6 rounded-full border border-white/30 text-white text-[14px] hover:bg-white/10 transition ${
                     layoutCategoryHero ? "krtiv-hero-interactive-btn" : ""
                   }`}
                 >
-                  {secondaryLabel}
+                  {cmsPage ? (
+                    <Editable cmsKey={cmsKey('secondaryCta')} defaultValue={secondaryLabel} as="span" />
+                  ) : (
+                    secondaryLabel
+                  )}
                 </a>
+                ) : null}
               </div>
 
               {children && <div className="mt-10">{children}</div>}

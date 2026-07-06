@@ -330,3 +330,28 @@
     height: 65%;
   }
 }
+
+/* Contact & other content pages — keep motion, lower visual weight */
+.planner-travel-ambient--subtle {
+  --planner-icon-opacity: 0.1;
+}
+
+.planner-travel-ambient--subtle .planner-travel-route {
+  opacity: 0.32;
+}
+
+.planner-travel-ambient--subtle .planner-travel-route--left {
+  opacity: 0.36;
+}
+
+.planner-travel-ambient--subtle .planner-travel-route--right {
+  opacity: 0.28;
+}
+
+.planner-travel-ambient--subtle .planner-travel-particle {
+  opacity: 0.09;
+}
+
+.planner-travel-ambient--subtle .planner-travel-center-glow {
+  opacity: 0.85;
+}

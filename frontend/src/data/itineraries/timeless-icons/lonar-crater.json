@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Drive to Lonar from Aurangabad", "Deccan plateau approach, crater first glimpse", "Leave Chhatrapati Sambhajinagar early for the three-hour drive to Buldhana district. Stop at a highway dhaba for breakfast — the crater rim appears suddenly above the plain."],
+      ["AFTERNOON", "Crater rim circuit", "Impact geology, temple ruins, saline lake views", "Walk the rim trail with a local guide who can explain the basalt impact uniqueness. Visit shore temples and photograph the lake’s shifting green hues."],
+      ["EVENING", "Lonar town stay", "Daitya Sudan temple, stargazing", "Explore the Hemadpanti Daitya Sudan temple in town, then return to the rim after dark for stars — minimal light pollution."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Dawn rim walk", "Mist on the lake, birdlife", "Sunrise transforms the crater — mist often fills the bowl before burning off. Bring binoculars for waders on the alkaline shore."],
+      ["AFTERNOON", "Geology interpretation & Kamalja Devi", "Science exhibits, shore shrine", "Visit any open interpretation displays and the Kamalja Devi temple at the water’s edge — respectful dress required."],
+      ["EVENING", "Return toward Aurangabad", "Highway dinner, textile stop", "Drive back with optional Himroo or Paithani shopping in the city."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Ajanta or Ellora extension", "Deccan heritage pairing", "Many travellers combine Lonar with the timeless icons of Ajanta or Ellora — plan an extra day if time allows."],
+      ["AFTERNOON", "Daulatabad Fort (optional)", "Medieval citadel en route", "If routing through Aurangabad, add Daulatabad’s Andheri tunnel climb for a second wonder in one trip."],
+      ["EVENING", "Departure", "Onward travel", "Lonar rewards unhurried pacing — one full day minimum on the crater itself."]
+    ]
+  }
+]

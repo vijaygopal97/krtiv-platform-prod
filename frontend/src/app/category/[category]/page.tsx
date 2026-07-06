@@ -3,8 +3,11 @@ import { headers, cookies } from 'next/headers';
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
 import { CategoryHeroSection } from '@/components/krtiv/CategoryHeroSection';
+import { PlaceHeroItineraryBridge } from '@/components/krtiv/PlaceHeroItineraryBridge';
 import { ItineraryStory } from '@/components/krtiv/ItineraryStory';
 import { CategoryShowcase } from '@/components/krtiv/CategoryShowcase';
+import { CategoryActivitiesSection } from '@/components/activities/CategoryActivitiesSection';
+import { getActivitiesForCategory } from '@/data/categoryActivities';
 import { CtaBandInteractive } from '@/components/krtiv/CtaBandInteractive';
 import SmartKeywordItinerary from '@/components/itinerary/SmartKeywordItinerary';
 import { getItinerary, type CategoryItinerary } from '@/components/krtiv/data';
@@ -127,10 +130,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       : `Plan your ${staticItinerary.title} journey`;
   const plannerSubheading =
     category === 'historical'
-      ? "Select the heritage experiences that interest you most, and we'll create a personalized itinerary through Maharashtra's rich history and cultural legacy."
+      ? 'Pick the heritage experiences you want — we’ll build a day-by-day route through Maharashtra’s forts, caves, and living history.'
       : category === 'adventure'
-        ? "Select the adventure experiences that excite you most, and we'll create a personalized itinerary filled with nature, exploration, and unforgettable experiences."
-      : 'Select interest tags for this category and click Generate My Itinerary.';
+        ? 'Choose what kind of adventure you’re after — treks, safaris, waterfalls, or hill escapes tailored to you.'
+        : 'Tap the interests that match your trip — we’ll craft a personalised itinerary for this theme.';
 
   return (
     <main className="bg-[color:var(--ivory)] text-[color:var(--ink)]">
@@ -147,6 +150,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         secondaryHref="#itinerary-map"
         secondaryLabel="See the map"
       />
+      <PlaceHeroItineraryBridge currentDestination={staticItinerary.title} />
       <SmartKeywordItinerary
         context={category}
         heading={plannerHeading}
@@ -159,6 +163,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         sidePanel="map"
         mapPanelId="itinerary-map"
       />
+      <CategoryActivitiesSection activities={getActivitiesForCategory(category)} />
       <CategoryShowcase showPlanner={false} />
       <CtaBandInteractive />
       <SiteFooter />

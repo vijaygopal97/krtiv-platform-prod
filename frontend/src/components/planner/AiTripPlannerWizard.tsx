@@ -222,13 +222,13 @@ export function AiTripPlannerWizard({ onGenerated }: Props) {
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
-                  href="/register?next=/dashboard"
+                  href="/register"
                   className="h-11 px-6 inline-flex items-center rounded-full bg-[color:var(--ink)] text-white text-sm"
                 >
                   Create account
                 </Link>
                 <Link
-                  href="/login?next=/dashboard"
+                  href="/login"
                   className="h-11 px-6 inline-flex items-center rounded-full border hairline text-sm"
                 >
                   Sign in

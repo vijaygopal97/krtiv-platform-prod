@@ -1,33 +1,37 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
 import { authService, type User } from '@/services/authService';
 import { startItineraryJob, pollJob, type ItineraryJobRequest } from '@/lib/signpostApi';
 import { parseItineraryText } from '@/lib/parseItinerary';
-import GeneratorForm from '@/components/dashboard/GeneratorForm';
+import BuilderPlannerForm from '@/components/dashboard/travel/BuilderPlannerForm';
 import GenerationProgress from '@/components/dashboard/GenerationProgress';
 import CompactItineraryView from '@/components/dashboard/CompactItineraryView';
 import SavedItinerariesPanel from '@/components/dashboard/SavedItinerariesPanel';
 import SmartKeywordItinerary from '@/components/itinerary/SmartKeywordItinerary';
-import { saveItinerary } from '@/lib/myItinerariesApi';
+import { saveItinerary, fetchMyItineraries, type SavedItineraryRecord } from '@/lib/myItinerariesApi';
 import { extractItineraryExtras } from '@/lib/itineraryExtras';
 import { downloadItineraryPdf } from '@/lib/itineraryPdf';
 import DashboardAdminStatsTab from '@/components/dashboard/DashboardAdminStatsTab';
-import { krtivLogo } from '@/lib/krtivPaths';
+import DashboardNav, { type DashTab } from '@/components/dashboard/travel/DashboardNav';
+import DashboardHome from '@/components/dashboard/travel/DashboardHome';
+import SavedPlaces from '@/components/dashboard/travel/SavedPlaces';
 
 const POLL_INTERVAL_MS = 2500;
-
-type Tab = 'smart' | 'builder' | 'saved' | 'favorites' | 'profile' | 'stats';
 
 function DashboardInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const initialTab = (searchParams.get('tab') as Tab) || 'smart';
+  const tabParam = searchParams.get('tab') as DashTab | null;
+
   const [user, setUser] = useState<User | null>(null);
-  const [tab, setTab] = useState<Tab>(initialTab);
+  const [tab, setTab] = useState<DashTab>(tabParam || 'home');
+  const [savedItems, setSavedItems] = useState<SavedItineraryRecord[]>([]);
+  const [favorites, setFavorites] = useState<SavedItineraryRecord[]>([]);
+  const [loadingSaved, setLoadingSaved] = useState(true);
+
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -39,23 +43,41 @@ function DashboardInner() {
   const [saveNote, setSaveNote] = useState('');
   const [pdfNote, setPdfNote] = useState('');
 
+  const loadLibrary = useCallback(async () => {
+    setLoadingSaved(true);
+    const [all, fav] = await Promise.all([fetchMyItineraries(false), fetchMyItineraries(true)]);
+    setSavedItems(all);
+    setFavorites(fav);
+    setLoadingSaved(false);
+  }, []);
+
   useEffect(() => {
     const currentUser = authService.getCurrentUser();
     if (!currentUser) {
-      router.push('/login?next=/dashboard');
+      router.push('/login?next=/dashboard&from=protected');
       return;
     }
     setUser(currentUser);
-    if (initialTab === 'stats' && currentUser.role !== 'admin') {
-      setTab('smart');
+    if (tabParam === 'stats' && currentUser.role !== 'admin') {
+      setTab('home');
+    } else if (tabParam) {
+      setTab(tabParam);
     }
-  }, [router, initialTab]);
+    void loadLibrary();
+  }, [router, tabParam, loadLibrary]);
+
+  const setTabAndUrl = (next: DashTab) => {
+    setTab(next);
+    const qs = next === 'home' ? '' : `?tab=${next}`;
+    router.replace(`/dashboard${qs}`, { scroll: false });
+  };
 
   const handleGenerate = async (payload: ItineraryJobRequest) => {
     setError(null);
     setResult(null);
     setIsGenerating(true);
     setProgress(10);
+    setTabAndUrl('builder');
 
     const startRes = await startItineraryJob(payload);
     if (!startRes?.jobId) {
@@ -97,7 +119,6 @@ function DashboardInner() {
               parsed,
               raw: pollRes.result.itinerary,
             });
-            setTab('builder');
           } else {
             setError('Itinerary returned no days. Please try again.');
           }
@@ -105,6 +126,7 @@ function DashboardInner() {
           setError('Could not parse itinerary. Please try again.');
         }
         setIsGenerating(false);
+        void loadLibrary();
         return;
       }
 
@@ -118,7 +140,7 @@ function DashboardInner() {
   const handleSaveResult = async () => {
     if (!result || !user) return;
     setSaveNote('');
-    const item = await saveItinerary({
+    const { item, error: saveErr } = await saveItinerary({
       title: result.title,
       itineraryText: result.raw,
       parsedSummary: {
@@ -128,7 +150,8 @@ function DashboardInner() {
       },
       source: 'dashboard',
     });
-    setSaveNote(item ? 'Saved to your library.' : 'Save failed.');
+    setSaveNote(item ? 'Saved to your library.' : saveErr || 'Save failed.');
+    if (item) void loadLibrary();
   };
 
   const handleDownloadPdf = () => {
@@ -143,6 +166,7 @@ function DashboardInner() {
       keywords: [],
       categoryFocus: 'Maharashtra Tourism',
       userName: user?.name,
+      aiGenerated: true,
     });
     if (!res.ok) setPdfNote(res.message);
   };
@@ -154,91 +178,52 @@ function DashboardInner() {
 
   if (!user) {
     return (
-      <div className="h-screen flex items-center justify-center bg-[color:var(--ivory)]">
-        <p className="text-[color:var(--ink-soft)] animate-pulse">Loading...</p>
+      <div className="min-h-screen grid place-items-center bg-[#F8F9FB]">
+        <p className="text-[#6B7280] animate-pulse">Loading…</p>
       </div>
     );
   }
 
-  const tabs: { id: Tab; label: string }[] = [
-    { id: 'smart', label: 'Smart tags' },
-    { id: 'builder', label: 'Full builder' },
-    { id: 'saved', label: 'Saved' },
-    { id: 'favorites', label: 'Favorites' },
-    { id: 'profile', label: 'Profile' },
-    ...(user.role === 'admin' ? [{ id: 'stats' as const, label: 'Stats' }] : []),
-  ];
-
   return (
-    <div className="min-h-screen flex flex-col bg-[color:var(--ivory)] text-[color:var(--ink)]">
-      <header className="flex-shrink-0 frosted border-b hairline px-5 md:px-10 h-16 md:h-[72px] flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3" aria-label="Home">
-          <img src={krtivLogo()} alt="" className="w-12 h-12 md:w-14 md:h-14 object-contain" />
-          <span className="hidden sm:inline text-[color:var(--ink-soft)] text-sm">Dashboard</span>
-        </Link>
-        <div className="flex items-center gap-3">
-          {user.role === 'admin' && (
-            <Link
-              href="/admin/hero"
-              className="text-sm px-3 h-9 hidden sm:inline-flex items-center rounded-full border hairline hover:bg-[color:var(--bone)]"
-            >
-              Hero CMS
-            </Link>
-          )}
-          {user.profilePicture ? (
-            <img src={user.profilePicture} alt="" width={36} height={36} className="rounded-full" />
-          ) : null}
-          <span className="text-sm text-[color:var(--ink-soft)] hidden sm:inline">{user.name}</span>
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="text-sm px-4 h-9 rounded-full border hairline hover:bg-[color:var(--bone)] transition"
-          >
-            Logout
-          </button>
-        </div>
-      </header>
+    <div className="min-h-screen flex flex-col bg-[#F8F9FB]">
+      <DashboardNav user={user} activeTab={tab} onTabChange={setTabAndUrl} onLogout={handleLogout} />
 
-      <nav className="flex gap-1 overflow-x-auto px-4 py-3 border-b hairline bg-white/80 no-scrollbar">
-        {tabs.map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            onClick={() => setTab(t.id)}
-            className={`shrink-0 px-4 h-9 rounded-full text-sm transition ${
-              tab === t.id ? 'bg-[color:var(--ink)] text-white' : 'text-[color:var(--ink-soft)] hover:bg-[color:var(--bone)]'
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
-      </nav>
+      {tab === 'home' && (
+        <DashboardHome
+          user={user}
+          savedItems={savedItems}
+          favorites={favorites}
+          loadingSaved={loadingSaved}
+          onTabChange={setTabAndUrl}
+          onGenerate={handleGenerate}
+          isGenerating={isGenerating}
+        />
+      )}
 
       {tab === 'smart' && (
-        <div className="flex-1 overflow-y-auto">
-          <SmartKeywordItinerary context="home" compact />
+        <div className="flex-1 overflow-y-auto max-w-[1440px] mx-auto w-full px-4 md:px-8 py-8">
+          <div className="travel-dash-card p-6 md:p-8">
+            <SmartKeywordItinerary context="home" dashboardMode />
+          </div>
         </div>
       )}
 
       {tab === 'builder' && (
-        <div className="flex flex-col md:flex-row md:flex-1 md:min-h-0">
-          <aside className="w-full md:w-[24rem] flex-shrink-0 border-b md:border-b-0 md:border-r hairline bg-white md:overflow-y-auto">
-            <div className="p-6 md:p-8">
-              <p className="eyebrow">AI planner</p>
-              <h2 className="font-display text-2xl mt-2">Plan your journey</h2>
-              <p className="text-sm text-[color:var(--ink-soft)] mt-2 mb-6">
-                Customize preferences for a detailed day-by-day itinerary.
-              </p>
-              <GeneratorForm onSubmit={handleGenerate} disabled={isGenerating} />
+        <div className="flex flex-col lg:flex-row flex-1 lg:min-h-0">
+          <aside className="w-full lg:w-[22rem] flex-shrink-0 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] bg-white lg:overflow-y-auto">
+            <div className="p-6">
+              <h2 className="font-display-dash text-lg font-semibold text-[#1F2937]">Full planner</h2>
+              <p className="text-sm text-[#6B7280] mt-1 mb-5">Detailed preferences for day-by-day itineraries.</p>
+              <BuilderPlannerForm onSubmit={handleGenerate} disabled={isGenerating} />
             </div>
           </aside>
-          <main className="min-w-0 md:flex-1 md:min-h-0 md:overflow-y-auto bg-[color:var(--bone)] min-h-[280px]">
+          <main className="min-w-0 lg:flex-1 lg:min-h-0 lg:overflow-y-auto bg-[#F8F9FB] min-h-[280px]">
             {error && (
               <div className="mx-5 md:mx-8 mt-6 p-4 bg-red-50 border border-red-200 rounded-2xl text-red-800 text-sm">{error}</div>
             )}
             {!isGenerating && !result && !error && (
-              <div className="min-h-[280px] md:h-full flex items-center justify-center p-8 text-center text-sm text-[color:var(--ink-soft)]">
-                Generate from the form or use Smart tags.
+              <div className="min-h-[280px] lg:h-full flex items-center justify-center p-8 text-center text-sm text-[#6B7280]">
+                Generate from the form or use the home dashboard AI widget.
               </div>
             )}
             {isGenerating && (
@@ -249,16 +234,24 @@ function DashboardInner() {
             {!isGenerating && result && result.parsed.days.length > 0 && (
               <div className="p-6 md:p-10 max-w-3xl mx-auto">
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <button type="button" onClick={() => void handleSaveResult()} className="h-10 px-4 rounded-full bg-[color:var(--ink)] text-white text-sm">
+                  <button
+                    type="button"
+                    onClick={() => void handleSaveResult()}
+                    className="h-10 px-4 rounded-xl bg-[#C46B2D] text-white text-sm font-semibold"
+                  >
                     Save to library
                   </button>
-                  <button type="button" onClick={handleDownloadPdf} className="h-10 px-4 rounded-full border hairline text-sm bg-white hover:bg-[color:var(--bone)]">
+                  <button
+                    type="button"
+                    onClick={handleDownloadPdf}
+                    className="h-10 px-4 rounded-xl border border-[#E5E7EB] text-sm bg-white hover:bg-[#F8F9FB]"
+                  >
                     Download PDF
                   </button>
                 </div>
-                {saveNote && <p className="text-sm mb-4 text-[color:var(--ink-soft)]">{saveNote}</p>}
+                {saveNote && <p className="text-sm mb-4 text-[#6B7280]">{saveNote}</p>}
                 {pdfNote && <p className="text-sm mb-4 text-red-700">{pdfNote}</p>}
-                <CompactItineraryView title={result.title} parsed={result.parsed} />
+                <CompactItineraryView title={result.title} parsed={result.parsed} showAiDisclaimer />
               </div>
             )}
           </main>
@@ -266,53 +259,83 @@ function DashboardInner() {
       )}
 
       {tab === 'saved' && (
-        <div className="flex-1 overflow-y-auto max-w-3xl mx-auto w-full">
-          <SavedItinerariesPanel />
+        <div className="flex-1 overflow-y-auto max-w-4xl mx-auto w-full px-4 py-8">
+          <h1 className="font-display-dash text-xl font-semibold mb-4">My Trips</h1>
+          <div className="travel-dash-card overflow-hidden">
+            <SavedItinerariesPanel />
+          </div>
+        </div>
+      )}
+
+      {tab === 'saved-places' && (
+        <div className="flex-1 overflow-y-auto max-w-5xl mx-auto w-full px-4 py-8">
+          <h1 className="font-display-dash text-xl font-semibold mb-2">Saved Places</h1>
+          <p className="text-sm text-[#6B7280] mb-6">
+            Destinations you saved across the site — plan a route-optimized AI itinerary from your starting city.
+          </p>
+          <SavedPlaces
+            fullPage
+            showRoutePlanner
+            isGenerating={isGenerating}
+            onGenerateRoute={handleGenerate}
+            onPlanWithAI={(req) => {
+              sessionStorage.setItem('dash-prefill-destination', req.destination);
+              setTabAndUrl('builder');
+            }}
+            onAddToTrip={(dest) => {
+              sessionStorage.setItem('dash-prefill-destination', dest);
+              setTabAndUrl('builder');
+            }}
+            onAddToItinerary={(dest) => {
+              sessionStorage.setItem('dash-prefill-destination', dest);
+              setTabAndUrl('builder');
+            }}
+          />
         </div>
       )}
 
       {tab === 'favorites' && (
-        <div className="flex-1 overflow-y-auto max-w-3xl mx-auto w-full">
-          <SavedItinerariesPanel favoritesOnly />
+        <div className="flex-1 overflow-y-auto max-w-4xl mx-auto w-full px-4 py-8">
+          <h1 className="font-display-dash text-xl font-semibold mb-4">Saved</h1>
+          <div className="travel-dash-card overflow-hidden">
+            <SavedItinerariesPanel favoritesOnly />
+          </div>
         </div>
       )}
 
       {tab === 'profile' && (
         <div className="flex-1 p-8 max-w-lg mx-auto w-full">
-          <div className="rounded-2xl bg-white border hairline p-6 space-y-4">
+          <div className="travel-dash-card p-6 space-y-4">
             {user.profilePicture && (
-              <img src={user.profilePicture} alt="" width={64} height={64} className="rounded-full" />
+              <img src={user.profilePicture} alt="" width={64} height={64} className="rounded-2xl" />
             )}
             <div>
-              <p className="text-xs text-[color:var(--ink-soft)]">Name</p>
+              <p className="text-xs text-[#6B7280]">Name</p>
               <p className="font-medium">{user.name}</p>
             </div>
             <div>
-              <p className="text-xs text-[color:var(--ink-soft)]">Email</p>
+              <p className="text-xs text-[#6B7280]">Email</p>
               <p className="font-medium">{user.email || '—'}</p>
             </div>
             <div>
-              <p className="text-xs text-[color:var(--ink-soft)]">Sign-in method</p>
+              <p className="text-xs text-[#6B7280]">Sign-in method</p>
               <p className="font-medium capitalize">{user.authProvider || 'local'}</p>
             </div>
             {user.lastLoginAt && (
               <div>
-                <p className="text-xs text-[color:var(--ink-soft)]">Last login</p>
+                <p className="text-xs text-[#6B7280]">Last login</p>
                 <p className="font-medium">{new Date(user.lastLoginAt).toLocaleString()}</p>
               </div>
             )}
             {user.role === 'admin' && (
-              <div className="pt-4 border-t hairline flex flex-wrap gap-2">
+              <div className="pt-4 border-t border-[#E5E7EB] flex flex-wrap gap-2">
                 <Link
                   href="/dashboard?tab=stats"
-                  className="text-sm px-4 h-9 inline-flex items-center rounded-full bg-[color:var(--ink)] text-white"
+                  className="text-sm px-4 h-9 inline-flex items-center rounded-xl bg-[#C46B2D] text-white font-semibold"
                 >
                   Platform stats
                 </Link>
-                <Link
-                  href="/admin/analytics"
-                  className="text-sm px-4 h-9 inline-flex items-center rounded-full border hairline"
-                >
+                <Link href="/admin/analytics" className="text-sm px-4 h-9 inline-flex items-center rounded-xl border border-[#E5E7EB]">
                   Full analytics
                 </Link>
               </div>
@@ -321,14 +344,18 @@ function DashboardInner() {
         </div>
       )}
 
-      {tab === 'stats' && user.role === 'admin' && <DashboardAdminStatsTab />}
+      {tab === 'stats' && user.role === 'admin' && (
+        <div className="flex-1 overflow-y-auto p-4 md:p-8">
+          <DashboardAdminStatsTab />
+        </div>
+      )}
     </div>
   );
 }
 
 export default function DashboardPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen grid place-items-center bg-[color:var(--ivory)]">Loading…</div>}>
+    <Suspense fallback={<div className="min-h-screen grid place-items-center bg-[#F8F9FB]">Loading…</div>}>
       <DashboardInner />
     </Suspense>
   );

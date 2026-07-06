@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Sanctuary entry & lower trails", "Evergreen forest, drongos & hornbills", "Reach Karnala from Mumbai or Pune in under two hours. Start on the lower loop for racket-tailed drongos, sunbirds, and the calls of Malabar whistling thrush."],
+      ["AFTERNOON", "Fort base climb", "Gradual ascent, butterfly clearings", "The trail to Karnala fort pinnacle steepens through shaded gullies — monsoon brings butterflies; winter offers clearer ridge views."],
+      ["EVENING", "Return to highway base", "Dhaba dinner, early night", "Stay near Panvel or Lonavala if planning a dawn birding start tomorrow — traffic on the expressway peaks on weekends."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Dawn birding session", "Migratory warblers, forest edge", "Arrive at gate opening for peak activity — winter migrants include flycatchers and leaf warblers in the understorey."],
+      ["AFTERNOON", "Fort summit (optional)", "Ruined ramparts, Konkan vista", "Strong hikers continue to the thumb-shaped pinnacle — carry water; the 360° view spans the Mumbai–Pune corridor and Arabian Sea haze."],
+      ["EVENING", "Lonavala extension", "Mist, chikki stops, lake walk", "Drop into Lonavala for an evening stroll around Bushi dam or the market — classic weekend pairing with Karnala."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Bhaje or Karla caves nearby", "Buddhist rock-cut contrast", "Combine Karnala with Lonavala’s ancient cave complexes — a heritage counterpoint to natural history."],
+      ["AFTERNOON", "Return to city", "Expressway descent", "Allow extra time for monsoon ghats — even short rain bursts slow the Mumbai–Pune route."],
+      ["EVENING", "Home", "Trip wrap", "Karnala works as a day trip, but two nights maximise birding windows and fort trekking."]
+    ]
+  }
+]

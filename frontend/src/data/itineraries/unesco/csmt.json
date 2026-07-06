@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "CSMT exterior & forecourt", "Victorian Gothic Revival, stone dome, turrets", "Study Frederick William Stevens’ fusion of European Gothic and Indian palace motifs. Morning light best reveals the sandstone carving and stained-glass details."],
+      ["AFTERNOON", "CST Heritage Museum (when open)", "Railway history, model trains, architectural drawings", "The on-site museum inside the terminus explains how this building announced Bombay as the Gothic City of the Raj — still a working station with 3 million daily passengers."],
+      ["EVENING", "Fort precinct walk", "DN Road Gothic rows, High Court, University", "Walk the UNESCO-buffer streets where Victorian ensembles face the Oval Maidan — CSMT is the anchor of this heritage grid."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Elephanta Caves ferry", "Harbour UNESCO site, Trimurti sculpture", "Balance architectural heritage with Maharashtra’s rock-cut tradition — the ferry from Gateway pairs naturally with a CSMT-focused itinerary."],
+      ["AFTERNOON", "Crawford Market & Victoria Terminus area", "Markets, street life, urban texture", "Experience the functioning city around the monument — Crawford Market’s Victorian hall is minutes from the station."],
+      ["EVENING", "CSMT illuminated", "Night photography, festive lighting", "Return for blue-hour and night views when the station is lit — among Mumbai’s most photographed UNESCO moments."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Art Deco Marine Drive circuit", "UNESCO ensemble partner site, ziggurat façades", "Continue the inscribed Mumbai ensemble along the Backbay Art Deco strip — Regal Cinema to Marine Drive."],
+      ["AFTERNOON", "Chhatrapati Shivaji Maharaj Vastu Sangrahalaya", "Museum collections, Indo-Saracenic architecture", "The city’s premier museum sits in another Stevens-related building — ideal context for colonial design ambition."],
+      ["EVENING", "Azad Maidan & Oval sunset", "Cricket greens, Gothic skyline silhouette", "End with the classic view: Gothic public buildings on one side, Art Deco apartments on the other — the UNESCO nomination in a single frame."]
+    ]
+  }
+]

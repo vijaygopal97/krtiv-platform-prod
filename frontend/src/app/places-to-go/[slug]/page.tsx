@@ -1,13 +1,12 @@
-import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
 import { PlaceHeroSection } from '@/components/krtiv/PlaceHeroSection';
 import { PlaceHeroItineraryBridge } from '@/components/krtiv/PlaceHeroItineraryBridge';
 import { ItineraryStory } from '@/components/krtiv/ItineraryStory';
-import { PlaceDestinationExtras } from '@/components/krtiv/PlaceDestinationExtras';
+import SmartKeywordItinerary from '@/components/itinerary/SmartKeywordItinerary';
 import { getDestination, allDestinationSlugs } from '@/data/destinations';
-import { PLACES_TO_GO_LABEL } from '@/lib/siteNavigation';
+import { CURATED_ITINERARIES_LABEL } from '@/lib/siteNavigation';
 import { DESTINATION_SLUG_REDIRECTS } from '@/lib/destinationRedirects';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -23,7 +22,7 @@ export async function generateMetadata({ params }: Props) {
   const place = getDestination(slug);
   if (!place) return { title: 'Places to Go — Maharashtra Tourism' };
   return {
-    title: `${place.title} — ${PLACES_TO_GO_LABEL} — Maharashtra Tourism`,
+    title: `${place.title} — ${CURATED_ITINERARIES_LABEL} — Maharashtra Tourism`,
     description: place.description,
   };
 }
@@ -43,26 +42,16 @@ export default async function PlaceToGoPage({ params }: Props) {
       <SiteHeaderClient />
       <PlaceHeroSection place={place} />
       <PlaceHeroItineraryBridge currentDestination={place.title} />
-      <nav
-        className="relative z-[1] px-4 sm:px-6 md:px-10 py-2 text-xs sm:text-[12px] text-[color:var(--ink-soft)] max-w-[1440px] mx-auto bg-[color:var(--ivory)]"
-        aria-label="Breadcrumb"
-      >
-        <ol className="flex flex-wrap gap-x-2 gap-y-1 items-center">
-          <li>
-            <Link href="/" className="hover:text-[color:var(--saffron)]">
-              Home
-            </Link>
-          </li>
-          <li aria-hidden>/</li>
-          <li>
-            <Link href="/places-to-go" className="hover:text-[color:var(--saffron)]">
-              {PLACES_TO_GO_LABEL}
-            </Link>
-          </li>
-          <li aria-hidden>/</li>
-          <li className="text-[color:var(--ink)]">{place.title}</li>
-        </ol>
-      </nav>
+      <SmartKeywordItinerary
+        context="explore"
+        sectionId="place-smart-itinerary"
+        heading={`Plan your ${place.title} journey`}
+        subheading="Tap a few interests below — we'll shape a personalised itinerary around this destination."
+        className="bg-white border-b hairline"
+        compact
+        placeSlug={slug}
+        placeTitle={place.title}
+      />
       <ItineraryStory
         itinerary={place}
         sectionId="suggested-itinerary"
@@ -70,8 +59,9 @@ export default async function PlaceToGoPage({ params }: Props) {
         sidePanel="map"
         mapPanelId="itinerary-map"
         seamlessTop
+        showTalkToPlanner={false}
+        plannerAnchor="#place-smart-itinerary"
       />
-      <PlaceDestinationExtras place={place} />
       <SiteFooter />
     </main>
   );

@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Kaas Plateau (seasonal bloom)", "Endemic wildflowers, UNESCO serial site, boardwalk trails", "In September–October, Kaas erupts in UNESCO-protected blooms found nowhere else on Earth. Entry is regulated — book slots in advance during peak flower season."],
+      ["AFTERNOON", "Thoseghar waterfalls", "Monsoon cascades, plateau edge views", "Drive to the waterfall viewpoint where the Sahyadri escarpment drops toward the Konkan — spectacular in post-monsoon months."],
+      ["EVENING", "Satara town & local dinner", "Kandhi pedhe, base for plateau trips", "Stay in Satara or Mahabaleshwar for cool evenings and easy access to day hikes."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Kalsubai peak trek (experienced hikers)", "Highest peak in Maharashtra, ladder sections, sunrise", "The Kalsubai summit offers sweeping Western Ghats panoramas — start pre-dawn from Bari village with a local guide and proper footwear."],
+      ["AFTERNOON", "Bhandardara lake & Arthur Lake", "Reservoir views, Randha Falls nearby", "A gentler alternative: boat on Bhandardara, visit the Amruteshwar temple, and photograph the ghats reflected in still water."],
+      ["EVENING", "Stargazing at Bhandardara", "Dark-sky pocket, dam overlook", "Low light pollution makes this a favoured spot for night-sky viewing after monsoon clears."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Bhimashankar Wildlife Sanctuary", "Sacred grove, endemic fauna, mist forest", "Trek or drive into one of the ghats’ protected corridors — look for the Maharashtra giant squirrel and listen for monsoon-fed streams."],
+      ["AFTERNOON", "Matheran eco-sensitive zone", "Vehicle-free hill station, valley overlooks", "Finish on the plateau’s eastern edge where the toy train and walking paths reveal undisturbed ridgeline forest."],
+      ["EVENING", "Descent to Pune or Mumbai", "Ghats hairpin views, sunset over the plains", "The drive down the ghat roads is itself a UNESCO landscape experience — pause at viewpoints as the Deccan opens below."]
+    ]
+  }
+]

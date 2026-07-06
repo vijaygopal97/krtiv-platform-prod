@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { CategoryItinerary } from "./data";
 import { ScrollReveal } from "./ScrollReveal";
 import { MaharashtraMapVisual } from "./MaharashtraMapVisual";
+import { ItineraryDayFavorite } from "@/components/places/ItineraryDayFavorite";
 
 export function ItineraryStory({
   itinerary,
@@ -12,6 +13,8 @@ export function ItineraryStory({
   sidePanel = "image",
   mapPanelId = "itinerary-map",
   seamlessTop = false,
+  showTalkToPlanner = true,
+  plannerAnchor = '#category-smart-itinerary',
 }: {
   itinerary: CategoryItinerary;
   sectionId?: string;
@@ -21,6 +24,10 @@ export function ItineraryStory({
   mapPanelId?: string;
   /** Omit top rule when preceded by hero bridge (Places to Go). */
   seamlessTop?: boolean;
+  /** Show secondary "Talk to a planner" CTA (off on Places to Go). */
+  showTalkToPlanner?: boolean;
+  /** Scroll target for "Build my own version" (smart planner at page top). */
+  plannerAnchor?: string;
 }) {
   const [activeDay, setActiveDay] = useState(0);
 
@@ -93,18 +100,42 @@ export function ItineraryStory({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
               <div className="absolute bottom-0 left-0 right-0 p-7 text-white">
-                <p className="text-[11px] tracking-[0.3em] uppercase text-white/75">
-                  Day {itinerary.days[activeDay].day}
-                </p>
-                <h3 className="font-display text-3xl md:text-4xl mt-2">
-                  {itinerary.days[activeDay].location}
-                </h3>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-[11px] tracking-[0.3em] uppercase text-white/75">
+                      Day {itinerary.days[activeDay].day}
+                    </p>
+                    <h3 className="font-display text-3xl md:text-4xl mt-2">
+                      {itinerary.days[activeDay].location}
+                    </h3>
+                  </div>
+                  <ItineraryDayFavorite
+                    location={itinerary.days[activeDay].location}
+                    image={itinerary.days[activeDay].image}
+                  />
+                </div>
               </div>
             </div>
             )}
           </div>
 
           <div className={`${sidePanel === "map" ? "md:col-span-6" : "md:col-span-7"} order-2`}>
+            {sidePanel === "map" ? (
+              <div className="flex items-center justify-between gap-3 mb-6">
+                <div>
+                  <p className="text-[11px] tracking-[0.25em] uppercase text-[color:var(--ink-soft)]">
+                    Day {itinerary.days[activeDay].day}
+                  </p>
+                  <h3 className="font-display text-2xl md:text-3xl mt-1 text-[color:var(--ink)]">
+                    {itinerary.days[activeDay].location}
+                  </h3>
+                </div>
+                <ItineraryDayFavorite
+                  location={itinerary.days[activeDay].location}
+                  image={itinerary.days[activeDay].image}
+                />
+              </div>
+            ) : null}
             <ol className="space-y-0">
               {itinerary.days[activeDay].activities.map((a, idx) => (
                 <li
@@ -140,19 +171,31 @@ export function ItineraryStory({
               ))}
             </ol>
 
-            <div className="mt-12 flex flex-wrap gap-3 pt-6 border-t hairline">
-              <Link
-                href="/dashboard"
+            <div
+              className={`mt-12 pt-6 border-t hairline${showTalkToPlanner ? ' flex flex-wrap gap-3' : ''}`}
+            >
+              <a
+                href={plannerAnchor}
                 className="inline-flex items-center gap-2 h-11 px-5 rounded-full bg-[color:var(--ink)] text-white text-sm hover:opacity-90 transition"
+                onClick={(e) => {
+                  const id = plannerAnchor.replace(/^#/, '');
+                  const el = document.getElementById(id);
+                  if (el) {
+                    e.preventDefault();
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
               >
                 Build my own version <span aria-hidden>→</span>
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 h-11 px-5 rounded-full border hairline text-sm text-[color:var(--ink)] hover:bg-[color:var(--bone)] transition"
-              >
-                Talk to a planner
-              </Link>
+              </a>
+              {showTalkToPlanner ? (
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 h-11 px-5 rounded-full border hairline text-sm text-[color:var(--ink)] hover:bg-[color:var(--bone)] transition"
+                >
+                  Talk to a planner
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>

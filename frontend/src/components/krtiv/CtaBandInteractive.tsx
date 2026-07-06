@@ -56,7 +56,7 @@ export function CtaBandInteractive() {
       });
       setShowSignupLightbox(false);
       setFormData({ name: '', email: '', phone: '', password: '', confirmPassword: '' });
-      router.push('/dashboard');
+      router.push('/');
     } catch (err) {
       setFormError(err instanceof Error ? err.message : 'Registration failed');
     } finally {

@@ -11,6 +11,7 @@ import {
 } from '../services/plannerAnalytics.js';
 import { authJwt } from '../middleware/authJwt.js';
 import { verifyFacebookAccessToken } from '../services/facebookAuth.js';
+import { isCmsEditorRole } from '../lib/contentRoles.js';
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'kraik-dev-secret-change-in-production';
@@ -148,6 +149,35 @@ router.post('/login', async (req, res) => {
   } catch (err) {
     console.error('Login error:', err.message || err);
     res.status(500).json({ success: false, message: 'Login failed' });
+  }
+});
+
+/** CMS admin login — email + password; Super Admin, Content Admin, or legacy admin only. */
+router.post('/admin/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const emailNorm = (email != null && email !== '') ? String(email).trim().toLowerCase() : '';
+    if (!emailNorm || !password) {
+      return res.status(400).json({ success: false, message: 'Admin email and password are required' });
+    }
+    const user = await User.findOne({ email: emailNorm });
+    if (!user || !isCmsEditorRole(user.role)) {
+      return res.status(401).json({ success: false, message: 'Invalid admin credentials' });
+    }
+    if (!user.password) {
+      return res.status(401).json({ success: false, message: 'Password login is not enabled for this account' });
+    }
+    const match = await user.comparePassword(password);
+    if (!match) {
+      return res.status(401).json({ success: false, message: 'Invalid admin credentials' });
+    }
+    user.lastLoginAt = new Date();
+    await user.save();
+    const token = generateToken(user);
+    res.json({ success: true, user: userPayload(user, token) });
+  } catch (err) {
+    console.error('Admin login error:', err.message || err);
+    res.status(500).json({ success: false, message: 'Admin login failed' });
   }
 });
 

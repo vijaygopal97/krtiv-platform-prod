@@ -8,7 +8,7 @@ import { krtivHeroImage } from "@/lib/krtivPaths";
 import type { HeroSlideRecord } from "@/lib/heroSlideTypes";
 
 const FALLBACK = {
-  eyebrow: "Discover Incredible Maharashtra",
+  eyebrow: "Experience Maharashtra",
   title: "You will find India here",
   subtitle:
     "Seven curated journeys across forts, ghats, coasts and quiet villages — written for travelers who like to read the place slowly.",
@@ -39,8 +39,6 @@ export function HomeHeroSection() {
       image={FALLBACK.image}
       primaryHref="/#itinerary-generator"
       primaryLabel="Plan with AI"
-      secondaryHref="/explore#explore-smart-planner"
-      secondaryLabel="Things to Do"
       showThemeAnimation
       themeAnimationTheme="home"
     />

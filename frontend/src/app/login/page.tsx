@@ -7,11 +7,13 @@ import { authService } from '@/services/authService';
 import { AuthShell } from '@/components/krtiv/AuthShell';
 import GoogleSignInButton from '@/components/GoogleSignInButton';
 import FacebookSignInButton from '@/components/FacebookSignInButton';
+import { buildAuthLink, resolvePostAuthRedirect } from '@/lib/authRedirect';
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const nextPath = searchParams.get('next') || '/dashboard';
+  const redirectTarget = resolvePostAuthRedirect(searchParams);
+  const registerHref = buildAuthLink('/register', searchParams);
   const [formData, setFormData] = useState({ emailOrPhone: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -22,7 +24,7 @@ function LoginForm() {
     setLoading(true);
     try {
       await authService.login(formData.emailOrPhone, formData.password);
-      router.push(nextPath.startsWith('/') ? nextPath : '/');
+      router.push(redirectTarget);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Invalid email/phone or password');
     } finally {
@@ -93,19 +95,19 @@ function LoginForm() {
       </div>
       <GoogleSignInButton
         mode="signin"
-        onSuccess={() => router.push(nextPath.startsWith('/') ? nextPath : '/dashboard')}
+        onSuccess={() => router.push(redirectTarget)}
         onError={(m) => setError(m)}
         disabled={loading}
       />
       <div className="mt-3">
         <FacebookSignInButton
-          onSuccess={() => router.push(nextPath.startsWith('/') ? nextPath : '/dashboard')}
+          onSuccess={() => router.push(redirectTarget)}
           onError={(m) => setError(m)}
           disabled={loading}
         />
       </div>
       <p className="mt-8 text-sm text-[color:var(--ink-soft)] text-center">
-        New here? <Link href="/register" className="text-[color:var(--ink)] underline-offset-4 hover:underline">Create an account</Link>
+        New here? <Link href={registerHref} className="text-[color:var(--ink)] underline-offset-4 hover:underline">Create an account</Link>
       </p>
     </AuthShell>
   );

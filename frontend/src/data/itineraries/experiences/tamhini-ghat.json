@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Pune departure via Pirangut", "Country road, Paud climb, cloud base", "Leave Pune by 7 am on a monsoon weekend — traffic builds by mid-morning. The road through Pirangut softens into green hills as you approach Mulshi; keep headlights on in fog."],
+      ["AFTERNOON", "Mulshi dam & Tamhini ascent", "Backwater vistas, first roadside falls", "Skirt Mulshi lake’s northern shore — photographers stop at every bend. As you climb into Tamhini Ghat, waterfalls appear beside the tarmac; drive slowly and use horn on blind curves."],
+      ["EVENING", "Tamhini village homestay", "Local dinner, early night", "Stay in a homestay or MTDC property near Tamhini if you want dawn mist without a pre-dawn drive from Pune. Rain on tin roofs is part of the experience."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Plus valley viewpoint", "Emerald amphitheatre, cloud gaps", "The Plus valley overlook rewards patience — wait for a cloud break to see the full bowl of forest. Binoculars help spot raptors riding thermals above the ridge."],
+      ["AFTERNOON", "Descent toward Kolad / Devkund", "Konkan humidity, greener valleys", "Drop toward the Konkan side for warmer air and denser vegetation. Optional detour to Devkund trek base at Bhira if energy allows."],
+      ["EVENING", "Kolad riverside", "Solkadhi dinner, river sound", "Konkan seafood and solkadhi taste better with the Kundalika rushing nearby — book accommodation if rafting is planned for day three."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Return drive through ghat", "Opposite light, new waterfalls", "Rain overnight often activates fresh streams on the basalt cliffs — the return journey is never identical to the outbound leg."],
+      ["AFTERNOON", "Lonavala chai stop (optional)", "Expressway merge, chikki haul", "If routing via Lonavala, pause for hot chai and Maganlal chikki before the expressway sprint to Mumbai or Pune."],
+      ["EVENING", "Home", "Monsoon road trip complete", "Tamhini is best treated as a journey not a checkpoint — the drive itself is the attraction."]
+    ]
+  }
+]

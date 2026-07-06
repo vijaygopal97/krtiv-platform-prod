@@ -5,6 +5,7 @@
  */
 
 import { assetPath } from '@/lib/basePath';
+import { sanitizePlaceLabel } from '@/lib/sanitizePlaceLabel';
 
 const SLOT_ICONS: Record<string, string> = {
   MORNING: '🌅',
@@ -89,7 +90,7 @@ export function parseItineraryText(raw: string): ParsedItinerary {
       continue;
     }
     if (line.startsWith('BASE_CITY:')) {
-      const value = line.replace(/^BASE_CITY:\s*/, '').trim();
+      const value = sanitizePlaceLabel(line.replace(/^BASE_CITY:\s*/, '').trim());
       if (currentDay) currentDay.baseCity = value;
       continue;
     }
@@ -107,7 +108,7 @@ export function parseItineraryText(raw: string): ParsedItinerary {
     }
     if (currentSlot) {
       if (line.startsWith('LOCATION:')) {
-        currentSlot.location = line.replace(/^LOCATION:\s*/, '').trim();
+        currentSlot.location = sanitizePlaceLabel(line.replace(/^LOCATION:\s*/, '').trim());
       } else if (line.startsWith('VISIT_DURATION:')) {
         currentSlot.duration = line.replace(/^VISIT_DURATION:\s*/, '').trim();
       } else if (line.startsWith('KEY_ACTIVITIES:')) {

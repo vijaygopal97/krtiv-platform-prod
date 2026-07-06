@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Reach Bhira village", "Guide registration, trek briefing, dam views", "Arrive at Bhira Patnus before 8 am — register with the forest desk and hire your mandatory local guide. Pack dry bags, two litres of water, and grippy shoes. Scan the notice board for flood or closure alerts before starting."],
+      ["AFTERNOON", "Forest trek to Devkund", "Stream crossings, backwater trail, basalt gorge", "The 6.5 km path alternates between flat dam shoreline and shaded forest. Monsoon swells every crossing — follow your guide’s line exactly. The gorge narrows as you approach; you will hear the fall before you see the pool."],
+      ["EVENING", "Devkund rim & descent", "Plunge pool photography, no swimming", "View the jade-green amphitheatre from approved vantage points only — swimming is banned due to depth and currents. Allow 45 minutes at the pool before the return trek while daylight holds."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Bhira village rest or Kolad drive", "Rural breakfast, Kundalika valley", "If legs are sore, enjoy a slow morning in Bhira. Otherwise drive toward Kolad along the Kundalika — the river that Devkund mythically feeds."],
+      ["AFTERNOON", "Tamhini Ghat scenic drive", "Mist corridors, roadside waterfalls", "Ascend through Tamhini pass toward Pune — countless unnamed falls line the highway after rain. Stop only at safe pullouts and watch for landslide warnings on your phone."],
+      ["EVENING", "Mulshi lake sunset", "Dam backwaters, tea stop", "Pause at Mulshi before dropping into Pune — the reservoir mirrors monsoon sky when wind is still."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Kolad rafting (post-monsoon season)", "Grade II–III white water", "When water levels permit (typically late monsoon into winter), book a morning rafting slot on the Kundalika — a natural extension of the Devkund watershed story."],
+      ["AFTERNOON", "Pune return via expressway", "Misal reward lunch", "Roll into Pune for a celebratory misal or bakarwadi stop — three days of Sahyadri forest complete."],
+      ["EVENING", "Departure", "Trip wrap", "Devkund access rules change yearly — verify forest department updates before planning a return monsoon visit."]
+    ]
+  }
+]

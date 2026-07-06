@@ -1,24 +1,49 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
 import { ScrollReveal } from '@/components/krtiv/ScrollReveal';
 import { ContactSocialSection } from '@/components/krtiv/ContactSocialSection';
-import SmartKeywordItinerary from '@/components/itinerary/SmartKeywordItinerary';
 import { SITE_HEADER_OFFSET_CLASS } from '@/lib/siteNavigation';
+import { Editable } from '@/components/cms/Editable';
+import '@/styles/planner-travel-ambient.css';
+
+const PlannerTravelAmbient = dynamic(
+  () =>
+    import('@/components/planner/PlannerTravelAmbient').then((mod) => ({
+      default: mod.PlannerTravelAmbient,
+    })),
+  { ssr: false }
+);
 
 export default function ContactPage() {
   return (
-    <main className="bg-[color:var(--ivory)] text-[color:var(--ink)]">
+    <main
+      id="contact-page-ambient-root"
+      className="relative planner-section-premium text-[color:var(--ink)] overflow-hidden"
+    >
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden>
+        <PlannerTravelAmbient observeRootSelector="#contact-page-ambient-root" />
+      </div>
+
+      <div className="relative z-[1]">
       <SiteHeaderClient variant="solid" />
       <section className={`${SITE_HEADER_OFFSET_CLASS} pb-16 md:pb-20`}>
         <div className="max-w-[1200px] mx-auto px-6 md:px-10">
           <ScrollReveal>
-            <p className="eyebrow">Contact</p>
-            <h1 className="display-xl mt-5 max-w-3xl text-balance">We answer every note.</h1>
+            <p className="eyebrow">
+              <Editable cmsKey="contact.main.eyebrow" defaultValue="Contact" as="span" />
+            </p>
+            <h1 className="display-xl mt-5 max-w-3xl text-balance">
+              <Editable cmsKey="contact.main.title" defaultValue="We answer every note." as="span" />
+            </h1>
             <p className="lede mt-8 max-w-2xl">
-              Whether you&apos;re planning a long weekend or a fifteen-day passage through the state — write in.
-              A real person on our team will reply.
+              <Editable
+                cmsKey="contact.main.lede"
+                defaultValue="Whether you're planning a long weekend or a fifteen-day passage through the state — write in. A real person on our team will reply."
+                as="span"
+              />
             </p>
           </ScrollReveal>
         </div>
@@ -46,7 +71,8 @@ export default function ContactPage() {
                 <textarea rows={6} className="w-full p-4 rounded-xl bg-[color:var(--ivory)] border hairline outline-none focus:border-[color:var(--ink)] transition resize-y" />
               </label>
               <button type="submit" className="mt-7 inline-flex items-center gap-2 h-12 px-6 rounded-full bg-[color:var(--ink)] text-white text-sm">
-                Send message <span aria-hidden>→</span>
+                <Editable cmsKey="contact.main.submitLabel" defaultValue="Send message" as="span" />{' '}
+                <span aria-hidden>→</span>
               </button>
             </form>
           </ScrollReveal>
@@ -55,14 +81,8 @@ export default function ContactPage() {
           </ScrollReveal>
         </div>
       </section>
-      <SmartKeywordItinerary
-        context="explore"
-        heading="While you&apos;re here — plan your journey"
-        subheading="Pick keywords and click Generate My Itinerary for an instant AI day-by-day plan."
-        className="border-t hairline bg-[color:var(--bone)]"
-        compact
-      />
       <SiteFooter />
+      </div>
     </main>
   );
 }

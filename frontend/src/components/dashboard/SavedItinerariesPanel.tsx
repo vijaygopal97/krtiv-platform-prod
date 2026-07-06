@@ -11,6 +11,8 @@ import { parseItineraryText } from '@/lib/parseItinerary';
 import { extractItineraryExtras } from '@/lib/itineraryExtras';
 import { downloadItineraryPdf } from '@/lib/itineraryPdf';
 import CompactItineraryView from '@/components/dashboard/CompactItineraryView';
+import AiItineraryDisclaimer from '@/components/itinerary/AiItineraryDisclaimer';
+import { isAiGeneratedItinerarySource } from '@/lib/aiItineraryDisclaimer';
 
 export default function SavedItinerariesPanel({ favoritesOnly = false }: { favoritesOnly?: boolean }) {
   const [items, setItems] = useState<SavedItineraryRecord[]>([]);
@@ -65,6 +67,7 @@ export default function SavedItinerariesPanel({ favoritesOnly = false }: { favor
             parsed = null;
           }
         }
+        const aiSaved = isAiGeneratedItinerarySource(item.source);
         return (
           <li key={item._id} className="p-4 md:p-5">
             <div className="flex flex-wrap items-start justify-between gap-3">
@@ -107,6 +110,7 @@ export default function SavedItinerariesPanel({ favoritesOnly = false }: { favor
                       extras,
                       keywords: item.keywords || [],
                       categoryFocus: item.categoryFocus || 'Maharashtra Tourism',
+                      aiGenerated: aiSaved,
                     });
                   }}
                   className="text-xs px-3 h-8 rounded-full border hairline"
@@ -117,13 +121,18 @@ export default function SavedItinerariesPanel({ favoritesOnly = false }: { favor
             </div>
             {open && parsed && parsed.days?.length > 0 && (
               <div className="mt-4">
-                <CompactItineraryView title={item.title} parsed={parsed} />
+                <CompactItineraryView title={item.title} parsed={parsed} showAiDisclaimer={aiSaved} />
               </div>
             )}
             {open && !parsed && (
               <pre className="mt-4 text-xs whitespace-pre-wrap bg-white p-4 rounded-xl border hairline max-h-96 overflow-auto">
                 {item.itineraryText}
               </pre>
+            )}
+            {open && !parsed && aiSaved && (
+              <div className="mt-2">
+                <AiItineraryDisclaimer />
+              </div>
             )}
           </li>
         );

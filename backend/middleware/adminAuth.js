@@ -25,7 +25,8 @@ export async function adminAuth(req, res, next) {
   try {
     const payload = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(payload.id).select('role email name');
-    if (!user || user.role !== 'admin') {
+    const role = user?.role || 'user';
+    if (!user || (role !== 'admin' && role !== 'super_admin')) {
       return res.status(403).json({ success: false, message: 'Admin access required' });
     }
     req.userId = String(user._id);

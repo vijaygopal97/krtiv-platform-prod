@@ -1,0 +1,26 @@
+[
+  {
+    "day": 1,
+    "slots": [
+      ["MORNING", "Malavli station to Bhaje base", "Suburban train, shared auto, village tea", "Catch an early Mumbai or Pune local to Malavli — shared autos run to Bhaje village at the foot of the plateau. Eat vada pav and check weather; cancel if thunderstorms are forecast."],
+      ["AFTERNOON", "Visapur plateau ascent", "Waterfall-on-wall trail, misty ramparts", "The monsoon route can include climbing beside a cascade on the fort wall — gripping shoes and a steady pace are essential. The plateau opens to ruined granaries, ponds, and wide grass soaked emerald."],
+      ["EVENING", "Descent before fog", "Lonavala check-in, dry clothes", "Leave the fort by 5 pm — fog thickens quickly and trails become disorienting. Lonavala hotels are ten minutes by road; hot shower non-negotiable."]
+    ]
+  },
+  {
+    "day": 2,
+    "slots": [
+      ["MORNING", "Lohagad twin fort", "Vinchu Kata ridge, connected history", "Many trekkers pair Visapur with neighbouring Lohagad — the scorpion-tail Vinchu Kata ridge is iconic when clouds part. Allow four hours for both forts if fit."],
+      ["AFTERNOON", "Bhaje Buddhist caves", "Rock-cut chaitya, dry footing", "Descend to Bhaje’s 2nd-century BCE caves — carved prayer halls contrast beautifully with yesterday’s open-sky fort walk."],
+      ["EVENING", "Lonavala market", "Chikki, fudge, lake stroll", "Bushi dam or the market strip — classic Lonavala evening after a wet trek day."]
+    ]
+  },
+  {
+    "day": 3,
+    "slots": [
+      ["MORNING", "Tiger Point or Rajmachi view", "Valley panoramas, gentle recovery", "A light morning viewpoint if legs need recovery — Tiger Point catches sunrise over the ghats when sky is clear."],
+      ["AFTERNOON", "Expressway return", "Traffic buffer, playlist home", "Sunday afternoon congestion on the Mumbai–Pune corridor is predictable — depart before 2 pm when possible."],
+      ["EVENING", "Home", "Fort trek complete", "Visapur in monsoon is among Maharashtra’s most cinematic day hikes — pack spare clothes in the car always."]
+    ]
+  }
+]

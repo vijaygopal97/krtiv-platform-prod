@@ -1,0 +1,42 @@
+.travel-dash {
+  --dash-bg: #f8f9fb;
+  --dash-card: #ffffff;
+  --dash-primary: #c46b2d;
+  --dash-accent: #f4a261;
+  --dash-border: #e5e7eb;
+  --dash-text: #1f2937;
+  --dash-muted: #6b7280;
+  --dash-radius: 20px;
+  --dash-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+  --dash-shadow-hover: 0 12px 40px rgba(15, 23, 42, 0.1);
+  background: var(--dash-bg);
+  color: var(--dash-text);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+.travel-dash .font-display-dash {
+  font-family: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+.travel-dash-card {
+  background: var(--dash-card);
+  border: 1px solid var(--dash-border);
+  border-radius: var(--dash-radius);
+  box-shadow: var(--dash-shadow);
+}
+
+.travel-dash-skeleton {
+  background: linear-gradient(90deg, #eef0f4 25%, #f5f6f8 50%, #eef0f4 75%);
+  background-size: 200% 100%;
+  animation: dash-shimmer 1.2s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+@keyframes dash-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

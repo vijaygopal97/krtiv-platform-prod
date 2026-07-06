@@ -15,6 +15,7 @@ type Props = {
   title: string;
   subtitle?: string;
   image: string;
+  imageAlt?: string;
   pageVideoScope?: string;
   /** When true, use the provided image only (no hero slide carousel). */
   staticHeroImage?: boolean;
@@ -24,6 +25,8 @@ type Props = {
   secondaryHref?: string;
   secondaryLabel?: string;
   children?: ReactNode;
+  /** When set, drives the in-hero destination slideshow (Places to Go). */
+  placeHeroSlides?: HeroSlideRecord[];
 };
 
 export function CategoryHeroSection({
@@ -32,10 +35,12 @@ export function CategoryHeroSection({
   title,
   subtitle,
   image,
+  imageAlt,
   pageVideoScope,
   staticHeroImage = false,
   showThemeAnimation = true,
   children,
+  placeHeroSlides,
   ...cta
 }: Props) {
   const [slides, setSlides] = useState<HeroSlideRecord[]>([]);
@@ -60,15 +65,31 @@ export function CategoryHeroSection({
   }, [category, staticHeroImage]);
 
   const luxuryHighlight = getCircuitHeroHighlight(category);
+  const destinationSlides =
+    placeHeroSlides && placeHeroSlides.length > 0 ? placeHeroSlides : undefined;
+  const carouselSlides =
+    destinationSlides ?? (!staticHeroImage && loaded && slides.length > 0 ? slides : undefined);
+  const useHeroCarousel = Boolean(carouselSlides?.length);
 
   return (
     <HeroSection
-      pageVideoScope={pageVideoScope ?? heroVideoScopeForCategory(category)}
-      slides={!staticHeroImage && loaded && slides.length > 0 ? slides : undefined}
+      pageVideoScope={
+        useHeroCarousel
+          ? ""
+          : pageVideoScope !== undefined
+            ? pageVideoScope
+            : heroVideoScopeForCategory(category)
+      }
+      slides={
+        destinationSlides ??
+        (!staticHeroImage && loaded && slides.length > 0 ? slides : undefined)
+      }
+      heroSliderMode={destinationSlides ? "place" : "category"}
       eyebrow={eyebrow}
       title={title}
       subtitle={subtitle}
       image={image}
+      imageAlt={imageAlt}
       luxuryHighlight={luxuryHighlight}
       luxuryHighlightRotate={Boolean(luxuryHighlight)}
       luxuryHeadingCentered

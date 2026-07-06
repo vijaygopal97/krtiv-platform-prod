@@ -1,6 +1,7 @@
 'use client';
 
 import type { ParsedItinerary } from '@/lib/parseItinerary';
+import AiItineraryDisclaimer from '@/components/itinerary/AiItineraryDisclaimer';
 
 const SLOT_LABELS: Record<string, string> = {
   MORNING: 'Morning',
@@ -11,9 +12,11 @@ const SLOT_LABELS: Record<string, string> = {
 interface CompactItineraryViewProps {
   title: string;
   parsed: ParsedItinerary;
+  /** Show mandatory AI transparency notice (AI Trip Planner output only). */
+  showAiDisclaimer?: boolean;
 }
 
-export default function CompactItineraryView({ title, parsed }: CompactItineraryViewProps) {
+export default function CompactItineraryView({ title, parsed, showAiDisclaimer = false }: CompactItineraryViewProps) {
   const { theme, region, days } = parsed;
 
   return (
@@ -62,6 +65,8 @@ export default function CompactItineraryView({ title, parsed }: CompactItinerary
           </div>
         ))}
       </div>
+
+      {showAiDisclaimer && <AiItineraryDisclaimer className="pt-1" />}
     </div>
   );
 }

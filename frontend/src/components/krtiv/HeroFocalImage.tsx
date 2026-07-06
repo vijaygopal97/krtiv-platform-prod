@@ -28,6 +28,29 @@ export function HeroFocalImage({
   const [imageSize, setImageSize] = useState({ w: 0, h: 0 });
   const [viewportW, setViewportW] = useState(0);
   const [isLandscape, setIsLandscape] = useState(false);
+  const [displaySrc, setDisplaySrc] = useState(src);
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    if (src === displaySrc) return;
+    setOpacity(0);
+    let cancelled = false;
+    const preload = new window.Image();
+    preload.onload = () => {
+      if (cancelled) return;
+      setDisplaySrc(src);
+      requestAnimationFrame(() => setOpacity(1));
+    };
+    preload.onerror = () => {
+      if (cancelled) return;
+      setDisplaySrc(src);
+      setOpacity(1);
+    };
+    preload.src = src;
+    return () => {
+      cancelled = true;
+    };
+  }, [src, displaySrc]);
 
   useEffect(() => {
     const el = frameRef.current;
@@ -71,12 +94,14 @@ export function HeroFocalImage({
   return (
     <div ref={frameRef} className="hero-focal-frame absolute inset-0 overflow-hidden">
       <img
-        src={src}
+        src={displaySrc}
         alt={alt}
         className={`hero-focal-image object-cover w-full h-full md:h-[120%] ${motionClass}`}
         style={{
           objectPosition,
           ...(useMobileFocal ? { transformOrigin } : {}),
+          opacity,
+          transition: 'opacity 420ms ease',
         }}
         loading={loading}
         onLoad={(e) => {

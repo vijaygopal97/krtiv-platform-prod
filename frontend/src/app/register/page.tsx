@@ -1,15 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { authService } from '@/services/authService';
 import { AuthShell } from '@/components/krtiv/AuthShell';
 import GoogleSignInButton from '@/components/GoogleSignInButton';
 import FacebookSignInButton from '@/components/FacebookSignInButton';
+import { buildAuthLink, resolvePostAuthRedirect } from '@/lib/authRedirect';
 
-export default function RegisterPage() {
+function RegisterForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTarget = resolvePostAuthRedirect(searchParams);
+  const loginHref = buildAuthLink('/login', searchParams);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -43,7 +47,7 @@ export default function RegisterPage() {
         phone: formData.phone.trim(),
         password: formData.password,
       });
-      router.push('/dashboard');
+      router.push(redirectTarget);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Registration failed');
     } finally {
@@ -104,19 +108,27 @@ export default function RegisterPage() {
       </div>
       <GoogleSignInButton
         mode="signup"
-        onSuccess={() => router.push('/dashboard')}
+        onSuccess={() => router.push(redirectTarget)}
         onError={(m) => setError(m)}
       />
       <div className="mt-3">
         <FacebookSignInButton
-          onSuccess={() => router.push('/dashboard')}
+          onSuccess={() => router.push(redirectTarget)}
           onError={(m) => setError(m)}
           disabled={loading}
         />
       </div>
       <p className="mt-8 text-sm text-[color:var(--ink-soft)] text-center">
-        Already have an account? <Link href="/login" className="text-[color:var(--ink)] underline-offset-4 hover:underline">Sign in</Link>
+        Already have an account? <Link href={loginHref} className="text-[color:var(--ink)] underline-offset-4 hover:underline">Sign in</Link>
       </p>
     </AuthShell>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<main className="min-h-screen grid place-items-center bg-[color:var(--ivory)]">Loading…</main>}>
+      <RegisterForm />
+    </Suspense>
   );
 }

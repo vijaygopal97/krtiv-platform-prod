@@ -9,7 +9,7 @@ import { HOME_HERO_HIGHLIGHT } from '@/lib/circuitHeroHeadings';
 import type { HeroSlideRecord } from '@/lib/heroSlideTypes';
 
 const FALLBACK = {
-  eyebrow: 'Discover Incredible Maharashtra',
+  eyebrow: 'Experience Maharashtra',
   title: 'You will find India here',
   subtitle:
     'Seven curated journeys across forts, ghats, coasts and quiet villages — written for travelers who like to read the place slowly.',
@@ -41,10 +41,10 @@ export function HomeHeroWithPlanner() {
       image={FALLBACK.image}
       luxuryHighlight={HOME_HERO_HIGHLIGHT}
       luxuryHeadingCentered
+      heroLedeClassName="hero-lede--emphasis"
+      cmsPage="home"
       primaryHref="#floating-interest-bubbles"
       primaryLabel="Plan with AI"
-      secondaryHref="/explore#explore-smart-planner"
-      secondaryLabel="Things to Do"
       showThemeAnimation
       themeAnimationTheme="home"
       pinnedReveal
