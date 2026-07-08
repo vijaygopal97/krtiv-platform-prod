@@ -11,12 +11,12 @@ export function FloatingInterestBubbles() {
     <PlannerAmbientProvider>
       <section
         id="floating-interest-bubbles"
-        className="planner-section-premium planner-section-enter relative overflow-hidden scroll-mt-24 py-16 md:py-24 pb-28 md:pb-24 px-4 md:px-8 border-b hairline"
+        className="planner-section-premium planner-section-enter relative overflow-hidden scroll-mt-24 py-8 md:py-12 pb-14 md:pb-12 px-4 md:px-8 border-b hairline"
         aria-labelledby="fib-heading"
       >
         <PlannerTravelAmbient />
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center mb-10 md:mb-12">
+        <div className="relative z-10 max-w-5xl mx-auto text-center mb-5 md:mb-6">
           <p className="planner-heading-enter eyebrow text-[color:var(--saffron)]">AI travel planner</p>
           <h2
             id="fib-heading"

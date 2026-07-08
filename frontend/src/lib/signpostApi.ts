@@ -152,6 +152,7 @@ export interface ItineraryJobRequest {
     travelWith: string;
     originCity: string;
     durationDays: string;
+    travelSeason?: string;
     preferredLocations: string[];
     tourismKeywords?: string[];
     categoryFocus?: string;

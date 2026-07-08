@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Kailasa Temple (Cave 16)", "Monolithic architecture, Ramayana panels, Nandi mandapa", "Begin at Ellora’s masterpiece — a multi-storey temple excavated from a single basalt mass. Study the elephant and lion friezes on the base and the soaring vimana above the courtyard."],
-      ["AFTERNOON", "Hindu caves 13–29", "Dashavatara, Rameshvara, sculptural density", "Walk the Brahmanical sequence where Shiva, Vishnu, and Devi imagery reaches extraordinary refinement. Caves 14 and 15 reward slow viewing."],
-      ["EVENING", "Ellora sound & light (seasonal)", "Narrated history, illuminated Kailasa", "When operating, the evening show adds drama to the cliff face. Otherwise, dine in Verul village and rest for a second day on site."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Buddhist caves 1–12", "Mahayana monasteries, prayer halls, early phase", "The quieter Buddhist wing demonstrates Ellora’s earliest excavations — compare cell planning with Ajanta’s monastic layouts."],
-      ["AFTERNOON", "Jain caves 30–34", "Digambara sculpture, Indra Sabha, delicate relief", "Ellora’s Jain group on the southern end is often overlooked — the Indra Sabha cave’s ceiling carving is a highlight."],
-      ["EVENING", "Daulatabad Fort sunset", "Medieval citadel, Andheri tunnel, panoramic views", "A short drive to Daulatabad’s “unconquerable” hill fort makes a dramatic counterpoint to the sacred art of the caves."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Bibi Ka Maqbara", "Mughal garden tomb, Aurangabad skyline", "Often called the “Taj of the Deccan,” this 17th-century mausoleum frames Aurangabad’s layered history between cave Buddhism and Mughal power."],
-      ["AFTERNOON", "Ajanta day trip (optional)", "Comparative Buddhist art, painted caves", "If you have not yet visited Ajanta, allocate a full afternoon transfer — the two UNESCO sites are best understood together."],
-      ["EVENING", "Grishneshwar Jyotirlinga", "Active temple near Ellora, pilgrimage atmosphere", "End with evening aarti at one of the twelve Jyotirlinga shrines, minutes from the cave complex — a living faith context for the ancient art nearby."]
+      [
+        "MORNING",
+        "Kailasa Temple (Cave 16)",
+        "Monolithic architecture, Ramayana panels, Nandi mandapa",
+        "Begin at Ellora’s masterpiece — a multi-storey temple excavated from a single basalt mass. Study the elephant and lion friezes on the base and the soaring vimana above the courtyard."
+      ],
+      [
+        "AFTERNOON",
+        "Hindu caves 13–29",
+        "Dashavatara, Rameshvara, sculptural density",
+        "Walk the Brahmanical sequence where Shiva, Vishnu, and Devi imagery reaches extraordinary refinement. Caves 14 and 15 reward slow viewing."
+      ],
+      [
+        "EVENING",
+        "Ellora sound & light (seasonal)",
+        "Narrated history, illuminated Kailasa",
+        "When operating, the evening show adds drama to the cliff face. Otherwise, dine in Verul village and rest for a second day on site."
+      ]
     ]
   }
 ]

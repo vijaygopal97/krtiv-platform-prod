@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Drive from Nagpur to Navegaon", "Teak country approach, park gate", "Nagpur makes the ideal base — two hours through rural Vidarbha brings you to Navegaon Bandh lake and the park headquarters."],
-      ["AFTERNOON", "Lake boat ride", "Island views, waterbirds, crocodile habitat", "The reservoir boat trip circles forested islands — scan for storks, cormorants, and occasional mugger crocodiles basking on banks."],
-      ["EVENING", "Watchtower sunset", "Forest canopy panorama", "Climb the park watchtower for golden-hour views over teak canopy — langurs often chatter in the treetops below."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Jungle trail & deer park", "Walking safari, spotted deer herds", "Guided foot trails explore mixed forest — morning is best for deer, wild boar, and bird activity. Tiger sightings are possible but require luck."],
-      ["AFTERNOON", "Forest rest house downtime", "Midday heat, naturalist talk", "Vidarbha afternoons are warm — rest at the rest house or visitor centre exhibits before an evening exploration."],
-      ["EVENING", "Buffer village walk", "Rural Gondia district, local cuisine", "Short village strolls reveal paddy fields and traditional homes — try simple Vidarbha thali with bhakri and spicy thecha."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Final lake circuit & birding", "Migrants in winter, resident hornbills", "Circle the lake shore for last photographs — winter brings additional waterfowl; summer concentrates mammals near water."],
-      ["AFTERNOON", "Return to Nagpur", "Orange markets, zero-mile stone", "Head back to Nagpur for evening flights or an optional Tadoba extension eastward."],
-      ["EVENING", "Onward travel", "Highway connections", "Combine Navegaon with Pench or Tadoba for a longer Vidarbha wildlife circuit."]
+      [
+        "MORNING",
+        "Drive from Nagpur to Navegaon",
+        "Teak country approach, park gate",
+        "Nagpur makes the ideal base — two hours through rural Vidarbha brings you to Navegaon Bandh lake and the park headquarters."
+      ],
+      [
+        "AFTERNOON",
+        "Lake boat ride",
+        "Island views, waterbirds, crocodile habitat",
+        "The reservoir boat trip circles forested islands — scan for storks, cormorants, and occasional mugger crocodiles basking on banks."
+      ],
+      [
+        "EVENING",
+        "Watchtower sunset",
+        "Forest canopy panorama",
+        "Climb the park watchtower for golden-hour views over teak canopy — langurs often chatter in the treetops below."
+      ]
     ]
   }
 ]

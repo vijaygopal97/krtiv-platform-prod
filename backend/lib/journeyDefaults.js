@@ -24,7 +24,7 @@ Historically, Ajanta was a monastic university of sorts, funded by merchants and
 
 Architecture follows the logic of stone: chaitya halls with ribbed ceilings mimicking timber, viharas with cells for monks, columns carved to look like wood yet destined to outlast empires. Panoramic viewpoints above the river allow you to see the scale of the excavation — an entire mountainside hollowed by hand. Local legends speak of celestial architects and of painters who mixed colours from stones gathered miles away. Scholars debate influences from Gandhara to Sri Lanka; visitors simply stand before Panel 17 in Cave 17 and feel the argument dissolve.
 
-The best visiting hours are early morning, when humidity is low and caretakers open the gates before tour buses arrive. Afternoon light slants into the river bend, ideal for exterior photography of the façade, but interiors reward the first soft illumination of the day. Nearby Aurangabad — once a Mughal capital — offers hotels, cuisine, and access to Ellora, Daulatabad Fort, and the Bibi ka Maqbara. Many travellers pair Ajanta with Ellora in a two-day heritage loop, but Ajanta deserves a full unhurried day.
+The best visiting hours are early morning, when humidity is low and caretakers open the gates before tour buses arrive. Afternoon light slants into the river bend, ideal for exterior photography of the façade, but interiors reward the first soft illumination of the day. Nearby Chhatrapati Sambhajinagar — once a Mughal capital — offers hotels, cuisine, and access to Ellora, Daulatabad Fort, and the Bibi ka Maqbara. Many travellers pair Ajanta with Ellora in a two-day heritage loop, but Ajanta deserves a full unhurried day.
 
 Photography points include the viewpoint across the gorge, the approach bridge, and selected exterior angles where the cliff curve frames the caves. Inside, put the camera away and look with your eyes; memory survives where ISO settings fail. Respectful dress and silence are expected; these are active archaeological sites under the Archaeological Survey of India.
 
@@ -247,7 +247,7 @@ export function getDefaultJourneys() {
         slug: "kohinoor-of-the-deccan",
         title: "Kohinoor of the Deccan",
         subtitle: "Where ancient monks carved heaven into stone, the Ajanta Caves stand as a timeless testament to Buddhist art and devotion.",
-        location: "Ajanta Caves, Aurangabad District, Maharashtra",
+        location: "Ajanta Caves, Chhatrapati Sambhajinagar District, Maharashtra",
         category: "Heritage · Caves",
         readingTime: "8 min read",
         shortDescription: "Nestled in a horseshoe-shaped gorge, the Ajanta Caves are a UNESCO World Heritage Site renowned for their exquisite murals, sculptures, and architectural brilliance dating back to the 2nd century BCE. This journey takes you through 30 rock-cut caves that narrate the life of Buddha and the golden age of the Vakataka and Gupta dynasties.",
@@ -362,7 +362,7 @@ export function getDefaultJourneys() {
         itinerary: [
             {
                 time: "06:00",
-                title: "Depart from Aurangabad",
+                title: "Depart from Chhatrapati Sambhajinagar",
                 description: "Start early to beat the heat and traffic; the drive takes about 2.5 hours via NH-52."
             },
             {
@@ -392,10 +392,10 @@ export function getDefaultJourneys() {
             }
         ],
         travelInfo: {
-            location: "Ajanta Caves, near Fardapur village, Aurangabad District, Maharashtra, India",
-            nearestAirport: "Aurangabad Airport (IXU) — 99 km",
-            nearestRailway: "Jalgaon Junction (JL) — 56 km; Aurangabad Railway Station — 100 km",
-            roadConnectivity: "Well-connected via NH-52; state buses and taxis from Aurangabad, Jalgaon, and Fardapur",
+            location: "Ajanta Caves, near Fardapur village, Chhatrapati Sambhajinagar District, Maharashtra, India",
+            nearestAirport: "Chhatrapati Sambhajinagar Airport (IXU) — 99 km",
+            nearestRailway: "Jalgaon Junction (JL) — 56 km; Chhatrapati Sambhajinagar Railway Station — 100 km",
+            roadConnectivity: "Well-connected via NH-52; state buses and taxis from Chhatrapati Sambhajinagar, Jalgaon, and Fardapur",
             entryFees: "₹40 for Indians, ₹600 for foreigners, ₹25 for SAARC/BIMSTEC nationals; free for children under 15",
             timings: "9:00 AM to 5:00 PM (closed on Mondays)",
             duration: "Full day (4–6 hours at site recommended)",
@@ -432,12 +432,12 @@ export function getDefaultJourneys() {
             }
         ],
         map: {
-            query: "Ajanta Caves+Aurangabad District+Maharashtra"
+            query: "Ajanta Caves+Chhatrapati Sambhajinagar District+Maharashtra"
         },
         seo: {
             title: "Ajanta Caves – Kohinoor of the Deccan | Maharashtra Tourism",
-            description: "Discover the Ajanta Caves in Aurangabad District, Maharashtra — a UNESCO World Heritage Site with stunning Buddhist murals, rock-cut architecture, and timeless art. Plan your visit with our complete guide.",
-            keywords: "Ajanta Caves, Maharashtra tourism, UNESCO heritage, Buddhist caves, Padmapani painting, Aurangabad travel, rock-cut architecture, Deccan caves, Indian art history, travel guide Maharashtra",
+            description: "Discover the Ajanta Caves in Chhatrapati Sambhajinagar District, Maharashtra — a UNESCO World Heritage Site with stunning Buddhist murals, rock-cut architecture, and timeless art. Plan your visit with our complete guide.",
+            keywords: "Ajanta Caves, Maharashtra tourism, UNESCO heritage, Buddhist caves, Padmapani painting, Chhatrapati Sambhajinagar travel, rock-cut architecture, Deccan caves, Indian art history, travel guide Maharashtra",
             ogImage: "/places/slides/ajanta-ellora/ajanta-aerial.jpg"
         }
     },

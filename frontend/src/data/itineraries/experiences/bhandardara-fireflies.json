@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Drive to Bhandardara", "Arthur Lake, dam viewpoints, village check-in", "Leave Mumbai or Pune early for Ahmednagar district. Pause at Arthur Lake for misty reservoir views before settling into a lakeside resort or Purushwadi homestay."],
-      ["AFTERNOON", "Randha Falls & Wilson Dam", "Monsoon cascades, engineering heritage", "Visit Randha Falls when the river is in flow — the plunge into the rocky gorge is one of the region’s signature sights. The dam wall offers wide Sahyadri panoramas."],
-      ["EVENING", "Firefly trail briefing", "Guided night walk preparation", "Licensed guides explain firefly ecology and no-flash rules. Wear dark clothing, closed shoes, and carry a red-filter torch for minimal disturbance."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Kalsubai base village walk", "India’s highest peak trailhead, rural life", "Explore Bari village at the foot of Kalsubai — terraced fields, temple shrines, and the famous iron ladders visible on clear days for non-summit hikers."],
-      ["AFTERNOON", "Lake kayaking or rest", "Calm water, birdlife, resort downtime", "Bhandardara’s lake activities depend on season — even a quiet afternoon on the shore prepares you for the main event after dusk."],
-      ["EVENING", "Firefly festival walk", "Bioluminescent meadows, starlit forest", "The highlight: millions of fireflies synchronising in pre-monsoon humidity. Move slowly, stay on marked paths, and let your eyes adjust to the natural light show."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Amruteshwar temple & return", "Hemadpanti architecture, scenic drive out", "Stop at the ancient Shiva temple near Ratanwadi — black stone carvings in a riverside grove — before descending toward Nashik or Mumbai."],
-      ["AFTERNOON", "Nashik wine country (optional)", "Vineyard lunch, Godavari ghats", "Extend through Nashik for Sula or York tastings and evening aarti at Ramkund if heading north."],
-      ["EVENING", "Homebound", "Highway dinner stops", "Monsoon cloud build-ups can slow ghats — allow buffer time on the Mumbai–Pune expressway connections."]
+      [
+        "MORNING",
+        "Drive to Bhandardara",
+        "Arthur Lake, dam viewpoints, village check-in",
+        "Leave Mumbai or Pune early for Ahmednagar district. Pause at Arthur Lake for misty reservoir views before settling into a lakeside resort or Purushwadi homestay."
+      ],
+      [
+        "AFTERNOON",
+        "Randha Falls & Wilson Dam",
+        "Monsoon cascades, engineering heritage",
+        "Visit Randha Falls when the river is in flow — the plunge into the rocky gorge is one of the region’s signature sights. The dam wall offers wide Sahyadri panoramas."
+      ],
+      [
+        "EVENING",
+        "Firefly trail briefing",
+        "Guided night walk preparation",
+        "Licensed guides explain firefly ecology and no-flash rules. Wear dark clothing, closed shoes, and carry a red-filter torch for minimal disturbance."
+      ]
     ]
   }
 ]

@@ -55,7 +55,7 @@ export default async function PlaceToGoPage({ params }: Props) {
       <ItineraryStory
         itinerary={place}
         sectionId="suggested-itinerary"
-        heading="Suggested 3-day itinerary"
+        heading="Suggested itinerary"
         sidePanel="map"
         mapPanelId="itinerary-map"
         seamlessTop

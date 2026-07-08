@@ -2,7 +2,7 @@ import { ScrollReveal } from "./ScrollReveal";
 
 export function CtaBand() {
   return (
-    <section id="itinerary-generator" className="bg-[color:var(--ivory)] py-24 md:py-36">
+    <section id="itinerary-generator" className="bg-[color:var(--ivory)] py-12 md:py-20">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
         <div className="relative overflow-hidden rounded-[24px] grid md:grid-cols-2 min-h-[520px]">
           <div className="relative bg-[color:var(--ink)] text-white p-10 md:p-16 flex flex-col justify-between">

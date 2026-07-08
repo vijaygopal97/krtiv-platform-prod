@@ -10,7 +10,7 @@ export const CATEGORY_ACTIVITIES: ActivityRecord[] = [
   {
     "slug": "explore-ajanta-caves",
     "title": "Explore the Ajanta Caves",
-    "location": "Aurangabad District, Maharashtra",
+    "location": "Chhatrapati Sambhajinagar District, Maharashtra",
     "category": "Historical & Heritage",
     "readingTime": "10 min read",
     "shortDescription": "Discover ancient Buddhist rock-cut caves adorned with exquisite murals and sculptures. These UNESCO World Heritage sites date back to the 2nd century BCE.",
@@ -72,7 +72,7 @@ export const CATEGORY_ACTIVITIES: ActivityRecord[] = [
       "Hire an official guide for deeper historical insights."
     ],
     "travelInfo": {
-      "location": "Ajanta, Aurangabad District, Maharashtra",
+      "location": "Ajanta, Chhatrapati Sambhajinagar District, Maharashtra",
       "bestSeason": "October to March",
       "duration": "Half day",
       "idealFor": "History buffs, art lovers, solo travelers"
@@ -169,7 +169,7 @@ export const CATEGORY_ACTIVITIES: ActivityRecord[] = [
   {
     "slug": "tour-ellora-caves",
     "title": "Tour the Ellora Caves",
-    "location": "Aurangabad District, Maharashtra",
+    "location": "Chhatrapati Sambhajinagar District, Maharashtra",
     "category": "Historical & Heritage",
     "readingTime": "9 min read",
     "shortDescription": "Witness the remarkable rock-cut architecture of 34 caves representing Buddhist, Hindu, and Jain traditions. The Kailasa Temple is a stunning monolithic marvel.",
@@ -231,7 +231,7 @@ export const CATEGORY_ACTIVITIES: ActivityRecord[] = [
       "Combine with Ajanta Caves for a complete heritage trip."
     ],
     "travelInfo": {
-      "location": "Ellora, Aurangabad District, Maharashtra",
+      "location": "Ellora, Chhatrapati Sambhajinagar District, Maharashtra",
       "bestSeason": "October to March",
       "duration": "Full day",
       "idealFor": "History buffs, architecture enthusiasts"
@@ -1271,12 +1271,12 @@ export const CATEGORY_ACTIVITIES: ActivityRecord[] = [
   {
     "slug": "ellora-caves-festival-august",
     "title": "Ellora Caves Festival",
-    "location": "Aurangabad, Maharashtra",
+    "location": "Chhatrapati Sambhajinagar, Maharashtra",
     "category": "Art, Craft & Culture",
     "readingTime": "8 min read",
     "shortDescription": "Experience the annual Ellora Caves Festival, a vibrant celebration of classical music, dance, and theatre set against the backdrop of the UNESCO World Heritage caves. This week-long event brings together renowned artists and thousands of visitors.",
     "heroImage": "/places/slides/ajanta-ellora/ellora-detail.jpg",
-    "excerpt": "Witness spectacular performances at the Ellora Caves Festival, a cultural extravaganza in Aurangabad.",
+    "excerpt": "Witness spectacular performances at the Ellora Caves Festival, a cultural extravaganza in Chhatrapati Sambhajinagar.",
     "storySections": [
       {
         "heading": "Festival of Heritage",
@@ -1316,13 +1316,13 @@ export const CATEGORY_ACTIVITIES: ActivityRecord[] = [
       "Combine with a day tour of the Ajanta and Ellora caves."
     ],
     "travelInfo": {
-      "location": "Ellora Caves, Aurangabad District, Maharashtra",
+      "location": "Ellora Caves, Chhatrapati Sambhajinagar District, Maharashtra",
       "bestSeason": "March (festival dates vary)",
       "duration": "Week-long festival (plan 2-3 days)",
       "idealFor": "Culture enthusiasts, music lovers, photographers"
     },
     "map": {
-      "query": "Ellora Caves Festival Aurangabad Maharashtra"
+      "query": "Ellora Caves Festival Chhatrapati Sambhajinagar Maharashtra"
     },
     "categoryId": "art-culture",
     "gallery": [
@@ -1334,7 +1334,7 @@ export const CATEGORY_ACTIVITIES: ActivityRecord[] = [
   {
     "slug": "paithani-saree-weaving-paithan",
     "title": "Paithani Saree Weaving Workshop in Paithan",
-    "location": "Paithan, Aurangabad District, Maharashtra",
+    "location": "Paithan, Chhatrapati Sambhajinagar District, Maharashtra",
     "category": "Art, Craft & Culture",
     "readingTime": "8 min read",
     "shortDescription": "Discover the intricate art of Paithani saree weaving in the historic town of Paithan, where master weavers create these prized silk textiles with gold zari borders. Participate in a workshop to understand the weaving process and design motifs.",
@@ -1379,7 +1379,7 @@ export const CATEGORY_ACTIVITIES: ActivityRecord[] = [
       "Carry cash, as many workshops may not accept cards."
     ],
     "travelInfo": {
-      "location": "Paithan, Aurangabad District, Maharashtra",
+      "location": "Paithan, Chhatrapati Sambhajinagar District, Maharashtra",
       "bestSeason": "October to March",
       "duration": "2 to 3 hours",
       "idealFor": "Textile enthusiasts, shoppers, cultural travelers"

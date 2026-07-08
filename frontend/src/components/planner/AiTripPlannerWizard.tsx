@@ -12,6 +12,8 @@ import { PlannerConfetti } from '@/components/planner/PlannerConfetti';
 import { usePlannerAmbient } from '@/components/planner/PlannerAmbientContext';
 import { PlannerTravelIcon } from '@/components/planner/plannerTravelIconSvgs';
 import { exploreChipIconId } from '@/lib/plannerTravelIcons';
+import { useAutoPlannerOrigin } from '@/hooks/useAutoPlannerOrigin';
+import PlannerTripDetailsFields from '@/components/itinerary/PlannerTripDetailsFields';
 import '@/styles/planner-interactions.css';
 
 const EXPLORE_OPTIONS = [
@@ -105,6 +107,14 @@ export function AiTripPlannerWizard({ onGenerated }: Props) {
   const planner = useSmartItineraryGeneration('home');
   const { generating, progress, error, result, setError } = planner;
   const { setSelectedInterests, flashInterest } = usePlannerAmbient();
+  const {
+    originCity,
+    setOriginCity,
+    travelSeason,
+    setTravelSeason,
+    detectingOrigin,
+    originFromIp,
+  } = useAutoPlannerOrigin();
 
   const [step, setStep] = useState(0);
   const [progressPct, setProgressPct] = useState(25);
@@ -184,6 +194,8 @@ export function AiTripPlannerWizard({ onGenerated }: Props) {
       travelWith,
       tripName: tripName.trim(),
       exploreInterests: interests,
+      originCity: originCity.trim() || 'Mumbai',
+      travelSeason,
     });
 
     planner.setSelected(interests);
@@ -350,14 +362,30 @@ export function AiTripPlannerWizard({ onGenerated }: Props) {
 
           {step === 3 && (
             <fieldset key={`s3-${stepEnterKey}`} className="space-y-4 planner-fieldset-enter">
-              <legend className="font-display text-xl mb-2">Give your trip a name</legend>
-              <input
-                type="text"
-                value={tripName}
-                onChange={(e) => setTripName(e.target.value)}
-                placeholder="e.g. Monsoon Escape, Heritage Trail"
-                className="w-full h-12 px-4 rounded-xl bg-[color:var(--ivory)] border hairline outline-none focus:border-[color:var(--ink)]"
+              <legend className="font-display text-xl mb-2">Trip details</legend>
+              <PlannerTripDetailsFields
+                originCity={originCity}
+                onOriginCityChange={setOriginCity}
+                travelSeason={travelSeason}
+                onTravelSeasonChange={setTravelSeason}
+                variant="marketing"
+                originAutoDetected={originFromIp}
               />
+              {detectingOrigin && (
+                <p className="text-xs text-[color:var(--ink-soft)]">Detecting your starting city…</p>
+              )}
+              <label className="block">
+                <span className="block text-xs tracking-wide text-[color:var(--ink-soft)] mb-2">
+                  Trip name
+                </span>
+                <input
+                  type="text"
+                  value={tripName}
+                  onChange={(e) => setTripName(e.target.value)}
+                  placeholder="e.g. Monsoon Escape, Heritage Trail"
+                  className="w-full h-12 px-4 rounded-xl bg-[color:var(--ivory)] border hairline outline-none focus:border-[color:var(--ink)]"
+                />
+              </label>
             </fieldset>
           )}
 

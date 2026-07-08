@@ -71,7 +71,7 @@ export function CuratedExperienceGuidePage({
       <ItineraryStory
         itinerary={itinerary}
         sectionId="suggested-itinerary"
-        heading="Suggested 3-day itinerary"
+        heading="Suggested itinerary"
         sidePanel="map"
         mapPanelId="itinerary-map"
         seamlessTop

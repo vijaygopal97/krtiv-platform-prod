@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Ajanta Caves", "UNESCO World Heritage Site, Buddhist art, ancient murals", "Journey into one of the world's greatest archaeological treasures. Marvel at intricate paintings and rock-cut monasteries that have preserved stories from over two millennia ago."],
-      ["AFTERNOON", "Ajanta Cave Exploration", "Chaityas, viharas, sculptural masterpieces", "Continue exploring the cave complex and discover the artistic brilliance that made Ajanta a landmark of ancient Indian civilization."],
-      ["EVENING", "Ajanta View Point", "Valley panoramas, photography, sunset views", "Take in sweeping views of the horseshoe-shaped gorge and the caves nestled into the cliffside as the evening light transforms the landscape."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Ellora Caves", "UNESCO World Heritage Site, rock-cut architecture, multi-faith heritage", "Explore one of India's most extraordinary cave complexes, where Buddhist, Hindu, and Jain monuments coexist in remarkable harmony."],
-      ["AFTERNOON", "Kailasa Temple", "Monolithic wonder, intricate carvings, engineering marvel", "Witness the world's largest monolithic rock-cut temple, carved from a single rock and celebrated as a masterpiece of ancient engineering."],
-      ["EVENING", "Grishneshwar Temple", "Jyotirlinga shrine, spiritual significance, historic architecture", "Visit one of the twelve sacred Jyotirlingas and experience the spiritual ambience of this revered pilgrimage destination."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Bibi Ka Maqbara", "Mughal architecture, heritage monument, landscaped gardens", "Often called the \"Taj of the Deccan,\" this elegant mausoleum showcases the grandeur of Mughal design amidst serene surroundings."],
-      ["AFTERNOON", "Daulatabad Fort", "Hill fort, defensive engineering, panoramic views", "Climb through one of India's most formidable forts and uncover ingenious military strategies that once made it nearly impregnable."],
-      ["EVENING", "Himayat Bagh", "Historic gardens, nature walk, relaxation", "End your journey with a peaceful stroll through one of Aurangabad's oldest garden complexes, offering a refreshing escape amid greenery."]
+      [
+        "MORNING",
+        "Ajanta Caves",
+        "UNESCO World Heritage Site, Buddhist art, ancient murals",
+        "Journey into one of the world's greatest archaeological treasures. Marvel at intricate paintings and rock-cut monasteries that have preserved stories from over two millennia ago."
+      ],
+      [
+        "AFTERNOON",
+        "Ajanta Cave Exploration",
+        "Chaityas, viharas, sculptural masterpieces",
+        "Continue exploring the cave complex and discover the artistic brilliance that made Ajanta a landmark of ancient Indian civilization."
+      ],
+      [
+        "EVENING",
+        "Ajanta View Point",
+        "Valley panoramas, photography, sunset views",
+        "Take in sweeping views of the horseshoe-shaped gorge and the caves nestled into the cliffside as the evening light transforms the landscape."
+      ]
     ]
   }
 ]

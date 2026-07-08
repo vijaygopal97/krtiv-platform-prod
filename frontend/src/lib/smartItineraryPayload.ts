@@ -1,5 +1,6 @@
 import type { ItineraryJobRequest } from '@/lib/signpostApi';
 import { getCategoryApiName } from '@/lib/signpostApi';
+import { buildPlannerLogisticsKeywords, TRAVEL_SEASONS } from '@/lib/plannerTripDetails';
 
 const INTEREST_TO_CATEGORY: Record<string, string> = {
   Heritage: 'Historical & Heritage',
@@ -109,7 +110,7 @@ const KEYWORD_TO_CATEGORY: Record<string, string> = {
   'Ellora caves': 'Historical & Heritage',
   'Heritage photography': 'Art, Craft & Culture',
   'Cave day trips': 'Historical & Heritage',
-  'Aurangabad flavours': 'Culinary & Rural',
+  'Chhatrapati Sambhajinagar flavours': 'Culinary & Rural',
 
   // Places — Shirdi
   'Sai Baba darshan': 'Spiritual & Pilgrimage',
@@ -214,6 +215,7 @@ export function buildSmartItineraryJobRequest(opts: {
   durationDays?: string;
   originCity?: string;
   travelWith?: string;
+  travelSeason?: string;
   tripName?: string;
   exploreInterests?: string[];
   placeSlug?: string;
@@ -222,13 +224,18 @@ export function buildSmartItineraryJobRequest(opts: {
   const {
     keywords,
     context,
-    durationDays = '4',
+    durationDays,
     originCity = 'Mumbai',
     travelWith = 'Family',
+    travelSeason = TRAVEL_SEASONS[2].value,
     tripName,
     exploreInterests = [],
     placeTitle,
   } = opts;
+
+  const isPlaceFocused = Boolean(placeTitle?.trim());
+  const effectiveDuration =
+    durationDays ?? (isPlaceFocused ? '1' : context === 'home' ? '3' : '3');
 
   const mappedFromExplore = exploreInterests
     .map((i) => INTEREST_TO_CATEGORY[i])
@@ -237,15 +244,31 @@ export function buildSmartItineraryJobRequest(opts: {
   const interestCategory = resolveInterestCategories(keywords, context, mappedFromExplore);
   const categoryFocus = resolveCategoryFocus(context, interestCategory, mappedFromExplore, placeTitle);
 
+  const primaryTheme = interestCategory[0] ?? 'Maharashtra Tourism';
+  const themeLockNote =
+    mappedFromExplore.length > 0 || interestCategory.length === 1
+      ? `STRICT THEME: Every day must stay within ${primaryTheme} — no unrelated activities on later days`
+      : 'Keep each day aligned with the selected interests — avoid mixing unrelated themes across days';
+
+  const logisticsKeywords = buildPlannerLogisticsKeywords({
+    originCity,
+    travelSeason,
+    durationDays: effectiveDuration,
+  });
+
   const tourismKeywords = [
     ...new Set(
       [
         ...keywords,
         ...exploreInterests,
+        ...logisticsKeywords,
         placeTitle ? `Base destination: ${placeTitle}` : '',
+        placeTitle ? `Single-day focus: cover ${placeTitle} only` : '',
         categoryFocus ? `Primary theme: ${categoryFocus}` : '',
+        primaryTheme ? `Interest category lock: ${primaryTheme}` : '',
+        themeLockNote,
         `Travel group: ${travelWith}`,
-        `Duration: ${durationDays} days`,
+        `Duration: ${effectiveDuration} days`,
         tripName ? `Trip name: ${tripName}` : '',
       ].filter(Boolean)
     ),
@@ -267,11 +290,14 @@ export function buildSmartItineraryJobRequest(opts: {
       age: '30',
       interestCategory,
       travelWith,
-      originCity: placeTitle || originCity,
-      durationDays,
+      originCity: originCity.trim() || 'Mumbai',
+      durationDays: effectiveDuration,
+      travelSeason,
       preferredLocations: placeTitle ? [placeTitle] : [],
       tourismKeywords,
-      categoryFocus,
+      categoryFocus: isPlaceFocused
+        ? `${primaryTheme} — ${placeTitle}`
+        : categoryFocus,
     },
   };
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import type { SavedItineraryRecord } from '@/lib/myItinerariesApi';
-import { tripDateRange, tripProgress, tripStatus } from './dashboardUtils';
+import { tripDateRange } from './dashboardUtils';
 
 type Props = {
   items: SavedItineraryRecord[];
@@ -37,8 +37,6 @@ export default function UpcomingTrips({ items, loading, onView }: Props) {
             </thead>
             <tbody>
               {upcoming.map((item) => {
-                const progress = tripProgress(item);
-                const status = tripStatus(progress);
                 const days = item.parsedSummary?.dayCount ?? 3;
                 return (
                   <tr key={item._id} className="border-b border-[#F3F4F6] last:border-0">
@@ -46,7 +44,7 @@ export default function UpcomingTrips({ items, loading, onView }: Props) {
                     <td className="py-3 text-[#6B7280]">{tripDateRange(item)}</td>
                     <td className="py-3 text-[#6B7280]">{days} days</td>
                     <td className="py-3">
-                      <span className="text-xs px-2 py-1 rounded-full bg-[#F8F9FB] border border-[#E5E7EB]">{status.label}</span>
+                      <span className="text-xs px-2 py-1 rounded-full bg-[#F8F9FB] border border-[#E5E7EB]">Saved</span>
                     </td>
                     <td className="py-3 text-right">
                       <button type="button" onClick={() => onView(item._id)} className="text-[#C46B2D] font-semibold text-xs hover:underline">

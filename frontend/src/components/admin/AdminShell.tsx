@@ -7,6 +7,7 @@ import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 const NAV = [
   { href: '/admin/analytics', label: 'Analytics' },
   { href: '/admin/hero', label: 'Hero CMS' },
+  { href: '/admin/featured-experiences', label: 'Featured Experiences' },
   { href: '/admin/content', label: 'Inline CMS' },
 ];
 

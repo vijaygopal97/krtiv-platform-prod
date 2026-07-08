@@ -44,7 +44,10 @@ function metaToView(meta: SavedPlaceMeta, index: number): SavedPlaceView | null 
   const name = dest?.title || displayNameForSlug(meta.slug, meta.title);
   const description = dest?.description || meta.locationLabel || 'Saved from your exploration.';
   const image = meta.image || dest?.hero || assetPath('/places/heroes/mumbai.jpg');
-  const category = dest?.subtitle?.split('—')[0]?.trim() || meta.source || 'Saved place';
+  const category =
+    meta.source === 'explore-photo'
+      ? 'Liked photo'
+      : dest?.subtitle?.split('—')[0]?.trim() || meta.source || 'Saved place';
   const map = dest?.map;
   const mapUrl = map
     ? `https://www.google.com/maps/search/?api=1&query=${map.lat},${map.lng}`
@@ -166,7 +169,7 @@ export default function SavedPlaces({
           Sign in and tap the heart on destinations, travel stories, and guides — they are saved to your account.
         </p>
         <Link
-          href="/explore"
+          href="/places-to-go"
           className="inline-flex mt-6 h-11 px-6 items-center rounded-xl bg-[#C46B2D] text-white text-sm font-semibold hover:brightness-105 transition-all duration-250"
         >
           Explore Destinations

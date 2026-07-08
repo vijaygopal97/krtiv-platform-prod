@@ -16,6 +16,8 @@ import { extractItineraryExtras } from '@/lib/itineraryExtras';
 import { trackKeywordGeneration } from '@/lib/plannerApi';
 import GenerationProgress from '@/components/dashboard/GenerationProgress';
 import SmartItineraryResult from '@/components/itinerary/SmartItineraryResult';
+import PlannerTripDetailsFields from '@/components/itinerary/PlannerTripDetailsFields';
+import { useAutoPlannerOrigin } from '@/hooks/useAutoPlannerOrigin';
 import { authService } from '@/services/authService';
 
 const POLL_MS = 2500;
@@ -50,6 +52,14 @@ export default function SmartKeywordItinerary({
   const router = useRouter();
   const keywords = useMemo(() => keywordsForContext(context, placeSlug), [context, placeSlug]);
   const [selected, setSelected] = useState<string[]>([]);
+  const {
+    originCity,
+    setOriginCity,
+    travelSeason,
+    setTravelSeason,
+    originFromIp,
+  } = useAutoPlannerOrigin();
+  const [durationDays, setDurationDays] = useState(placeTitle ? '1' : '3');
   const [generating, setGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -104,6 +114,9 @@ export default function SmartKeywordItinerary({
       context,
       placeSlug,
       placeTitle,
+      originCity,
+      travelSeason,
+      durationDays,
     });
     const startRes = await startItineraryJob(payload);
     if (!startRes?.jobId) {
@@ -152,18 +165,18 @@ export default function SmartKeywordItinerary({
       setTimeout(poll, POLL_MS);
     };
     setTimeout(poll, POLL_MS);
-  }, [selected, context, categoryFocus, placeSlug, placeTitle, sectionId]);
+  }, [selected, context, categoryFocus, placeSlug, placeTitle, sectionId, originCity, travelSeason, durationDays]);
 
   const extras = result ? extractItineraryExtras(result.raw) : null;
 
   return (
     <section
       id={sectionId}
-      className={`${dashboardMode ? 'py-6 px-0' : compact ? 'py-12' : 'py-16 md:py-24'} ${dashboardMode ? '' : 'px-4 md:px-8'} scroll-mt-24 ${className}`}
+      className={`${dashboardMode ? 'py-6 px-0' : compact ? 'py-8' : 'py-8 md:py-12'} ${dashboardMode ? '' : 'px-4 md:px-8'} scroll-mt-24 ${className}`}
     >
       <div className={dashboardMode ? 'max-w-3xl' : 'max-w-4xl mx-auto'}>
         {!dashboardMode && (
-          <div className="text-center mb-8 md:mb-10">
+          <div className="text-center mb-4 md:mb-5">
             <p className="eyebrow text-[color:var(--saffron)]">Smart AI planner</p>
             <h2 className="font-display text-3xl md:text-4xl mt-3 text-[color:var(--ink)] text-balance">{heading}</h2>
             <p className="lede mt-3 text-[color:var(--ink-soft)] max-w-2xl mx-auto">{subheading}</p>
@@ -176,6 +189,18 @@ export default function SmartKeywordItinerary({
             <p className="text-sm text-[#6B7280] mt-1">Select interests and generate without leaving your dashboard.</p>
           </div>
         )}
+
+        <PlannerTripDetailsFields
+          originCity={originCity}
+          onOriginCityChange={setOriginCity}
+          travelSeason={travelSeason}
+          onTravelSeasonChange={setTravelSeason}
+          durationDays={durationDays}
+          onDurationDaysChange={setDurationDays}
+          showDuration={!placeTitle}
+          variant={dashboardMode ? 'dashboard' : 'marketing'}
+          originAutoDetected={originFromIp}
+        />
 
         <div className={`flex flex-wrap gap-2 md:gap-3 mb-8 ${dashboardMode ? 'justify-start' : 'justify-center'}`}>
           {keywords.map((kw) => {
@@ -249,7 +274,7 @@ export default function SmartKeywordItinerary({
             <div className="mt-8 text-center">
               <button
                 type="button"
-                onClick={() => router.push('/explore#explore-smart-planner')}
+                onClick={() => router.push('/things-to-do#explore-smart-planner')}
                 className="text-sm text-[color:var(--ink)] underline underline-offset-4"
               >
                 Open planner

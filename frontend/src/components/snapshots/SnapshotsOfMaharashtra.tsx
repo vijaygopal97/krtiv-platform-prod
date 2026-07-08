@@ -116,7 +116,7 @@ export function SnapshotsOfMaharashtra() {
   return (
     <section
       id="snapshots-of-maharashtra"
-      className="relative bg-[color:var(--ivory)] py-24 md:py-36 border-b hairline"
+      className="relative bg-[color:var(--ivory)] py-12 md:py-20 border-b hairline"
       aria-labelledby="snapshots-heading"
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">

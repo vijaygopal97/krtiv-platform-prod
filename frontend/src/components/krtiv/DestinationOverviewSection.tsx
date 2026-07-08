@@ -10,7 +10,7 @@ export function DestinationOverviewSection({ title, subtitle, paragraphs }: Prop
   if (!paragraphs.length) return null;
 
   return (
-    <section className="bg-[color:var(--bone)]/30 border-t hairline py-16 md:py-24">
+    <section className="bg-[color:var(--bone)]/30 border-t hairline py-8 md:py-12">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <ScrollReveal className="lg:col-span-4 lg:sticky lg:top-28">

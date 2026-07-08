@@ -1,6 +1,9 @@
 'use client';
 
 import type { ItineraryJobRequest } from '@/lib/signpostApi';
+import PlannerTripDetailsFields from '@/components/itinerary/PlannerTripDetailsFields';
+import { TRAVEL_SEASONS, buildPlannerLogisticsKeywords } from '@/lib/plannerTripDetails';
+import { useState } from 'react';
 
 interface GeneratorFormProps {
   onSubmit: (payload: ItineraryJobRequest) => void;
@@ -25,6 +28,9 @@ export default function GeneratorForm({
   initialOrigin = 'Mumbai',
   initialLocations = '',
 }: GeneratorFormProps) {
+  const [originCity, setOriginCity] = useState(initialOrigin);
+  const [travelSeason, setTravelSeason] = useState<string>(TRAVEL_SEASONS[2].value);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -33,18 +39,36 @@ export default function GeneratorForm({
     const interests = (form.querySelector('[name="interestCategory"]') as HTMLInputElement)?.value?.trim() || 'Culinary, Rural';
     const travelWith = (form.querySelector('[name="travelWith"]') as HTMLInputElement)?.value?.trim() || 'Family';
     const durationDays = (form.querySelector('[name="durationDays"]') as HTMLInputElement)?.value?.trim() || '3';
-    const originCity = (form.querySelector('[name="originCity"]') as HTMLInputElement)?.value?.trim() || 'Mumbai';
     const preferredLocations = (form.querySelector('[name="preferredLocations"]') as HTMLInputElement)?.value?.trim() || '';
+
+    const interestList = interests.split(',').map((s) => s.trim()).filter(Boolean);
+    const preferredList = preferredLocations.split(',').map((s) => s.trim()).filter(Boolean);
+    const primaryInterest = interestList[0] || 'Maharashtra Tourism';
+    const logisticsKeywords = buildPlannerLogisticsKeywords({
+      originCity: originCity.trim() || 'Mumbai',
+      travelSeason,
+      durationDays,
+    });
 
     const payload: ItineraryJobRequest = {
       title,
       userProfile: {
         age,
-        interestCategory: interests.split(',').map((s) => s.trim()).filter(Boolean),
+        interestCategory: interestList,
         travelWith,
-        originCity,
+        originCity: originCity.trim() || 'Mumbai',
         durationDays,
-        preferredLocations: preferredLocations.split(',').map((s) => s.trim()).filter(Boolean),
+        travelSeason,
+        preferredLocations: preferredList,
+        tourismKeywords: [
+          `Primary theme: ${primaryInterest}`,
+          preferredList.length ? `Destination focus: ${preferredList.join(', ')}` : '',
+          `STRICT THEME: Every day must stay within ${primaryInterest} — no unrelated activities on later days`,
+          ...logisticsKeywords,
+        ].filter(Boolean),
+        categoryFocus: preferredList.length
+          ? `${primaryInterest} — ${preferredList.join(', ')}`
+          : primaryInterest,
       },
     };
     onSubmit(payload);
@@ -116,18 +140,13 @@ export default function GeneratorForm({
           className="w-full h-11 px-4 text-sm rounded-xl bg-[color:var(--ivory)] border hairline outline-none focus:border-[color:var(--ink)] transition"
         />
       </div>
-      <div>
-        <label htmlFor="originCity" className="block text-xs tracking-wide text-[color:var(--ink-soft)] mb-2">Origin city</label>
-        <input
-          type="text"
-          id="originCity"
-          name="originCity"
-          required
-          defaultValue={initialOrigin}
-          placeholder="Mumbai"
-          className="w-full h-11 px-4 text-sm rounded-xl bg-[color:var(--ivory)] border hairline outline-none focus:border-[color:var(--ink)] transition"
-        />
-      </div>
+      <PlannerTripDetailsFields
+        originCity={originCity}
+        onOriginCityChange={setOriginCity}
+        travelSeason={travelSeason}
+        onTravelSeasonChange={setTravelSeason}
+        variant="dashboard"
+      />
       <div>
         <label htmlFor="preferredLocations" className="block text-xs tracking-wide text-[color:var(--ink-soft)] mb-2">Preferred locations (optional)</label>
         <input

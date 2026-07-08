@@ -94,7 +94,7 @@ export const categoryItineraries: Record<string, {
           { time: 'EVENING', title: 'Raja Dinkar Kelkar Museum', duration: '2 hrs', description: 'Antique Collection, Artifacts, Cultural Exhibits, Traditional Crafts', details: "One of India's finest museums with over 20,000 artifacts from across the country.", icon: '🎨' }
         ]
       },
-      { day: 3, location: 'Aurangabad', image: 'https://images.pexels.com/photos/3581368/pexels-photo-3581368.jpeg?auto=compress&cs=tinysrgb&w=800',
+      { day: 3, location: 'Chhatrapati Sambhajinagar', image: 'https://images.pexels.com/photos/3581368/pexels-photo-3581368.jpeg?auto=compress&cs=tinysrgb&w=800',
         activities: [
           { time: 'MORNING', title: 'Ajanta Caves', duration: '5 hrs', description: 'UNESCO World Heritage Site, Buddhist Rock-cut Caves, Ancient Paintings, Sculptures', details: 'Marvel at 2nd century BCE Buddhist cave monuments with exquisite paintings and sculptures.', icon: '🗿' },
           { time: 'AFTERNOON', title: 'Bibi Ka Maqbara', duration: '2 hrs', description: 'Mughal Architecture, Tomb of Rabia-ud-Daurani, Gardens, Photography', details: 'Known as the "Taj of Deccan", this stunning mausoleum mirrors the Taj Mahal.', icon: '🕌' },
@@ -171,10 +171,10 @@ export const categoryItineraries: Record<string, {
           { time: 'EVENING', title: 'Lavani Performance', duration: '2 hrs', description: 'Traditional Dance, Live Music, Cultural Show, Storytelling', details: 'Experience the vibrant folk dance form of Maharashtra with live performance.', icon: '💃' }
         ]
       },
-      { day: 2, location: 'Paithan & Aurangabad', image: 'https://images.pexels.com/photos/6978854/pexels-photo-6978854.jpeg?auto=compress&cs=tinysrgb&w=800',
+      { day: 2, location: 'Paithan & Chhatrapati Sambhajinagar', image: 'https://images.pexels.com/photos/6978854/pexels-photo-6978854.jpeg?auto=compress&cs=tinysrgb&w=800',
         activities: [
           { time: 'MORNING', title: 'Paithani Weaving Center', duration: '4 hrs', description: 'Silk Weaving, Handloom Demonstration, Saree Making, Artisan Interaction', details: 'Witness the intricate art of weaving the legendary Paithani silk sarees.', icon: '🧵' },
-          { time: 'AFTERNOON', title: 'Himroo Shawl Workshop', duration: '3 hrs', description: 'Traditional Weaving, Design Process, Shopping, Cultural Heritage', details: 'Discover the 14th-century Persian weaving technique unique to Aurangabad.', icon: '🧶' },
+          { time: 'AFTERNOON', title: 'Himroo Shawl Workshop', duration: '3 hrs', description: 'Traditional Weaving, Design Process, Shopping, Cultural Heritage', details: 'Discover the 14th-century Persian weaving technique unique to Chhatrapati Sambhajinagar.', icon: '🧶' },
           { time: 'EVENING', title: 'Ellora Caves Light Show', duration: '2 hrs', description: 'Sound & Light Show, Historical Narration, Rock-cut Architecture', details: 'Experience the UNESCO World Heritage site come alive through multimedia storytelling.', icon: '🎭' }
         ]
       },

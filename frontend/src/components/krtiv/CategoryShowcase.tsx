@@ -207,10 +207,10 @@ export function CategoryShowcase({ showPlanner = true }: { showPlanner?: boolean
   return (
     <section
       id="explore-by-categories"
-      className="relative bg-[color:var(--ivory)] py-24 md:py-36"
+      className="relative bg-[color:var(--ivory)] py-12 md:py-20"
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
-        <div className="flex items-end justify-between gap-8 mb-12 md:mb-16">
+        <div className="flex items-end justify-between gap-8 mb-6 md:mb-8">
           <ScrollReveal className="max-w-2xl">
             <p className="eyebrow">Seven ways in</p>
             <h2 className="display-lg mt-4 text-[color:var(--ink)] text-balance">
@@ -271,7 +271,7 @@ export function CategoryShowcase({ showPlanner = true }: { showPlanner?: boolean
           context="explore"
           heading="Explore Maharashtra your way"
           subheading="Choose the themes that match your trip, then generate a personalized AI itinerary."
-          className="bg-[color:var(--bone)]/60 border-t hairline mt-16 md:mt-24"
+          className="bg-[color:var(--bone)]/60 border-t hairline mt-8 md:mt-12"
           compact
         />
       )}

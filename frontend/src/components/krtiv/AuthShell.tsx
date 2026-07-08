@@ -57,7 +57,7 @@ export function AuthShell({
         </div>
       </div>
 
-      <div className="relative flex items-center justify-center px-6 md:px-12 py-16 md:py-20">
+      <div className="relative flex items-center justify-center px-6 md:px-12 py-16 md:py-20 mobile-scroll-pad mobile-scroll-pad--desktop-reset">
         <div className="w-full max-w-md">
           <Link
             href="/"

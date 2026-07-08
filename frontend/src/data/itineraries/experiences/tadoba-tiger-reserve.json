@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Arrive Chandrapur & park orientation", "Forest lodge check-in, safari briefing, zone allocation", "Reach Chandrapur or Moharli gate area by midday. Collect permits, meet your naturalist, and understand core vs buffer zone rules before your first drive."],
-      ["AFTERNOON", "Afternoon jeep safari", "Teak forests, meadows, waterholes", "The afternoon slot often rewards patience — tigers move toward water as heat builds. Scan bamboo edges and Irai reservoir margins for sambar, gaur, and sloth bear."],
-      ["EVENING", "Lodge dinner & night sounds", "Forest ambience, starlit deck", "Early night — tomorrow’s morning safari starts before dawn. Many lodges offer short nature walks or documentary screenings on Tadoba’s conservation story."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Prime morning safari", "Tiger tracking, bird chorus, misty meadows", "The classic Tadoba experience: cold dawn air, alarm calls from langurs, and the chance of a striped silhouette crossing the track. Carry binoculars for raptors and woodland birds."],
-      ["AFTERNOON", "Rest or buffer-zone birding", "Irai backwaters, village edges", "Skip a second drive if you prefer recovery — or book a buffer-zone route for landscape photography and wetland species away from the busiest gates."],
-      ["EVENING", "Second evening safari", "Golden-hour light, predator movement", "Evening light softens the teak canopy. Experienced drivers read pugmarks and alarm calls — stay quiet and let the forest reveal itself."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Final safari or photography walk", "Last chance sightings, departure packing", "Use your remaining slot for a zone you have not covered, or revisit a productive meadow. Check out by late morning for onward travel to Nagpur airport or Pench."],
-      ["AFTERNOON", "Nagpur extension (optional)", "Orange city markets, cuisine", "Many visitors route through Nagpur — tarri poha breakfast, Sitabuldi fort views, and saoji curry before flying out."],
-      ["EVENING", "Onward journey", "Highway connections to Wardha, Amravati", "Plan departures around safari end times; monsoon and summer slots fill weeks ahead — book return transport accordingly."]
+      [
+        "MORNING",
+        "Arrive Chandrapur & park orientation",
+        "Forest lodge check-in, safari briefing, zone allocation",
+        "Reach Chandrapur or Moharli gate area by midday. Collect permits, meet your naturalist, and understand core vs buffer zone rules before your first drive."
+      ],
+      [
+        "AFTERNOON",
+        "Afternoon jeep safari",
+        "Teak forests, meadows, waterholes",
+        "The afternoon slot often rewards patience — tigers move toward water as heat builds. Scan bamboo edges and Irai reservoir margins for sambar, gaur, and sloth bear."
+      ],
+      [
+        "EVENING",
+        "Lodge dinner & night sounds",
+        "Forest ambience, starlit deck",
+        "Early night — tomorrow’s morning safari starts before dawn. Many lodges offer short nature walks or documentary screenings on Tadoba’s conservation story."
+      ]
     ]
   }
 ]

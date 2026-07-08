@@ -20,7 +20,7 @@ export const UNESCO_SPOTLIGHTS: CuratedSpotlight[] = [
   {
     slug: 'ajanta-caves',
     title: 'Ajanta Caves',
-    location: 'Chhatrapati Sambhajinagar (Aurangabad district)',
+    location: 'Chhatrapati Sambhajinagar district',
     image: '/curated/unesco/ajanta-caves.jpg',
     badge: 'UNESCO · 1983',
     summary:
@@ -157,7 +157,7 @@ export const SEVEN_WONDERS_SPOTLIGHTS: CuratedSpotlight[] = [
       'Rock-cut Buddhist caves whose 2,000-year-old murals remain among the greatest achievements of ancient Indian painting.',
     body:
       'Voted one of Maharashtra’s seven wonders, Ajanta draws art historians and first-time travellers alike. The cliff-face monasteries overlook a wooded gorge; inside, painted ceilings and sculpted Buddhas narrate centuries of devotion. Arrive early, carry a torch for darker cells, and allow time for the Archaeological Museum at the base.',
-    highlights: ['UNESCO World Heritage Site', 'Caves 1, 2 & 17 for mural highlights', '~2.5 hr drive from Aurangabad'],
+    highlights: ['UNESCO World Heritage Site', 'Caves 1, 2 & 17 for mural highlights', '~2.5 hr drive from Chhatrapati Sambhajinagar'],
     relatedHref: '/places-to-go/ajanta-ellora',
     relatedLabel: 'Plan your visit',
   },
@@ -224,10 +224,10 @@ export const SEVEN_WONDERS_SPOTLIGHTS: CuratedSpotlight[] = [
     summary:
       'The “unconquerable” Deccan citadel — moats, tunnels, and a hilltop stronghold that once commanded medieval trade routes.',
     body:
-      'Rising above the plains near Aurangabad, Daulatabad’s layered defences include a pitch-dark zigzag passage engineered to confuse invaders. Climb through the Andheri tunnel with a guide, explore the Chand Minar, and survey the horizon from the summit. Easily combined with Ellora on the same trip.',
+      'Rising above the plains near Chhatrapati Sambhajinagar, Daulatabad’s layered defences include a pitch-dark zigzag passage engineered to confuse invaders. Climb through the Andheri tunnel with a guide, explore the Chand Minar, and survey the horizon from the summit. Easily combined with Ellora on the same trip.',
     highlights: ['Medieval Deccan military architecture', 'Famous dark passage (Andheri)', '30 minutes from Ellora caves'],
     relatedHref: '/places-to-go/ajanta-ellora',
-    relatedLabel: 'Aurangabad heritage loop',
+    relatedLabel: 'Chhatrapati Sambhajinagar heritage loop',
   },
   {
     slug: 'global-vipassana-pagoda',

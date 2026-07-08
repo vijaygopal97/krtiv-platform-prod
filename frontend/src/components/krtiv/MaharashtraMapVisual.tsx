@@ -1,8 +1,8 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { CategoryItinerary } from './data';
-import { getItineraryGeoPoints } from './maharashtraMapUtils';
+import { getItineraryGeoPoints, itineraryHasMapPoints } from './maharashtraMapUtils';
 import { ItineraryRouteMap } from './ItineraryRouteMap';
 
 type Props = {
@@ -23,9 +23,18 @@ export function MaharashtraMapVisual({
   aspectClassName = 'aspect-[4/5] md:aspect-[4/5]',
   className = '',
 }: Props) {
-  const points = useMemo(() => getItineraryGeoPoints(itinerary), [itinerary]);
+  const [activeStop, setActiveStop] = useState(0);
+  const points = useMemo(
+    () => getItineraryGeoPoints(itinerary, activeDay),
+    [itinerary, activeDay],
+  );
+  const hasPoints = useMemo(() => itineraryHasMapPoints(itinerary), [itinerary]);
 
-  if (points.length === 0) {
+  useEffect(() => {
+    setActiveStop(0);
+  }, [activeDay, itinerary]);
+
+  if (!hasPoints) {
     return (
       <div
         id={id}
@@ -40,6 +49,21 @@ export function MaharashtraMapVisual({
     );
   }
 
+  if (points.length === 0) {
+    return (
+      <div
+        id={id}
+        className={`relative rounded-[20px] overflow-hidden border hairline bg-[color:var(--bone)] flex items-center justify-center ${aspectClassName} ${className}`}
+        role="img"
+        aria-label="Map unavailable for this day"
+      >
+        <p className="text-sm text-[color:var(--ink-soft)] px-6 text-center">
+          Map locations could not be resolved for this day.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div
       id={id}
@@ -49,8 +73,8 @@ export function MaharashtraMapVisual({
     >
       <ItineraryRouteMap
         points={points}
-        activeDay={activeDay}
-        onActiveDayChange={onActiveDayChange}
+        activeStop={activeStop}
+        onActiveStopChange={setActiveStop}
       />
       <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/70 backdrop-blur flex items-center justify-center text-[10px] tracking-widest text-[color:var(--ink-soft)] border hairline pointer-events-none z-[600]">
         N

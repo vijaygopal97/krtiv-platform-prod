@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
 import { ScrollReveal } from '@/components/krtiv/ScrollReveal';
+import { DidYouKnowStackedCarousel } from '@/components/krtiv/DidYouKnowStackedCarousel';
 import { CuratedSpotlightGrid } from '@/components/krtiv/CuratedSpotlightGrid';
 import { CuratedTrailAmbientShell } from '@/components/krtiv/CuratedTrailAmbientShell';
 import { PlaceHeroItineraryBridge } from '@/components/krtiv/PlaceHeroItineraryBridge';
@@ -24,7 +25,8 @@ import {
   getMonsoonTrailSite,
   monsoonTrailAsItinerary,
 } from '@/data/monsoonTrails';
-import { CURATED_ITINERARIES_LABEL, SITE_HEADER_OFFSET_CLASS } from '@/lib/siteNavigation';
+import { SITE_HEADER_OFFSET_CLASS } from '@/lib/siteNavigation';
+import { getMonsoonCategoryFacts } from '@/data/destinationFacts';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -58,6 +60,7 @@ function MonsoonCategoryListingPage({ slug }: { slug: string }) {
   if (!category) notFound();
 
   const spotlights = getMonsoonCategoryActivitySpotlights(category.slug);
+  const facts = getMonsoonCategoryFacts(category.slug);
 
   return (
     <CuratedTrailAmbientShell>
@@ -65,7 +68,7 @@ function MonsoonCategoryListingPage({ slug }: { slug: string }) {
       <section className={`${SITE_HEADER_OFFSET_CLASS} pb-16 md:pb-24`}>
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10">
           <ScrollReveal>
-            <p className="eyebrow">Monsoon Trails · {CURATED_ITINERARIES_LABEL}</p>
+            <p className="eyebrow">Curated Itineraries · Monsoon Trails</p>
             <div className="mt-5 grid md:grid-cols-12 gap-6 md:gap-y-8 md:gap-x-14 lg:gap-x-20 items-center">
               <h1 className="display-xl md:col-span-5 text-balance text-center md:text-left">
                 {category.title}
@@ -75,6 +78,15 @@ function MonsoonCategoryListingPage({ slug }: { slug: string }) {
               </div>
             </div>
           </ScrollReveal>
+
+          {facts.length ? (
+            <DidYouKnowStackedCarousel
+              facts={facts}
+              placeName={category.title}
+              embedded
+              backgroundImage="/curated/monsoon-trails/tamhini-ghat.jpg"
+            />
+          ) : null}
 
           <CuratedSpotlightGrid spotlights={spotlights} trailSlug="monsoon-trails" />
 
@@ -131,7 +143,7 @@ function MonsoonTrailDetailPage({ slug }: { slug: string }) {
         <ItineraryStory
           itinerary={itinerary}
           sectionId="suggested-itinerary"
-          heading="Suggested 3-day itinerary"
+          heading="Suggested itinerary"
           sidePanel="map"
           mapPanelId="itinerary-map"
           seamlessTop

@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Tadoba-Andhari Tiger Reserve Safari", "Tiger sightings, wildlife safari, forest landscapes", "Begin your Chandrapur adventure with an early morning safari through Maharashtra's oldest and most celebrated tiger reserve. Keep an eye out for tigers, leopards, sloth bears, and diverse birdlife."],
-      ["AFTERNOON", "Tadoba Interpretation Centre", "Wildlife education, conservation insights, biodiversity", "Learn about the reserve's unique ecosystem, conservation efforts, and the incredible variety of flora and fauna that thrive within the forest."],
-      ["EVENING", "Irai Lake", "Lakeside views, birdwatching, sunset photography", "Relax by the tranquil waters of Irai Lake and watch the landscape come alive with migratory birds and stunning sunset colours."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Tadoba Buffer Zone Nature Trail", "Forest walks, birdwatching, eco-tourism", "Explore the buffer areas surrounding the reserve and experience the quieter side of the forest through guided nature trails and wildlife spotting opportunities."],
-      ["AFTERNOON", "Moharli Village Experience", "Local culture, rural tourism, traditional lifestyles", "Interact with local communities and gain insight into the traditions and livelihoods that have coexisted alongside the forests for generations."],
-      ["EVENING", "Jungle Camp Experience", "Campfire atmosphere, stargazing, wilderness retreat", "Spend the evening immersed in nature, enjoying the sounds of the forest under a canopy of stars."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Mahakali Temple", "Ancient shrine, spiritual heritage, cultural significance", "Visit one of Chandrapur's most revered temples and experience the spiritual traditions that continue to shape the region's cultural identity."],
-      ["AFTERNOON", "Ancient City Walls & Chandrapur Fort Precinct", "Historic fortifications, regional history, heritage walk", "Explore remnants of Chandrapur's historic fortifications and discover stories from the city's medieval past."],
-      ["EVENING", "Junona Lake", "Nature retreat, birdlife, scenic landscapes", "Conclude your journey with a peaceful visit to this picturesque lake, a favourite spot for nature lovers and birdwatchers."]
+      [
+        "MORNING",
+        "Tadoba-Andhari Tiger Reserve Safari",
+        "Tiger sightings, wildlife safari, forest landscapes",
+        "Begin your Chandrapur adventure with an early morning safari through Maharashtra's oldest and most celebrated tiger reserve. Keep an eye out for tigers, leopards, sloth bears, and diverse birdlife."
+      ],
+      [
+        "AFTERNOON",
+        "Tadoba Interpretation Centre",
+        "Wildlife education, conservation insights, biodiversity",
+        "Learn about the reserve's unique ecosystem, conservation efforts, and the incredible variety of flora and fauna that thrive within the forest."
+      ],
+      [
+        "EVENING",
+        "Irai Lake",
+        "Lakeside views, birdwatching, sunset photography",
+        "Relax by the tranquil waters of Irai Lake and watch the landscape come alive with migratory birds and stunning sunset colours."
+      ]
     ]
   }
 ]

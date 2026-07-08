@@ -58,7 +58,7 @@ export const CATEGORY_SLIDES_DEFAULT: Record<string, HeroSlideRecord[]> = {
       alt: 'Kailasa Temple, Ellora Caves',
       focalX: 55,
       focalY: 50,
-      kicker: 'Ellora · Aurangabad',
+      kicker: 'Ellora · Chhatrapati Sambhajinagar',
       title: 'Rock-cut marvel',
       sortOrder: 0,
     },
@@ -73,7 +73,7 @@ export const CATEGORY_SLIDES_DEFAULT: Record<string, HeroSlideRecord[]> = {
     },
     {
       imageUrl: '/places/slides/ajanta-ellora/ellora-caves.jpg',
-      alt: 'Ellora Caves, Aurangabad',
+      alt: 'Ellora Caves, Chhatrapati Sambhajinagar',
       focalX: 55,
       focalY: 50,
       kicker: 'Ellora',

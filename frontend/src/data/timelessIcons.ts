@@ -12,6 +12,10 @@ export const TIMELESS_ICON_SLUGS = [
   'kas-plateau',
   'daulatabad-fort',
   'global-vipassana-pagoda',
+  'shaniwar-wada',
+  'sandhan-valley',
+  'gateway-of-india',
+  'harihar-fort',
 ] as const;
 
 export type TimelessIconSlug = (typeof TIMELESS_ICON_SLUGS)[number];
@@ -30,6 +34,10 @@ export function timelessIconPath(slug: TimelessIconSlug) {
 
 function heroImagePath(slug: TimelessIconSlug): string {
   if (slug === 'global-vipassana-pagoda') return '/curated/seven-wonders/global-pagoda.jpg';
+  if (slug === 'gateway-of-india') return '/places-to-go/mumbai.jpg';
+  if (slug === 'shaniwar-wada') return '/places-to-go/pune.jpg';
+  if (slug === 'sandhan-valley') return '/curated/monsoon-trails/bhandardara.jpg';
+  if (slug === 'harihar-fort') return '/categories/explorer/adventure.jpg';
   return `/curated/seven-wonders/${slug}.jpg`;
 }
 
@@ -75,7 +83,7 @@ const META: Meta[] = [
     ],
     topAttractions: ['Cave 1 & 2 Mahayana frescoes', 'Cave 16 & 17 narrative murals', 'Cave 26 dying Buddha', 'Waghora gorge viewpoint'],
     bestTimeToVisit: 'October–March; arrive at opening for cooler light and fewer coaches.',
-    localFood: ['Naan qalia', 'Tahri', 'Mawa jalebi', 'Aurangabad Himroo textiles nearby'],
+    localFood: ['Naan qalia', 'Tahri', 'Mawa jalebi', 'Chhatrapati Sambhajinagar Himroo textiles nearby'],
     travelTips: [
       'Hire licensed guides at the ticket counter — murals reward expert narration.',
       'No flash photography; some cells restrict cameras entirely.',
@@ -131,7 +139,7 @@ const META: Meta[] = [
     overview: [
       'Roughly 50,000 years ago, a meteor struck the Deccan traps and left Lonar — a near-perfect circular bowl now filled with alkaline water studied by geologists and astrobiologists worldwide. Maharashtra’s 2013 vote recognised this rarity: nowhere else on the planet offers the same combination of impact geology and living Hindu temple heritage on the rim.',
       'Circumambulate the crater path at sunrise when mist lifts off the lake, visit the Daitya Sudan temple in Lonar town, and scan the shore for ancient sati stones and small shrines half-swallowed by forest. The water’s colour shifts from jade to steel grey with the sky.',
-      'Lonar rewards an overnight stay far from city lights — stargazing from the rim is memorable. Base in Aurangabad (3 hours) or Buldhana for a dedicated geological pilgrimage.',
+      'Lonar rewards an overnight stay far from city lights — stargazing from the rim is memorable. Base in Chhatrapati Sambhajinagar (3 hours) or Buldhana for a dedicated geological pilgrimage.',
     ],
     topAttractions: ['Crater rim walking trail', 'Daitya Sudan temple', 'Kamalja Devi temple on shore', 'Impact geology interpretation centre'],
     bestTimeToVisit: 'October–February for cool treks; avoid peak summer heat on the rim.',
@@ -211,7 +219,7 @@ const META: Meta[] = [
     title: 'Daulatabad Fort',
     subtitle: 'Voted Timeless Icon · the unconquerable Deccan citadel',
     description:
-      'Rising above the plains near Aurangabad, Daulatabad’s moats, tunnels, and hilltop stronghold earned its “unconquerable” reputation — and a place among Maharashtra’s seven timeless icons.',
+      'Rising above the plains near Chhatrapati Sambhajinagar, Daulatabad’s moats, tunnels, and hilltop stronghold earned its “unconquerable” reputation — and a place among Maharashtra’s seven timeless icons.',
     region: 'Daulatabad · Timeless Icon 2013',
     lat: 19.939,
     lng: 75.225,
@@ -223,7 +231,7 @@ const META: Meta[] = [
     ],
     topAttractions: ['Andheri dark passage tunnel', 'Chand Minar minaret', 'Summit citadel views', 'Bharat Mata temple on peak'],
     bestTimeToVisit: 'October–March; avoid midday summer heat on the climb.',
-    localFood: ['Aurangabad biryani', 'Naan qalia', 'Highway dhaba thali en route to Ellora'],
+    localFood: ['Chhatrapati Sambhajinagar biryani', 'Naan qalia', 'Highway dhaba thali en route to Ellora'],
     travelTips: [
       'Torch essential for Andheri tunnel — available at entry vendors.',
       'Not recommended for claustrophobia or knee issues — steep steps throughout.',
@@ -265,6 +273,100 @@ const META: Meta[] = [
       { label: 'All Timeless Icons', href: '/curated-itineraries/seven-wonders' },
     ],
     plannerPlaceSlug: 'mumbai',
+  },
+  {
+    slug: 'shaniwar-wada',
+    title: 'Shaniwar Wada',
+    subtitle: 'Voted Timeless Icon · seat of the Peshwas',
+    description:
+      'The fortified heart of Pune — Shaniwar Wada’s Delhi Gate and surviving ramparts recall the Peshwa era before the great fire of 1828.',
+    region: 'Pune · Timeless Icon',
+    lat: 18.5196,
+    lng: 73.8553,
+    overview: [
+      'Built in 1732 as the Peshwa residence, Shaniwar Wada once sprawled across seven storeys of teak and stone. Today’s gardens and walls frame Pune’s old city — evening light-and-sound shows narrate Maratha history.',
+      'Pair with Kasba Peth lanes, Dagdusheth Ganpati, and Pune’s museum quarter on a single heritage day.',
+    ],
+    topAttractions: ['Delhi Gate façade', 'Light & sound show', 'Ganesh Mahal ruins', 'Old Pune walk'],
+    bestTimeToVisit: 'October–March; evenings for the show.',
+    localFood: ['Mastani', 'Pune misal', 'Bakarwadi'],
+    travelTips: ['Tickets for the show sell out on weekends — book ahead.', 'Wear comfortable shoes for cobbled lanes.'],
+    nearby: [
+      { label: 'Pune guide', href: '/places-to-go/pune' },
+      { label: 'All Timeless Icons', href: '/curated-itineraries/seven-wonders' },
+    ],
+    plannerPlaceSlug: 'pune',
+  },
+  {
+    slug: 'sandhan-valley',
+    title: 'Sandhan Valley',
+    subtitle: 'Voted Timeless Icon · Valley of Shadows',
+    description:
+      'A narrow rappelling gorge near Bhandardara — Sandhan Valley is one of Maharashtra’s signature adventure corridors through basalt walls and seasonal pools.',
+    region: 'Ahmednagar · Timeless Icon',
+    lat: 19.55,
+    lng: 73.75,
+    overview: [
+      'The full traverse combines trekking, wading, and rappelling between towering rock faces — best attempted with licensed guides in the post-monsoon window when water levels are manageable.',
+      'Base at Bhandardara or Igatpuri for Arthur Lake sunsets after the valley day.',
+    ],
+    topAttractions: ['Rappelling sections', 'Narivali village approach', 'Bhandardara lake', 'Randha Falls nearby'],
+    bestTimeToVisit: 'October–February; avoid heavy monsoon floods.',
+    localFood: ['Village thali', 'Kokum sharbat', 'Local poha'],
+    travelTips: ['Only go with certified adventure operators.', 'Carry headlamps and dry bags for gear.'],
+    nearby: [
+      { label: 'Bhandardara', href: '/blog/bhandardara' },
+      { label: 'All Timeless Icons', href: '/curated-itineraries/seven-wonders' },
+    ],
+    plannerPlaceSlug: 'mumbai',
+  },
+  {
+    slug: 'gateway-of-india',
+    title: 'Gateway of India',
+    subtitle: 'Voted Timeless Icon · harbour monument',
+    description:
+      'Mumbai’s ceremonial arch on Apollo Bunder — built to commemorate a royal visit, later witness to India’s last departing colonial troops.',
+    region: 'Mumbai · Timeless Icon',
+    lat: 18.922,
+    lng: 72.8347,
+    zoom: 14,
+    overview: [
+      'Indo-Saracenic stone rises above the ferry quay to Elephanta and the harbour. Dawn here is quiet; evenings bring street photographers, tuk-tuks, and the Taj Mahal Palace hotel glowing across the plaza.',
+      'Combine with Colaba art galleries, Kala Ghoda cafés, and a sunset ferry when seas are calm.',
+    ],
+    topAttractions: ['Harbour arch', 'Elephanta ferry', 'Colaba Causeway', 'Taj Mahal Palace exterior'],
+    bestTimeToVisit: 'November–February; sunrise for fewer crowds.',
+    localFood: ['Bademiya kebabs', 'Leopold Café', 'Sulaimani chai'],
+    travelTips: ['Watch belongings in crowds.', 'Confirm Elephanta ferry return times.'],
+    nearby: [
+      { label: 'Mumbai itineraries', href: '/places-to-go/mumbai' },
+      { label: 'Elephanta UNESCO guide', href: '/curated-itineraries/unesco/elephanta-caves' },
+      { label: 'All Timeless Icons', href: '/curated-itineraries/seven-wonders' },
+    ],
+    plannerPlaceSlug: 'mumbai',
+  },
+  {
+    slug: 'harihar-fort',
+    title: 'Harihar Fort',
+    subtitle: 'Voted Timeless Icon · ladder steps in the sky',
+    description:
+      'Famous for its steep rock-cut steps — Harihar Fort is a Sahyadri classic where climbers ascend a near-vertical staircase to a plateau in the clouds.',
+    region: 'Nashik · Timeless Icon',
+    lat: 19.9,
+    lng: 73.45,
+    overview: [
+      'The iconic steps require sure footing and a head for heights. Monsoon mists swirl around the plateau; winter offers crisp Konkan views from the summit temple.',
+      'Approach from Nirgudpada or Harshewadi village with a local guide on busy weekends.',
+    ],
+    topAttractions: ['Rock-cut steps', 'Summit plateau', 'Konkan vista', 'Village trail'],
+    bestTimeToVisit: 'October–February; monsoon only for experienced trekkers.',
+    localFood: ['Poha at trailhead', 'Nashik misal on return'],
+    travelTips: ['Avoid the steps in rain — rock becomes dangerously slick.', 'Start pre-dawn in summer.'],
+    nearby: [
+      { label: 'Nashik', href: '/places-to-go/nashik' },
+      { label: 'All Timeless Icons', href: '/curated-itineraries/seven-wonders' },
+    ],
+    plannerPlaceSlug: 'nashik',
   },
 ];
 
@@ -319,7 +421,8 @@ export function timelessIconAsItinerary(site: TimelessIconRecord): CategoryItine
 }
 
 export function getTimelessIconSpotlights(): CuratedSpotlight[] {
-  return BUILT.map((site) => ({
+  const hidden = new Set<TimelessIconSlug>(['ajanta-caves', 'ellora-caves']);
+  return BUILT.filter((site) => !hidden.has(site.slug)).map((site) => ({
     slug: site.slug,
     title: site.title,
     location: site.subtitle.replace(/^Voted Timeless Icon · /, ''),

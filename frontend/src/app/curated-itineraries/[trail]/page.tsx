@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { SiteHeaderClient } from '@/components/krtiv/SiteHeaderClient';
 import { SiteFooter } from '@/components/krtiv/SiteFooter';
 import { ScrollReveal } from '@/components/krtiv/ScrollReveal';
-import { DestinationFactsSection } from '@/components/krtiv/DestinationFactsSection';
+import { DidYouKnowStackedCarousel } from '@/components/krtiv/DidYouKnowStackedCarousel';
 import { CuratedSpotlightGrid } from '@/components/krtiv/CuratedSpotlightGrid';
 import { CuratedTrailAmbientShell } from '@/components/krtiv/CuratedTrailAmbientShell';
 import {
@@ -12,7 +12,11 @@ import {
   trailUsesSpotlights,
   type CuratedTrailSlug,
 } from '@/data/curatedItineraries';
-import { getTimelessIconTrailFacts, getUnescoTrailFacts } from '@/data/destinationFacts';
+import {
+  getMonsoonTrailFacts,
+  getTimelessIconTrailFacts,
+  getUnescoTrailFacts,
+} from '@/data/destinationFacts';
 import { CURATED_ITINERARIES_LABEL, SITE_HEADER_OFFSET_CLASS } from '@/lib/siteNavigation';
 import { notFound } from 'next/navigation';
 
@@ -53,7 +57,16 @@ export default async function CuratedItineraryTrailPage({ params }: Props) {
       ? getUnescoTrailFacts()
       : slug === 'seven-wonders'
         ? getTimelessIconTrailFacts()
-        : null;
+        : slug === 'monsoon-trails'
+          ? getMonsoonTrailFacts()
+          : null;
+
+  const factsBackground =
+    slug === 'monsoon-trails'
+      ? '/curated/monsoon-trails/tamhini-ghat.jpg'
+      : slug === 'seven-wonders'
+        ? '/curated/seven-wonders/raigad-fort.jpg'
+        : '/curated/unesco/ajanta-caves.jpg';
 
   return (
     <CuratedTrailAmbientShell>
@@ -74,7 +87,12 @@ export default async function CuratedItineraryTrailPage({ params }: Props) {
 
           {trailFacts?.length ? (
             <div className="mt-8 md:mt-10">
-              <DestinationFactsSection facts={trailFacts} placeName={config.title} embedded />
+              <DidYouKnowStackedCarousel
+                facts={trailFacts}
+                placeName={config.title}
+                embedded
+                backgroundImage={factsBackground}
+              />
             </div>
           ) : null}
 
@@ -86,7 +104,8 @@ export default async function CuratedItineraryTrailPage({ params }: Props) {
                 config.slug === 'seven-wonders' ||
                 config.slug === 'weekend-getaways' ||
                 config.slug === 'nature-trails' ||
-                config.slug === 'monsoon-trails'
+                config.slug === 'monsoon-trails' ||
+                config.slug === 'wine-trail'
                   ? config.slug
                   : undefined
               }

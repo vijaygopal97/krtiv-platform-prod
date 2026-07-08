@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Satara or Mahabaleshwar departure", "Ghats climb, bloom season check", "Confirm Kaas Plateau is open and your entry slot is booked — without a reservation peak weekends turn away visitors."],
-      ["AFTERNOON", "Kaas boardwalk circuit", "Endemic wildflowers, Smithia carpets", "Follow the marked boardwalk only — the ecosystem is fragile. Guides explain species found nowhere else on Earth."],
-      ["EVENING", "Satara town", "Kandi pedhe, early night", "Stay in Satara for a second morning attempt if clouds closed the plateau today."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Kaas lake & second plateau pass", "Different light, fewer crowds", "Dawn visits can be magical when dew holds on petals — dress warmly for plateau wind."],
-      ["AFTERNOON", "Thoseghar waterfalls", "Monsoon cascade pairing", "Drive to Thoseghar for waterfall viewpoints — natural companion to Kaas on a Satara weekend."],
-      ["EVENING", "Sajjangad fort", "Ramdas Swami shrine above Satara", "Short evening drive to Sajjangad for sunset over the city and plateau rim."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Mahabaleshwar strawberries", "Hill station breakfast", "Descend to Mahabaleshwar for Mapro lunch and Venna lake if extending the trip west."],
-      ["AFTERNOON", "Return to Pune", "Expressway homeward", "Bloom season is short — September to early October is the classic window."],
-      ["EVENING", "Departure", "Seasonal wonder complete", "Check MTDC notifications yearly — bloom timing shifts with monsoon withdrawal."]
+      [
+        "MORNING",
+        "Satara or Mahabaleshwar departure",
+        "Ghats climb, bloom season check",
+        "Confirm Kaas Plateau is open and your entry slot is booked — without a reservation peak weekends turn away visitors."
+      ],
+      [
+        "AFTERNOON",
+        "Kaas boardwalk circuit",
+        "Endemic wildflowers, Smithia carpets",
+        "Follow the marked boardwalk only — the ecosystem is fragile. Guides explain species found nowhere else on Earth."
+      ],
+      [
+        "EVENING",
+        "Satara town",
+        "Kandi pedhe, early night",
+        "Stay in Satara for a second morning attempt if clouds closed the plateau today."
+      ]
     ]
   }
 ]

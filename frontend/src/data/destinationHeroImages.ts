@@ -104,7 +104,7 @@ const SLIDES_BY_SLUG: Record<string, SlideInput[]> = {
   'ajanta-ellora': [
     { src: C.ajantaEllora.kailasa, alt: 'Kailasa Temple, Ellora Caves' },
     { src: C.ajantaEllora.ajanta, alt: 'Ajanta Caves aerial view, Maharashtra' },
-    { src: C.ajantaEllora.ellora, alt: 'Ellora Caves, Aurangabad' },
+    { src: C.ajantaEllora.ellora, alt: 'Ellora Caves, Chhatrapati Sambhajinagar' },
     { src: C.ajantaEllora.detail, alt: 'Rock-cut sculptures, Ellora' },
   ],
   shirdi: [

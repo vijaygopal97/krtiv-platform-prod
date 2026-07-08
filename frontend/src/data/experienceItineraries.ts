@@ -1,4 +1,5 @@
-import type { Activity, Day } from '@/components/krtiv/data';
+import type { Day } from '@/components/krtiv/data';
+import { buildSinglePlaceItineraryDays, type RawItineraryDay } from '@/lib/singleDayItinerary';
 
 import tadoba from './itineraries/experiences/tadoba-tiger-reserve.json';
 import bhandardara from './itineraries/experiences/bhandardara-fireflies.json';
@@ -10,47 +11,16 @@ import devkund from './itineraries/experiences/devkund-waterfall.json';
 import tamhini from './itineraries/experiences/tamhini-ghat.json';
 import visapur from './itineraries/experiences/visapur-fort.json';
 
-type RawDay = {
-  day: number;
-  slots: [string, string, string, string][];
-};
-
-const ICON: Record<string, string> = {
-  MORNING: '🌅',
-  AFTERNOON: '☀️',
-  EVENING: '🌇',
-};
-
-function toActivities(slots: RawDay['slots']): Activity[] {
-  return slots.map(([time, title, description, details]) => ({
-    time,
-    title,
-    duration: '',
-    description,
-    details,
-    icon: ICON[time] ?? '📍',
-  }));
-}
-
-function toDays(raw: RawDay[], location: string, images: string[]): Day[] {
-  return raw.map((d, i) => ({
-    day: d.day,
-    location,
-    image: images[i % images.length] ?? images[0],
-    activities: toActivities(d.slots),
-  }));
-}
-
-const RAW: Record<string, RawDay[]> = {
-  'tadoba-tiger-reserve': tadoba as RawDay[],
-  'bhandardara-fireflies': bhandardara as RawDay[],
-  'flamingo-watching': flamingo as RawDay[],
-  'navegaon-national-park': navegaon as RawDay[],
-  'karnala-bird-sanctuary': karnala as RawDay[],
-  'thoseghar-waterfalls': thoseghar as RawDay[],
-  'devkund-waterfall': devkund as RawDay[],
-  'tamhini-ghat': tamhini as RawDay[],
-  'visapur-fort': visapur as RawDay[],
+const RAW: Record<string, RawItineraryDay[]> = {
+  'tadoba-tiger-reserve': tadoba as RawItineraryDay[],
+  'bhandardara-fireflies': bhandardara as RawItineraryDay[],
+  'flamingo-watching': flamingo as RawItineraryDay[],
+  'navegaon-national-park': navegaon as RawItineraryDay[],
+  'karnala-bird-sanctuary': karnala as RawItineraryDay[],
+  'thoseghar-waterfalls': thoseghar as RawItineraryDay[],
+  'devkund-waterfall': devkund as RawItineraryDay[],
+  'tamhini-ghat': tamhini as RawItineraryDay[],
+  'visapur-fort': visapur as RawItineraryDay[],
 };
 
 export function experienceItineraryDays(
@@ -60,5 +30,5 @@ export function experienceItineraryDays(
 ): Day[] | undefined {
   const raw = RAW[slug];
   if (!raw) return undefined;
-  return toDays(raw, locationTitle, gallery);
+  return buildSinglePlaceItineraryDays(raw, locationTitle, gallery);
 }

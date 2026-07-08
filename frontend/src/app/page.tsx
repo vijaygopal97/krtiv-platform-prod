@@ -6,6 +6,7 @@ import { FloatingInterestBubbles } from '@/components/krtiv/FloatingInterestBubb
 import { CategoryShowcase } from '@/components/krtiv/CategoryShowcase';
 import { IntroBand } from '@/components/krtiv/IntroBand';
 import { SignatureExperiences } from '@/components/krtiv/SignatureExperiences';
+import { FeaturedExperiencesSection } from '@/components/featuredExperiences/FeaturedExperiencesSection';
 import { CtaBandInteractive } from '@/components/krtiv/CtaBandInteractive';
 
 export const metadata = {
@@ -24,6 +25,7 @@ export default function HomePage() {
       <TravelStoriesSection />
       <IntroBand />
       <SignatureExperiences />
+      <FeaturedExperiencesSection />
       <CtaBandInteractive />
       <SiteFooter />
     </main>

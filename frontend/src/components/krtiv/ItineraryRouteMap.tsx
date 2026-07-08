@@ -10,8 +10,8 @@ type LeafletLayer = import('leaflet').Layer;
 
 type Props = {
   points: GeoMapPoint[];
-  activeDay: number;
-  onActiveDayChange: (index: number) => void;
+  activeStop: number;
+  onActiveStopChange: (index: number) => void;
 };
 
 /** Stop trackpad pinch from zooming the whole page while the pointer is over the map. */
@@ -34,18 +34,18 @@ function attachMapGestureGuards(el: HTMLElement) {
   };
 }
 
-export function ItineraryRouteMap({ points, activeDay, onActiveDayChange }: Props) {
+export function ItineraryRouteMap({ points, activeStop, onActiveStopChange }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const markersRef = useRef<LeafletLayer[]>([]);
   const routeRef = useRef<LeafletLayer | null>(null);
-  const onSelectRef = useRef(onActiveDayChange);
+  const onSelectRef = useRef(onActiveStopChange);
   const detachGesturesRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
-    onSelectRef.current = onActiveDayChange;
-  }, [onActiveDayChange]);
+    onSelectRef.current = onActiveStopChange;
+  }, [onActiveStopChange]);
 
   useEffect(() => {
     if (!containerRef.current || points.length === 0) return;
@@ -99,16 +99,18 @@ export function ItineraryRouteMap({ points, activeDay, onActiveDayChange }: Prop
       }
 
       markersRef.current = points.map((p, i) => {
-        const isActive = activeDay === i;
+        const isActive = activeStop === i;
+        const stopNum = p.stopIndex + 1;
         const icon = L.divIcon({
           className: 'itinerary-route-map__pin-wrap',
-          html: `<div class="itinerary-route-map__pin${isActive ? ' itinerary-route-map__pin--active' : ''}" aria-hidden="true">${p.day.day}</div>`,
+          html: `<div class="itinerary-route-map__pin${isActive ? ' itinerary-route-map__pin--active' : ''}" aria-hidden="true">${stopNum}</div>`,
           iconSize: [32, 32],
           iconAnchor: [16, 16],
         });
 
-        const marker = L.marker([p.lat, p.lng], { icon, alt: `Day ${p.day.day}, ${p.label}` });
-        marker.bindPopup(`<strong>Day ${p.day.day}</strong><br/>${p.label}`);
+        const popupTime = p.time ? `<strong>${p.time}</strong><br/>` : '';
+        const marker = L.marker([p.lat, p.lng], { icon, alt: `Stop ${stopNum}, ${p.label}` });
+        marker.bindPopup(`${popupTime}${p.label}`);
         marker.on('click', () => onSelectRef.current(i));
         marker.addTo(map);
         return marker;
@@ -126,7 +128,7 @@ export function ItineraryRouteMap({ points, activeDay, onActiveDayChange }: Prop
       markersRef.current = [];
       routeRef.current = null;
     };
-  }, [points]);
+  }, [points, activeStop]);
 
   useEffect(() => {
     if (!mapRef.current || markersRef.current.length === 0) return;
@@ -134,12 +136,13 @@ export function ItineraryRouteMap({ points, activeDay, onActiveDayChange }: Prop
     void import('leaflet').then((L) => {
       markersRef.current.forEach((layer, i) => {
         const marker = layer as import('leaflet').Marker;
-        const isActive = activeDay === i;
+        const isActive = activeStop === i;
         const p = points[i];
         if (!p) return;
+        const stopNum = p.stopIndex + 1;
         const icon = L.divIcon({
           className: 'itinerary-route-map__pin-wrap',
-          html: `<div class="itinerary-route-map__pin${isActive ? ' itinerary-route-map__pin--active' : ''}" aria-hidden="true">${p.day.day}</div>`,
+          html: `<div class="itinerary-route-map__pin${isActive ? ' itinerary-route-map__pin--active' : ''}" aria-hidden="true">${stopNum}</div>`,
           iconSize: [32, 32],
           iconAnchor: [16, 16],
         });
@@ -150,7 +153,7 @@ export function ItineraryRouteMap({ points, activeDay, onActiveDayChange }: Prop
         }
       });
     });
-  }, [activeDay, points]);
+  }, [activeStop, points]);
 
   return (
     <div ref={wrapRef} className="itinerary-route-map-shell relative w-full h-full min-h-[280px]">

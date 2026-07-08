@@ -25,7 +25,7 @@ export default function CallToAction() {
 
   const handleGenerateClick = useCallback(() => {
     if (authService.isAuthenticated()) {
-      router.push('/explore#explore-smart-planner');
+      router.push('/things-to-do#explore-smart-planner');
     } else {
       setShowSignupLightbox(true);
     }

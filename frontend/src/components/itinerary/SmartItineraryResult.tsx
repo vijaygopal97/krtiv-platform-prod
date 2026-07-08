@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import CompactItineraryView from '@/components/dashboard/CompactItineraryView';
 import { MaharashtraMapVisual } from '@/components/krtiv/MaharashtraMapVisual';
 import {
-  getItineraryGeoPoints,
+  itineraryHasMapPoints,
   parsedItineraryToMapShape,
 } from '@/components/krtiv/maharashtraMapUtils';
 import type { ParsedItinerary } from '@/lib/parseItinerary';
@@ -51,7 +51,7 @@ export default function SmartItineraryResult({
   const [activeMapDay, setActiveMapDay] = useState(0);
 
   const mapItinerary = useMemo(() => parsedItineraryToMapShape(parsed), [parsed]);
-  const mapPoints = useMemo(() => getItineraryGeoPoints(mapItinerary), [mapItinerary]);
+  const hasMapPoints = useMemo(() => itineraryHasMapPoints(mapItinerary), [mapItinerary]);
 
   const handleSave = async (favorite: boolean) => {
     if (!authService.isAuthenticated()) {
@@ -138,13 +138,32 @@ export default function SmartItineraryResult({
       {saveMsg && <p className="text-sm text-[color:var(--ink-soft)]">{saveMsg}</p>}
       {pdfMsg && <p className="text-sm text-red-700">{pdfMsg}</p>}
 
-      {mapPoints.length > 0 && (
+      {hasMapPoints && (
         <div className="rounded-[20px] border hairline bg-[color:var(--bone)] p-4 md:p-6">
           <p className="eyebrow text-[color:var(--saffron)]">On the map</p>
           <h3 className="font-display text-2xl mt-2 text-[color:var(--ink)]">Your route across Maharashtra</h3>
           <p className="text-sm text-[color:var(--ink-soft)] mt-2 mb-5">
-            Tap a numbered stop to highlight that day on the map.
+            Every visit for the selected day is pinned — tap a numbered stop to highlight it.
           </p>
+          {mapItinerary.days.length > 1 ? (
+            <div className="flex flex-wrap gap-2 mb-5">
+              {mapItinerary.days.map((d, i) => (
+                <button
+                  key={d.day}
+                  type="button"
+                  onClick={() => setActiveMapDay(i)}
+                  aria-pressed={activeMapDay === i}
+                  className={`h-9 px-4 rounded-full border text-sm transition ${
+                    activeMapDay === i
+                      ? 'bg-[color:var(--ink)] text-white border-[color:var(--ink)]'
+                      : 'hairline hover:border-[color:var(--ink)]'
+                  }`}
+                >
+                  Day {d.day}
+                </button>
+              ))}
+            </div>
+          ) : null}
           <MaharashtraMapVisual
             itinerary={mapItinerary}
             activeDay={activeMapDay}

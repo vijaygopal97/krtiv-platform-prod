@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Shaniwar Wada", "Maratha history, grand fortification, cultural legacy", "Step into the former seat of the Peshwas and explore the remains of one of Maharashtra's most significant historical landmarks. Discover stories of power, politics, and the rise of the Maratha Empire."],
-      ["AFTERNOON", "Raja Dinkar Kelkar Museum", "Traditional artifacts, folk art, heritage collections", "Journey through centuries of Indian craftsmanship as you explore an extraordinary collection of sculptures, musical instruments, and everyday treasures from across the country."],
-      ["EVENING", "FC Road & JM Road", "Local cuisine, shopping, vibrant city life", "Experience Pune's youthful energy with a leisurely walk through its bustling streets, lined with popular eateries, cafés, and local shopping spots."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Aga Khan Palace", "Freedom movement, colonial architecture, national heritage", "Visit one of India's most important historical monuments, closely associated with Mahatma Gandhi and the country's struggle for independence."],
-      ["AFTERNOON", "Pataleshwar Cave Temple & Pune Heritage Walk", "Rock-cut temple, ancient architecture, city heritage", "Explore an 8th-century cave temple hidden within the city before discovering Pune's historic neighbourhoods and cultural landmarks."],
-      ["EVENING", "Saras Baug", "Landscaped gardens, Ganesh temple, relaxation", "Unwind amidst lush greenery and enjoy a peaceful evening at one of Pune's most beloved public spaces."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Sinhagad Fort", "Hill fort, trekking, panoramic views", "Venture to the legendary fort associated with Tanaji Malusare and witness breathtaking views of the Sahyadri ranges from its historic ramparts."],
-      ["AFTERNOON", "Khadakwasla Dam & Panshet Backwaters", "Scenic landscapes, waterfront views, nature escape", "Enjoy a refreshing break surrounded by tranquil waters and rolling hills, making it a favourite getaway for locals and visitors alike."],
-      ["EVENING", "Pune Food Trail", "Misal pav, mastani, local flavours", "End your Pune experience by sampling the city's iconic culinary delights and discovering why it is considered one of Maharashtra's most exciting food destinations."]
+      [
+        "MORNING",
+        "Shaniwar Wada",
+        "Maratha history, grand fortification, cultural legacy",
+        "Step into the former seat of the Peshwas and explore the remains of one of Maharashtra's most significant historical landmarks. Discover stories of power, politics, and the rise of the Maratha Empire."
+      ],
+      [
+        "AFTERNOON",
+        "Raja Dinkar Kelkar Museum",
+        "Traditional artifacts, folk art, heritage collections",
+        "Journey through centuries of Indian craftsmanship as you explore an extraordinary collection of sculptures, musical instruments, and everyday treasures from across the country."
+      ],
+      [
+        "EVENING",
+        "FC Road & JM Road",
+        "Local cuisine, shopping, vibrant city life",
+        "Experience Pune's youthful energy with a leisurely walk through its bustling streets, lined with popular eateries, cafés, and local shopping spots."
+      ]
     ]
   }
 ]

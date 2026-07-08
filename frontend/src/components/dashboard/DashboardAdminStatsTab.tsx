@@ -13,7 +13,7 @@ export default function DashboardAdminStatsTab() {
 
   const load = useCallback(async () => {
     const user = authService.getCurrentUser();
-    if (!user?.token || user.role !== 'admin') {
+    if (!user?.token || !authService.isAdmin()) {
       setError('Admin access required.');
       setLoading(false);
       return;

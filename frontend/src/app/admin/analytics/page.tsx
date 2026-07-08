@@ -16,7 +16,7 @@ export default function AdminAnalyticsPage() {
 
   const load = useCallback(async () => {
     const user = authService.getCurrentUser();
-    if (!user?.token || user.role !== 'admin') {
+    if (!user?.token || !authService.isAdmin()) {
       router.replace('/login?next=/admin/analytics');
       return;
     }

@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Sparkles } from 'lucide-react';
 import type { ItineraryJobRequest } from '@/lib/signpostApi';
+import PlannerTripDetailsFields from '@/components/itinerary/PlannerTripDetailsFields';
+import { buildPlannerLogisticsKeywords } from '@/lib/plannerTripDetails';
+import { useAutoPlannerOrigin } from '@/hooks/useAutoPlannerOrigin';
 
 export type PlannerPrefill = {
   destination: string;
@@ -18,18 +21,52 @@ type Props = {
   prefill?: PlannerPrefill | null;
 };
 
-const STYLES = ['Relaxed', 'Adventure', 'Cultural', 'Family', 'Luxury', 'Nature', 'Spiritual', 'Urban'];
+const STYLES = ['Relaxed', 'Adventure', 'Cultural', 'Family', 'Luxury', 'Nature', 'Spiritual', 'Urban'] as const;
 
-function buildPayload(dest: string, days: string, budget: string, style: string): ItineraryJobRequest {
+const STYLE_TO_CATEGORY: Record<(typeof STYLES)[number], string> = {
+  Relaxed: 'Maharashtra Tourism',
+  Adventure: 'Adventure & Ecotourism',
+  Cultural: 'Historical & Heritage',
+  Family: 'Maharashtra Tourism',
+  Luxury: 'Urban & Contemporary',
+  Nature: 'Adventure & Ecotourism',
+  Spiritual: 'Spiritual & Pilgrimage',
+  Urban: 'Urban & Contemporary',
+};
+
+function buildPayload(
+  dest: string,
+  days: string,
+  budget: string,
+  style: (typeof STYLES)[number],
+  originCity: string,
+  travelSeason: string,
+): ItineraryJobRequest {
+  const category = STYLE_TO_CATEGORY[style] || 'Maharashtra Tourism';
+  const logisticsKeywords = buildPlannerLogisticsKeywords({
+    originCity: originCity.trim() || 'Mumbai',
+    travelSeason,
+    durationDays: days,
+  });
   return {
     title: `${dest} — ${days} day trip`,
     userProfile: {
       age: '30',
-      interestCategory: [style, budget, 'Maharashtra Tourism'].filter(Boolean),
-      travelWith: style === 'Family' ? 'Family' : 'Friends',
-      originCity: 'Mumbai',
+      interestCategory: [category],
+      travelWith: style === 'Family' ? 'Family' : style === 'Spiritual' ? 'Family' : 'Friends',
+      originCity: originCity.trim() || 'Mumbai',
       durationDays: days,
+      travelSeason,
       preferredLocations: [dest],
+      tourismKeywords: [
+        `Primary theme: ${category}`,
+        `Destination focus: ${dest}`,
+        `Travel style: ${style}`,
+        `Budget: ${budget}`,
+        `STRICT THEME: Every day must stay within ${category} — no unrelated activities on later days`,
+        ...logisticsKeywords,
+      ],
+      categoryFocus: `${category} — ${dest}`,
     },
   };
 }
@@ -39,6 +76,7 @@ export default function AIPlannerWidget({ onGenerate, disabled, prefill }: Props
   const [days, setDays] = useState('4');
   const [budget, setBudget] = useState('Moderate');
   const [style, setStyle] = useState('Relaxed');
+  const { originCity, setOriginCity, travelSeason, setTravelSeason, originFromIp } = useAutoPlannerOrigin();
   const lastNonce = useRef(0);
   const onGenerateRef = useRef(onGenerate);
   onGenerateRef.current = onGenerate;
@@ -51,14 +89,17 @@ export default function AIPlannerWidget({ onGenerate, disabled, prefill }: Props
     if (dest) setDestination(dest);
     setStyle(travelStyle);
     if (prefill.autoGenerate && dest) {
-      onGenerateRef.current(buildPayload(dest, days, budget, travelStyle));
+      const styleKey = (STYLES as readonly string[]).includes(travelStyle)
+        ? (travelStyle as (typeof STYLES)[number])
+        : 'Nature';
+      onGenerateRef.current(buildPayload(dest, days, budget, styleKey, originCity, travelSeason));
     }
-  }, [prefill, days, budget]);
+  }, [prefill, days, budget, originCity, travelSeason]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const dest = destination.trim() || 'Maharashtra';
-    onGenerate(buildPayload(dest, days, budget, style));
+    onGenerate(buildPayload(dest, days, budget, style as (typeof STYLES)[number], originCity, travelSeason));
   };
 
   return (
@@ -117,6 +158,14 @@ export default function AIPlannerWidget({ onGenerate, disabled, prefill }: Props
             ))}
           </select>
         </label>
+        <PlannerTripDetailsFields
+          originCity={originCity}
+          onOriginCityChange={setOriginCity}
+          travelSeason={travelSeason}
+          onTravelSeasonChange={setTravelSeason}
+          variant="dashboard"
+          originAutoDetected={originFromIp}
+        />
         <button
           type="submit"
           disabled={disabled}

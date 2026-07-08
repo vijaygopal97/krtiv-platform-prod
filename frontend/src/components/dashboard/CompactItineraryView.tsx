@@ -17,7 +17,7 @@ interface CompactItineraryViewProps {
 }
 
 export default function CompactItineraryView({ title, parsed, showAiDisclaimer = false }: CompactItineraryViewProps) {
-  const { theme, region, days } = parsed;
+  const { theme, region, routing, days } = parsed;
 
   return (
     <div className="space-y-6">
@@ -26,6 +26,24 @@ export default function CompactItineraryView({ title, parsed, showAiDisclaimer =
         {region && <span className="text-gray-500">· {region}</span>}
         {theme && theme !== title && <span className="text-gray-400">· {theme}</span>}
       </div>
+
+      {routing && (routing.outboundFrom || routing.outboundTo) && (
+        <div className="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200/80 rounded-xl p-4 md:p-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[#C46B2D] mb-2">
+            Getting to Maharashtra
+          </p>
+          <p className="text-sm font-semibold text-gray-900">
+            {routing.outboundFrom || 'Your city'} → {routing.outboundTo || 'Maharashtra'}
+          </p>
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-700">
+            {routing.outboundMode && <span>Mode: {routing.outboundMode}</span>}
+            {routing.outboundDuration && <span>Duration: {routing.outboundDuration}</span>}
+          </div>
+          {routing.outboundNotes && (
+            <p className="mt-2 text-sm text-gray-600 leading-relaxed">{routing.outboundNotes}</p>
+          )}
+        </div>
+      )}
 
       <div className="space-y-4">
         {days.map((day) => (
@@ -50,7 +68,14 @@ export default function CompactItineraryView({ title, parsed, showAiDisclaimer =
                       <span className="font-semibold text-gray-900">{slot.location}</span>
                     )}
                     {slot.duration && (
-                      <span className="text-xs text-gray-500">{slot.duration}</span>
+                      <span className="text-xs font-medium text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">
+                        {slot.duration}
+                      </span>
+                    )}
+                    {slot.travelTime && (
+                      <span className="text-xs font-medium text-sky-800 bg-sky-50 px-2 py-0.5 rounded">
+                        {slot.travelTime}
+                      </span>
                     )}
                   </div>
                   {slot.activities && (

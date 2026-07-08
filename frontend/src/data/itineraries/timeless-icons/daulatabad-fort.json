@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Daulatabad Fort climb", "Andheri tunnel, Chand Minar, summit", "Start early to beat heat — buy a torch for the dark zigzag passage. Climb through successive gates to the summit citadel."],
-      ["AFTERNOON", "Ellora Caves — Kailasa", "Monolithic temple, timeless icon pairing", "A 30-minute drive brings you to Ellora’s Cave 16 — dedicate the afternoon to the Kailasa complex alone."],
-      ["EVENING", "Aurangabad base", "Deccan dinner, rest", "Stay in the city for day two at Ajanta or more Ellora caves."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Ellora Buddhist & Jain wings", "Tri-faith rock architecture", "Explore caves 1–12 and the Jain complex on the far end — less crowded in morning."],
-      ["AFTERNOON", "Grishneshwar Jyotirlinga", "Sacred pilgrimage stop", "Short drive to one of the twelve Jyotirlinga shrines — dress modestly."],
-      ["EVENING", "Local cuisine", "Naan qalia, biryani", "Aurangabad’s Muslim-Deccan food rewards a long heritage day."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Ajanta day trip", "Second timeless icon", "Drive to Ajanta for the painted caves — the ultimate Deccan trilogy: Daulatabad, Ellora, Ajanta."],
-      ["AFTERNOON", "Waghora gorge views", "Cliff photography", "Finish with the classic ravine viewpoint outside the cave horseshoe."],
-      ["EVENING", "Onward travel", "Departure planning", "Three days covers Maharashtra’s greatest Deccan icons in one loop."]
+      [
+        "MORNING",
+        "Daulatabad Fort climb",
+        "Andheri tunnel, Chand Minar, summit",
+        "Start early to beat heat — buy a torch for the dark zigzag passage. Climb through successive gates to the summit citadel."
+      ],
+      [
+        "AFTERNOON",
+        "Ellora Caves — Kailasa",
+        "Monolithic temple, timeless icon pairing",
+        "A 30-minute drive brings you to Ellora’s Cave 16 — dedicate the afternoon to the Kailasa complex alone."
+      ],
+      [
+        "EVENING",
+        "Chhatrapati Sambhajinagar base",
+        "Deccan dinner, rest",
+        "Stay in the city for day two at Ajanta or more Ellora caves."
+      ]
     ]
   }
 ]

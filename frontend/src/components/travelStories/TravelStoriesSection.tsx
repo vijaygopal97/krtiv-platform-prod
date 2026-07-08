@@ -72,11 +72,11 @@ export function TravelStoriesSection() {
   return (
     <section
       id="snapshots-of-maharashtra"
-      className="relative overflow-visible bg-[color:var(--ivory)] py-24 md:py-36 border-b hairline"
+      className="relative overflow-visible bg-[color:var(--ivory)] py-12 md:py-20 border-b hairline"
       aria-labelledby="snapshots-of-maharashtra-heading"
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
-        <div className="flex items-end justify-between gap-8 mb-12 md:mb-14">
+        <div className="flex items-end justify-between gap-8 mb-6 md:mb-7">
           <ScrollReveal className="max-w-2xl">
             <p className="eyebrow">Visual stories</p>
             <h2 id="snapshots-of-maharashtra-heading" className="display-lg mt-4 text-balance">

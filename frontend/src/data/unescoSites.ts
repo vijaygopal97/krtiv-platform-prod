@@ -72,7 +72,7 @@ const META: Meta[] = [
     zoom: 12,
     topAttractions: ['Cave 1 & 2 frescoes', 'Cave 16 & 17 paintings', 'Cave 26 dying Buddha', 'Waghora viewpoint'],
     bestTimeToVisit: 'October–March; closed Tuesdays. Arrive at opening for cooler light in the caves.',
-    localFood: ['Naan qalia', 'Tahri', 'Mawa jalebi', 'Aurangabad Himroo'],
+    localFood: ['Naan qalia', 'Tahri', 'Mawa jalebi', 'Chhatrapati Sambhajinagar Himroo'],
     travelTips: [
       'Hire ASI-licensed guides at the ticket counter.',
       'Photography without flash; some caves restrict cameras.',

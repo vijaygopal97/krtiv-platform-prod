@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Ajanta viewpoint & Cave 1", "Mahayana frescoes, Bodhisattva panels, earliest painted caves", "Arrive at the Ajanta complex before the crowds. Cave 1’s ceiling and pillar paintings are among the finest surviving examples of ancient Indian mural art — allow unhurried time with a licensed ASI guide."],
-      ["AFTERNOON", "Caves 2, 16 & 17", "Narrative Jataka tales, seated Buddha, monastery planning", "Move through the horseshoe cliff in sequence. Caves 16 and 17 combine sculpture and painting; Cave 2’s ornate façade introduces the monastery layout that defines the site."],
-      ["EVENING", "Ajanta Archaeological Museum", "Replicas, site context, conservation story", "The small museum at the base contextualises what you have seen in the caves — ideal before dinner in nearby Jalgaon or a resort stay in Chhatrapati Sambhajinagar."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Caves 9, 10, 19 & 26", "Chaitya halls, stupa worship, late-period painting", "Explore the earlier chaitya (prayer hall) caves and the celebrated Cave 26 with its dying Buddha sculpture — a emotional high point of the visit."],
-      ["AFTERNOON", "Waghora gorge walk & photography", "Ravine viewpoints, cliff perspective, birdlife", "Step outside the caves for views across the Waghora river gorge — the classic postcard angle that reveals how the monasteries cling to the basalt cliff."],
-      ["EVENING", "Local Deccan cuisine", "Naan qalia, tahri, mawa jalebi", "Return to your base city for a relaxed evening meal. Aurangabad’s Muslim-Deccan cooking pairs well with a heritage-heavy day."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Ellora — Buddhist caves (1–12)", "Mahayana sculpture, monastic cells, transition to Hindu phase", "A 2-hour drive brings you to Ellora’s Buddhist wing — the natural complement to Ajanta and essential for understanding Maharashtra’s rock-cut continuum."],
-      ["AFTERNOON", "Kailasa Temple (Cave 16)", "Monolithic shrine, elephant panels, Nandi courtyard", "Dedicate the afternoon to India’s most ambitious single-rock excavation — the temple carved downward from the cliff top."],
-      ["EVENING", "Return to base or onward travel", "Souvenir shopping, Aurangabad silk, departure planning", "Pick up Himroo or Paithani textiles in Aurangabad before your onward journey — many visitors pair Ajanta–Ellora with a Nashik or Mumbai connection."]
+      [
+        "MORNING",
+        "Ajanta viewpoint & Cave 1",
+        "Mahayana frescoes, Bodhisattva panels, earliest painted caves",
+        "Arrive at the Ajanta complex before the crowds. Cave 1’s ceiling and pillar paintings are among the finest surviving examples of ancient Indian mural art — allow unhurried time with a licensed ASI guide."
+      ],
+      [
+        "AFTERNOON",
+        "Caves 2, 16 & 17",
+        "Narrative Jataka tales, seated Buddha, monastery planning",
+        "Move through the horseshoe cliff in sequence. Caves 16 and 17 combine sculpture and painting; Cave 2’s ornate façade introduces the monastery layout that defines the site."
+      ],
+      [
+        "EVENING",
+        "Ajanta Archaeological Museum",
+        "Replicas, site context, conservation story",
+        "The small museum at the base contextualises what you have seen in the caves — ideal before dinner in nearby Jalgaon or a resort stay in Chhatrapati Sambhajinagar."
+      ]
     ]
   }
 ]

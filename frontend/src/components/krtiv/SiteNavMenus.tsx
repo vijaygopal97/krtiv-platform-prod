@@ -7,6 +7,8 @@ import {
   CURATED_ITINERARIES_HREF,
   CURATED_ITINERARIES_LABEL,
   CURATED_NAV,
+  EXPLORE_PHOTOS_HREF,
+  EXPLORE_PHOTOS_LABEL,
   getThingsNavLinks,
   isActiveNavPath,
   isCuratedSectionActive,
@@ -341,6 +343,15 @@ export function SiteNavMenus({
 
     return (
       <div className="flex flex-col gap-1">
+        <Link
+          href={EXPLORE_PHOTOS_HREF}
+          onClick={onNavigate}
+          className={`block py-3 min-h-[48px] font-display text-lg border-b hairline ${
+            isActiveNavPath(pathname, EXPLORE_PHOTOS_HREF) ? 'text-[color:var(--saffron)]' : ''
+          }`}
+        >
+          {EXPLORE_PHOTOS_LABEL}
+        </Link>
         <div className="border-b hairline pb-2">
           <button
             type="button"
@@ -433,6 +444,14 @@ export function SiteNavMenus({
 
   return (
     <>
+      <Link
+        href={EXPLORE_PHOTOS_HREF}
+        className={`min-h-[44px] inline-flex items-center transition-colors ${tone.linkHover} ${
+          isActiveNavPath(pathname, EXPLORE_PHOTOS_HREF) ? 'text-[color:var(--saffron)]' : ''
+        }`}
+      >
+        {EXPLORE_PHOTOS_LABEL}
+      </Link>
       <DesktopDropdown
         label={THINGS_TO_DO_LABEL}
         mainHref={THINGS_TO_DO_HREF}

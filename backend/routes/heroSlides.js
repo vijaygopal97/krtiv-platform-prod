@@ -58,9 +58,9 @@ const HOME_SLIDES = [
 
 const CATEGORY_SLIDES = {
   historical: [
-    { imageUrl: '/categories/slides/historical/ellora-kailasa.jpg', alt: 'Kailasa Temple, Ellora Caves', focalX: 55, focalY: 50, kicker: 'Ellora · Aurangabad', title: 'Rock-cut marvel', sortOrder: 0 },
+    { imageUrl: '/categories/slides/historical/ellora-kailasa.jpg', alt: 'Kailasa Temple, Ellora Caves', focalX: 55, focalY: 50, kicker: 'Ellora · Chhatrapati Sambhajinagar', title: 'Rock-cut marvel', sortOrder: 0 },
     { imageUrl: '/categories/slides/historical/ajanta-aerial.jpg', alt: 'Ajanta Caves aerial view, Maharashtra', focalX: 50, focalY: 45, kicker: 'Ajanta · UNESCO', title: 'Cave heritage', sortOrder: 1 },
-    { imageUrl: '/places/slides/ajanta-ellora/ellora-caves.jpg', alt: 'Ellora Caves, Aurangabad', focalX: 55, focalY: 50, kicker: 'Ellora', title: 'Ancient Deccan', sortOrder: 2 },
+    { imageUrl: '/places/slides/ajanta-ellora/ellora-caves.jpg', alt: 'Ellora Caves, Chhatrapati Sambhajinagar', focalX: 55, focalY: 50, kicker: 'Ellora', title: 'Ancient Deccan', sortOrder: 2 },
     { imageUrl: '/places/slides/ajanta-ellora/ellora-detail.jpg', alt: 'Rock-cut sculptures, Ellora', focalX: 55, focalY: 48, kicker: 'Ellora', title: 'Sculpted heritage', sortOrder: 3 },
     { imageUrl: '/places/slides/pune/shaniwar-wada.jpg', alt: 'Shaniwar Wada, Pune', focalX: 50, focalY: 50, kicker: 'Pune', title: 'Maratha heritage', sortOrder: 4 },
   ],

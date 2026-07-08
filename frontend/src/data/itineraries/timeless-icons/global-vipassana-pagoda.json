@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Borivali to Gorai jetty", "Ferry crossing, creek views", "Take the ferry from Borivali’s Gorai jetty — confirm return timings with the operator. Sea breeze and mangrove edges set a contemplative tone."],
-      ["AFTERNOON", "Pagoda dome & meditation hall", "Stone architecture, silence", "Explore the main hall beneath the unsupported stone dome — maintain silence and remove shoes. Photography rules are strict inside."],
-      ["EVENING", "Museum galleries & gardens", "Vipassana history, reflecting pools", "Walk the gardens and museum tracing the technique’s return to India — allow unhurried reading of exhibits."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Second visit or Gorai beach", "Quiet morning, coastal walk", "Return for dawn light on the dome or stroll Gorai beach before crowds — simple coastal breakfast stalls nearby."],
-      ["AFTERNOON", "Mumbai heritage loop", "Gateway, Fort district", "Head back toward South Mumbai — pair with Elephanta ferry or CSMT UNESCO walk."],
-      ["EVENING", "Marine Drive sunset", "City skyline closure", "Classic Mumbai evening after a day of stillness at the pagoda."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Elephanta Caves ferry", "Island UNESCO site", "Combine timeless spirituality with Elephanta’s Trimurti sculpture — ferries from Gateway of India."],
-      ["AFTERNOON", "Art Deco Oval Maidan walk", "UNESCO ensemble", "Stroll the Victorian Gothic and Art Deco skylines — Mumbai’s other world heritage faces."],
-      ["EVENING", "Departure", "Urban heritage complete", "The pagoda works as a half-day — this three-day plan folds it into a fuller Mumbai circuit."]
+      [
+        "MORNING",
+        "Borivali to Gorai jetty",
+        "Ferry crossing, creek views",
+        "Take the ferry from Borivali’s Gorai jetty — confirm return timings with the operator. Sea breeze and mangrove edges set a contemplative tone."
+      ],
+      [
+        "AFTERNOON",
+        "Pagoda dome & meditation hall",
+        "Stone architecture, silence",
+        "Explore the main hall beneath the unsupported stone dome — maintain silence and remove shoes. Photography rules are strict inside."
+      ],
+      [
+        "EVENING",
+        "Museum galleries & gardens",
+        "Vipassana history, reflecting pools",
+        "Walk the gardens and museum tracing the technique’s return to India — allow unhurried reading of exhibits."
+      ]
     ]
   }
 ]

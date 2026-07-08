@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Deekshabhoomi", "Buddhist monument, social history, architectural landmark", "Begin your journey at one of the world's most important Buddhist sites, where Dr. B. R. Ambedkar embraced Buddhism along with thousands of followers in 1956."],
-      ["AFTERNOON", "Zero Mile Stone", "Geographical landmark, colonial heritage, city icon", "Visit the historic marker considered the geographical centre of colonial India and learn about its significance in the country's mapping history."],
-      ["EVENING", "Futala Lake", "Waterfront promenade, illuminated fountains, sunset views", "Relax by one of Nagpur's most popular lakes, where scenic views and vibrant evening activities create the perfect end to the day."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Ramtek Temple", "Hilltop shrine, mythology, panoramic landscapes", "Travel to the historic town of Ramtek, believed to have been visited by Lord Rama during his exile. Enjoy breathtaking views from the temple complex atop the hill."],
-      ["AFTERNOON", "Khindsi Lake", "Boating, nature escape, recreational activities", "Spend the afternoon amidst tranquil surroundings, enjoying water-based activities and picturesque views of the surrounding hills."],
-      ["EVENING", "Dragon Palace Temple", "Buddhist architecture, meditation, peaceful atmosphere", "Experience serenity at this beautifully designed Buddhist temple known for its peaceful surroundings and spiritual ambience."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Pench Tiger Reserve", "Wildlife safari, tiger habitat, forest landscapes", "Embark on an exciting safari through one of Central India's premier wildlife destinations, home to tigers, leopards, deer, and diverse birdlife."],
-      ["AFTERNOON", "Nature Interpretation & Eco Trails", "Wildlife education, biodiversity, forest experience", "Deepen your understanding of the region's rich ecosystem through guided nature experiences and scenic forest trails."],
-      ["EVENING", "Orange Market Experience", "Local produce, regional specialties, shopping", "Conclude your Nagpur journey by exploring the city's famous orange markets and discovering why it is known as the \"Orange City\" of India."]
+      [
+        "MORNING",
+        "Deekshabhoomi",
+        "Buddhist monument, social history, architectural landmark",
+        "Begin your journey at one of the world's most important Buddhist sites, where Dr. B. R. Ambedkar embraced Buddhism along with thousands of followers in 1956."
+      ],
+      [
+        "AFTERNOON",
+        "Zero Mile Stone",
+        "Geographical landmark, colonial heritage, city icon",
+        "Visit the historic marker considered the geographical centre of colonial India and learn about its significance in the country's mapping history."
+      ],
+      [
+        "EVENING",
+        "Futala Lake",
+        "Waterfront promenade, illuminated fountains, sunset views",
+        "Relax by one of Nagpur's most popular lakes, where scenic views and vibrant evening activities create the perfect end to the day."
+      ]
     ]
   }
 ]

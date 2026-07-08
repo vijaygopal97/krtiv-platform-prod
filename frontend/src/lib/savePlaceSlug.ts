@@ -68,5 +68,6 @@ export function displayNameForSlug(slug: string, fallback?: string): string {
   if (slug.startsWith('journey:')) return fallback || slug.slice('journey:'.length);
   if (slug.startsWith('story:')) return fallback || slug.slice('story:'.length);
   if (slug.startsWith('spot:')) return fallback || slug.slice('spot:'.length).replace(/-/g, ' ');
+  if (slug.startsWith('explore:')) return fallback || 'Liked photo';
   return fallback || slug;
 }

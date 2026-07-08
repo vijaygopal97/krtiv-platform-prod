@@ -58,7 +58,7 @@ function DashboardInner() {
       return;
     }
     setUser(currentUser);
-    if (tabParam === 'stats' && currentUser.role !== 'admin') {
+    if (tabParam === 'stats' && !authService.isAdmin()) {
       setTab('home');
     } else if (tabParam) {
       setTab(tabParam);
@@ -185,7 +185,7 @@ function DashboardInner() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8F9FB]">
+    <div className="min-h-[100dvh] flex flex-col bg-[#F8F9FB]">
       <DashboardNav user={user} activeTab={tab} onTabChange={setTabAndUrl} onLogout={handleLogout} />
 
       {tab === 'home' && (
@@ -201,7 +201,7 @@ function DashboardInner() {
       )}
 
       {tab === 'smart' && (
-        <div className="flex-1 overflow-y-auto max-w-[1440px] mx-auto w-full px-4 md:px-8 py-8">
+        <div className="flex-1 overflow-y-auto mobile-scroll-pad max-w-[1440px] mx-auto w-full px-4 md:px-8 py-8">
           <div className="travel-dash-card p-6 md:p-8">
             <SmartKeywordItinerary context="home" dashboardMode />
           </div>
@@ -209,7 +209,7 @@ function DashboardInner() {
       )}
 
       {tab === 'builder' && (
-        <div className="flex flex-col lg:flex-row flex-1 lg:min-h-0">
+        <div className="flex flex-col lg:flex-row flex-1 lg:min-h-0 mobile-scroll-pad">
           <aside className="w-full lg:w-[22rem] flex-shrink-0 border-b lg:border-b-0 lg:border-r border-[#E5E7EB] bg-white lg:overflow-y-auto">
             <div className="p-6">
               <h2 className="font-display-dash text-lg font-semibold text-[#1F2937]">Full planner</h2>
@@ -259,7 +259,7 @@ function DashboardInner() {
       )}
 
       {tab === 'saved' && (
-        <div className="flex-1 overflow-y-auto max-w-4xl mx-auto w-full px-4 py-8">
+        <div className="flex-1 overflow-y-auto mobile-scroll-pad max-w-4xl mx-auto w-full px-4 py-8">
           <h1 className="font-display-dash text-xl font-semibold mb-4">My Trips</h1>
           <div className="travel-dash-card overflow-hidden">
             <SavedItinerariesPanel />
@@ -268,10 +268,10 @@ function DashboardInner() {
       )}
 
       {tab === 'saved-places' && (
-        <div className="flex-1 overflow-y-auto max-w-5xl mx-auto w-full px-4 py-8">
-          <h1 className="font-display-dash text-xl font-semibold mb-2">Saved Places</h1>
+        <div className="flex-1 overflow-y-auto mobile-scroll-pad max-w-5xl mx-auto w-full px-4 py-8">
+          <h1 className="font-display-dash text-xl font-semibold mb-2">Saved & liked</h1>
           <p className="text-sm text-[#6B7280] mb-6">
-            Destinations you saved across the site — plan a route-optimized AI itinerary from your starting city.
+            Destinations and explore photos you saved — plan a route-optimized AI itinerary from your starting city.
           </p>
           <SavedPlaces
             fullPage
@@ -295,7 +295,7 @@ function DashboardInner() {
       )}
 
       {tab === 'favorites' && (
-        <div className="flex-1 overflow-y-auto max-w-4xl mx-auto w-full px-4 py-8">
+        <div className="flex-1 overflow-y-auto mobile-scroll-pad max-w-4xl mx-auto w-full px-4 py-8">
           <h1 className="font-display-dash text-xl font-semibold mb-4">Saved</h1>
           <div className="travel-dash-card overflow-hidden">
             <SavedItinerariesPanel favoritesOnly />
@@ -304,7 +304,7 @@ function DashboardInner() {
       )}
 
       {tab === 'profile' && (
-        <div className="flex-1 p-8 max-w-lg mx-auto w-full">
+        <div className="flex-1 mobile-scroll-pad p-8 max-w-lg mx-auto w-full overflow-y-auto">
           <div className="travel-dash-card p-6 space-y-4">
             {user.profilePicture && (
               <img src={user.profilePicture} alt="" width={64} height={64} className="rounded-2xl" />
@@ -327,7 +327,7 @@ function DashboardInner() {
                 <p className="font-medium">{new Date(user.lastLoginAt).toLocaleString()}</p>
               </div>
             )}
-            {user.role === 'admin' && (
+            {authService.isAdmin() && (
               <div className="pt-4 border-t border-[#E5E7EB] flex flex-wrap gap-2">
                 <Link
                   href="/dashboard?tab=stats"
@@ -344,8 +344,8 @@ function DashboardInner() {
         </div>
       )}
 
-      {tab === 'stats' && user.role === 'admin' && (
-        <div className="flex-1 overflow-y-auto p-4 md:p-8">
+      {tab === 'stats' && authService.isAdmin() && (
+        <div className="flex-1 overflow-y-auto mobile-scroll-pad p-4 md:p-8">
           <DashboardAdminStatsTab />
         </div>
       )}

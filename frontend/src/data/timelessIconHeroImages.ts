@@ -8,7 +8,18 @@ import type { TimelessIconSlug } from '@/data/timelessIcons';
 type SlideInput = { src: string; alt: string };
 
 function gallerySlides(slug: TimelessIconSlug): SlideInput[] {
-  const hero = `/curated/seven-wonders/${slug === 'global-vipassana-pagoda' ? 'global-pagoda' : slug}.jpg`;
+  const hero =
+    slug === 'global-vipassana-pagoda'
+      ? '/curated/seven-wonders/global-pagoda.jpg'
+      : slug === 'gateway-of-india'
+        ? '/places-to-go/mumbai.jpg'
+        : slug === 'shaniwar-wada'
+          ? '/places-to-go/pune.jpg'
+          : slug === 'sandhan-valley'
+            ? '/curated/monsoon-trails/bhandardara.jpg'
+            : slug === 'harihar-fort'
+              ? '/categories/explorer/adventure.jpg'
+              : `/curated/seven-wonders/${slug}.jpg`;
   const base = `/curated/seven-wonders/galleries/${slug}`;
   const alts: Record<TimelessIconSlug, string[]> = {
     'ajanta-caves': [
@@ -53,6 +64,10 @@ function gallerySlides(slug: TimelessIconSlug): SlideInput[] {
       'Meditation hall interior',
       'Pagoda gardens and creek',
     ],
+    'shaniwar-wada': ['Shaniwar Wada, Pune', 'Delhi Gate', 'Fort gardens', 'Old Pune'],
+    'sandhan-valley': ['Sandhan Valley gorge', 'Rappelling section', 'Bhandardara hills', 'Valley trail'],
+    'gateway-of-india': ['Gateway of India, Mumbai', 'Harbour view', 'Apollo Bunder', 'Colaba skyline'],
+    'harihar-fort': ['Harihar Fort steps', 'Sahyadri trek', 'Summit plateau', 'Konkan view'],
   };
   return [
     { src: hero, alt: alts[slug][0] },

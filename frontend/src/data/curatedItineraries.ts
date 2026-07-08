@@ -7,6 +7,7 @@ import {
 import { getWeekendGetawaySpotlights } from '@/data/weekendGetaways';
 import { getMonsoonCategorySpotlights } from '@/data/monsoonTrailCategories';
 import { getTimelessIconSpotlights } from '@/data/timelessIcons';
+import { getWineTrailSpotlights } from '@/data/wineTrailDestinations';
 import {
   getNatureTrailSpotlights,
 } from '@/data/curatedExperiences';
@@ -66,8 +67,8 @@ export const CURATED_TRAILS: Record<CuratedTrailSlug, CuratedTrail> = {
     title: 'Wine Trail',
     eyebrow: 'Curated Itineraries',
     description:
-      'Follow the Nashik wine country — vineyards along the Godavari, cellar tastings, and sacred ghats in one leisurely circuit.',
-    placeSlugs: ['nashik'],
+      'From Nashik’s Godavari valley estates to Pune’s urban cellars, Konkan heritage brews, and boutique vineyard stays — four curated tasting routes across Maharashtra.',
+    useSpotlights: true,
   },
   'nature-trails': {
     slug: 'nature-trails',
@@ -103,6 +104,7 @@ export function getCuratedTrailSpotlights(slug: CuratedTrailSlug): CuratedSpotli
   if (slug === 'weekend-getaways') return getWeekendGetawaySpotlights();
   if (slug === 'nature-trails') return getNatureTrailSpotlights();
   if (slug === 'monsoon-trails') return getMonsoonCategorySpotlights();
+  if (slug === 'wine-trail') return getWineTrailSpotlights();
   if (slug === 'seven-wonders') return getTimelessIconSpotlights();
   if (slug === 'unesco') {
     return getSpotlightsForTrail(slug);

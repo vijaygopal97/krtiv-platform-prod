@@ -2,7 +2,7 @@
 import { useMemo, useState } from "react";
 import type { CategoryItinerary } from "./data";
 import { ScrollReveal } from "./ScrollReveal";
-import { getMaharashtraMapPoints } from "./maharashtraMapUtils";
+import { itineraryHasMapPoints } from "./maharashtraMapUtils";
 import { MaharashtraMapVisual } from "./MaharashtraMapVisual";
 
 export function MaharashtraMap({
@@ -13,13 +13,13 @@ export function MaharashtraMap({
   /** Hide day sidebar (avoids duplicating itinerary on place pages). */
   mapOnly?: boolean;
 }) {
-  const points = useMemo(() => getMaharashtraMapPoints(itinerary), [itinerary]);
+  const hasMap = useMemo(() => itineraryHasMapPoints(itinerary), [itinerary]);
   const [active, setActive] = useState(0);
 
-  if (points.length === 0) return null;
+  if (!hasMap) return null;
 
   return (
-    <section className="relative bg-[color:var(--bone)] border-t hairline py-24 md:py-32">
+    <section className="relative bg-[color:var(--bone)] border-t hairline py-12 md:py-16">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
         <div className="grid md:grid-cols-12 gap-10 items-end mb-12">
           <ScrollReveal className="md:col-span-7">
@@ -30,7 +30,7 @@ export function MaharashtraMap({
           </ScrollReveal>
           <ScrollReveal className="md:col-span-5" delay={120}>
             <p className="lede">
-              Each stop on this itinerary, pinned across the state. Tap a marker to read the day.
+              Each stop on this itinerary, pinned across the state. Switch days to see every visit on the map.
             </p>
           </ScrollReveal>
         </div>
@@ -48,11 +48,11 @@ export function MaharashtraMap({
           {!mapOnly && (
           <div className="md:col-span-4">
             <div className="sticky top-28 space-y-3">
-              {points.map((p, i) => {
+              {itinerary.days.map((d, i) => {
                 const isActive = active === i;
                 return (
                   <button
-                    key={i}
+                    key={d.day}
                     type="button"
                     onClick={() => setActive(i)}
                     aria-pressed={isActive}
@@ -70,18 +70,18 @@ export function MaharashtraMap({
                             : "bg-[color:var(--bone)] text-[color:var(--ink)]"
                         }`}
                       >
-                        {p.day.day}
+                        {d.day}
                       </span>
                       <div>
                         <p className={`text-[10px] tracking-[0.3em] uppercase ${isActive ? "text-white/60" : "text-[color:var(--ink-soft)]"}`}>
-                          Day {p.day.day}
+                          Day {d.day}
                         </p>
-                        <p className="font-display text-lg leading-tight">{p.day.location}</p>
+                        <p className="font-display text-lg leading-tight">{d.location}</p>
                       </div>
                     </div>
                     {isActive && (
                       <div className="mt-4 pt-4 border-t border-white/15 space-y-2 animate-[krtiv-fade_400ms_ease-out_both]">
-                        {p.day.activities.slice(0, 3).map((a, idx) => (
+                        {d.activities.slice(0, 3).map((a, idx) => (
                           <div key={idx} className="flex items-start gap-3 text-[13px]">
                             <span className="text-white/60 mt-0.5">{a.icon}</span>
                             <div className="flex-1">

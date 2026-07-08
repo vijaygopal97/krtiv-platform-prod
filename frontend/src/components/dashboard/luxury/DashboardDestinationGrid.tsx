@@ -25,7 +25,7 @@ const DESTINATIONS = [
   },
   {
     name: 'Ajanta Caves',
-    location: 'Aurangabad · UNESCO',
+    location: 'Chhatrapati Sambhajinagar · UNESCO',
     desc: 'Painted cliffs and two millennia of Buddhist art.',
     duration: '1–2 days',
     rating: '4.9',

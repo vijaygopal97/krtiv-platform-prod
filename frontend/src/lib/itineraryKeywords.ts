@@ -191,7 +191,7 @@ export const PLACE_KEYWORDS: Record<string, readonly string[]> = {
     'Ellora caves',
     'Heritage photography',
     'Cave day trips',
-    'Aurangabad flavours',
+    'Chhatrapati Sambhajinagar flavours',
   ],
   shirdi: [
     'Sai Baba darshan',
@@ -290,7 +290,7 @@ const PLACE_CHIP_LABELS: Record<string, Record<string, string>> = {
     'Ellora caves': '⛰️ Ellora caves',
     'Heritage photography': '📸 Heritage photography',
     'Cave day trips': '🚶 Cave day trips',
-    'Aurangabad flavours': '🍽️ Aurangabad flavours',
+    'Chhatrapati Sambhajinagar flavours': '🍽️ Chhatrapati Sambhajinagar flavours',
   },
   shirdi: {
     'Sai Baba darshan': '🙏 Sai Baba darshan',

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { krtivLogo } from "@/lib/krtivPaths";
+import { krtivLogo, krtivLogoHero } from "@/lib/krtivPaths";
 import { SiteNavMenus } from "@/components/krtiv/SiteNavMenus";
 import { PLAN_WITH_AI_HREF } from "@/lib/siteNavigation";
 import {
@@ -11,6 +11,7 @@ import {
 } from "@/lib/featureFlags";
 import { EditModeToggle } from "@/components/cms/EditModeToggle";
 import { Editable } from "@/components/cms/Editable";
+import { useMobileNav } from "@/components/navigation/MobileNavContext";
 
 export function SiteHeader({
   variant = "auto",
@@ -31,8 +32,8 @@ export function SiteHeader({
 }) {
   const pathname = usePathname() ?? "/";
   const headerRef = useRef<HTMLElement>(null);
+  const { open, setOpen } = useMobileNav();
   const [scrolled, setScrolled] = useState(variant === "solid");
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const el = headerRef.current;
@@ -90,12 +91,29 @@ export function SiteHeader({
         }`}
       >
         <div className="max-w-[1440px] mx-auto px-4 sm:px-5 md:px-10 h-16 md:h-20 flex items-center justify-between gap-2">
-          <Link href="/" className={`flex shrink-0 items-center ${textColor}`} aria-label="Home">
-            <img
-              src={krtivLogo()}
-              alt=""
-              className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain"
-            />
+          <Link href="/" className={`relative flex shrink-0 items-center ${textColor}`} aria-label="Home">
+            {/*
+              Optical size match: both PNGs sit in the same slot, but the white hero
+              mark has more internal empty padding (~15% smaller artwork). Scale it so
+              the visible silhouette matches the scrolled orange logo — no size jump.
+            */}
+            <span className="relative block w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 overflow-visible">
+              <img
+                src={krtivLogoHero()}
+                alt="Maharashtra Tourism"
+                className={`absolute inset-0 w-full h-full object-contain origin-center scale-[1.15] transition-opacity duration-300 ${
+                  isLight ? "opacity-0 pointer-events-none" : "opacity-100"
+                }`}
+              />
+              <img
+                src={krtivLogo()}
+                alt=""
+                aria-hidden={!isLight}
+                className={`absolute inset-0 w-full h-full object-contain origin-center transition-opacity duration-300 ${
+                  isLight ? "opacity-100" : "opacity-0 pointer-events-none"
+                }`}
+              />
+            </span>
           </Link>
 
           <nav
@@ -187,7 +205,7 @@ export function SiteHeader({
                   <button
                     type="button"
                     onClick={onLogout}
-                    className={`text-[13px] px-3 h-9 rounded-full border transition-colors ${
+                    className={`hidden lg:inline-flex text-[13px] px-3 h-9 rounded-full border transition-colors items-center ${
                       isLight
                         ? "hairline text-[color:var(--ink-soft)] hover:bg-[color:var(--bone)]"
                         : "border-white/25 text-white/90 hover:bg-white/10"
@@ -256,11 +274,49 @@ export function SiteHeader({
           <nav className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-5 font-display">
             <SiteNavMenus tone={navTone} pathname={pathname} mobile onNavigate={() => setOpen(false)} />
             <div className="mt-4 pt-4 border-t hairline space-y-1">
+            {isAuthenticated ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  onClick={() => setOpen(false)}
+                  className="block py-3 min-h-[44px] text-lg font-semibold hover:text-[color:var(--saffron)] transition-colors"
+                >
+                  Profile
+                </Link>
+                {onLogout ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOpen(false);
+                      onLogout();
+                    }}
+                    className="block w-full text-left py-3 min-h-[44px] text-lg hover:text-[color:var(--saffron)] transition-colors"
+                  >
+                    Logout
+                  </button>
+                ) : null}
+              </>
+            ) : null}
             {isContentEditor ? (
               <div className="pb-4 mb-2 border-b hairline">
                 <EditModeToggle />
               </div>
             ) : null}
+              {isAdmin
+                ? [
+                    ["Analytics", "/admin/analytics"] as const,
+                    ["Hero CMS", "/admin/hero"] as const,
+                  ].map(([label, href]) => (
+                    <Link
+                      key={href}
+                      href={href}
+                      onClick={() => setOpen(false)}
+                      className="block py-3 min-h-[44px] text-lg hover:text-[color:var(--saffron)] transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  ))
+                : null}
               {[
                 ...(FEATURE_HEADER_ABOUT_LINK ? ([["About", "/about"]] as const) : []),
                 ["Contact", "/contact"] as const,
@@ -281,20 +337,32 @@ export function SiteHeader({
             </div>
           </nav>
           <div className="shrink-0 p-4 sm:p-5 flex gap-3 border-t hairline safe-area-pb">
-            <Link
-              href="/login"
-              onClick={() => setOpen(false)}
-              className="flex-1 text-center py-3 min-h-[44px] flex items-center justify-center rounded-full border hairline text-sm"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/register"
-              onClick={() => setOpen(false)}
-              className="flex-1 text-center py-3 min-h-[44px] flex items-center justify-center rounded-full bg-[color:var(--ink)] text-white text-sm"
-            >
-              Create account
-            </Link>
+            {isAuthenticated ? (
+              <Link
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+                className="flex-1 text-center py-3 min-h-[44px] flex items-center justify-center rounded-full bg-[color:var(--ink)] text-white text-sm"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="flex-1 text-center py-3 min-h-[44px] flex items-center justify-center rounded-full border hairline text-sm"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={() => setOpen(false)}
+                  className="flex-1 text-center py-3 min-h-[44px] flex items-center justify-center rounded-full bg-[color:var(--ink)] text-white text-sm"
+                >
+                  Create account
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

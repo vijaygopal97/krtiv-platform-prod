@@ -39,13 +39,9 @@ export default function DashboardHome({
   onGenerate,
   isGenerating,
 }: Props) {
-  const tripsPlanned = savedItems.length;
   const savedPlaces = useSavedPlacesList();
   const savedPlaceCount = savedPlaces.length;
-  const placesSaved = favorites.length + savedPlaceCount;
   const [plannerPrefill, setPlannerPrefill] = useState<PlannerPrefill | null>(null);
-
-  const progressPct = Math.min(95, tripsPlanned * 12 + savedPlaceCount * 4);
 
   const scrollToPlanner = useCallback(() => {
     requestAnimationFrame(() => {
@@ -73,7 +69,7 @@ export default function DashboardHome({
   };
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto mobile-scroll-pad">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-6 md:py-8 space-y-6">
         <DashboardHeader userName={user.name} onCreateTrip={() => onTabChange('builder')} />
         <QuickActions onNavigate={onTabChange} />
@@ -103,7 +99,7 @@ export default function DashboardHome({
           </div>
 
           <aside className="space-y-4 xl:sticky xl:top-20">
-            <ProfileSidebar user={user} tripsCompleted={tripsPlanned} placesSaved={placesSaved} progressPct={progressPct} />
+            <ProfileSidebar user={user} placesSaved={savedPlaceCount} />
             <AIAssistant onNavigate={onTabChange} />
             <WeatherWidget />
           </aside>

@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Thane Creek Flamingo Sanctuary", "Mudflat viewing, BNHS orientation", "Join an early-morning guided visit to the Thane Creek Ramsar wetlands — thousands of greater and lesser flamingos feed in shallow water when tides are right."],
-      ["AFTERNOON", "Airoli–Diva creek edge", "Urban wetland birding, photography blinds", "Explore designated viewing points along the eastern harbour. Expect egrets, storks, and waders alongside the pink flocks."],
-      ["EVENING", "Marine Drive sunset", "City skyline, coastal breeze", "Return to South Mumbai for a classic sunset walk — contrast urban energy with the morning’s quiet mudflats."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Seewri jetty boat (seasonal)", "Harbour cruise, mangrove edges", "When permitted, short boat trips reveal flamingo congregations from the water — check BNHS or local operator schedules for winter weekends."],
-      ["AFTERNOON", "Elephanta or Colaba heritage", "Island caves or Art Deco walk", "Balance wildlife morning with culture: ferry to Elephanta or a Fort district architecture stroll."],
-      ["EVENING", "Coastal seafood dinner", "Konkan-style pomfret, solkadhi", "Try classic coastal plates in Colaba or Versova — many restaurants source fresh catch daily in winter."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Sanjay Gandhi National Park edge", "Forest buffer, leopard habitat awareness", "Optional nature morning in Mumbai’s surprising national park — a different shade of Maharashtra wildlife before departure."],
-      ["AFTERNOON", "CSMT & Fort street food", "UNESCO terminus, vada pav trail", "Photograph the Gothic railway cathedral and sample Mumbai’s essential street bites on a short urban loop."],
-      ["EVENING", "Departure", "Airport or station connections", "Flamingo season peaks November–March — align return travel with low-tide morning windows for a final visit if time allows."]
+      [
+        "MORNING",
+        "Thane Creek Flamingo Sanctuary",
+        "Mudflat viewing, BNHS orientation",
+        "Join an early-morning guided visit to the Thane Creek Ramsar wetlands — thousands of greater and lesser flamingos feed in shallow water when tides are right."
+      ],
+      [
+        "AFTERNOON",
+        "Airoli–Diva creek edge",
+        "Urban wetland birding, photography blinds",
+        "Explore designated viewing points along the eastern harbour. Expect egrets, storks, and waders alongside the pink flocks."
+      ],
+      [
+        "EVENING",
+        "Marine Drive sunset",
+        "City skyline, coastal breeze",
+        "Return to South Mumbai for a classic sunset walk — contrast urban energy with the morning’s quiet mudflats."
+      ]
     ]
   }
 ]

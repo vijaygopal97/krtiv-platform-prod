@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Raigad Fort ropeway & Maha Darwaja", "Coronation site, queen’s chambers, Sahyadri views", "Begin at Shivaji Maharaj’s capital — the 1674 coronation platform, granaries, and cliff walls explain why Raigad anchors Maharashtra’s newest UNESCO serial inscription."],
-      ["AFTERNOON", "Takmak Tok & fort circuit", "Execution cliff, panoramic Konkan views", "Walk the full citadel ridge with a licensed guide. Clear weather reveals the Arabian Sea and the mountain fort network that defined Maratha strategy."],
-      ["EVENING", "Mahad base stay", "Konkan gateway town, local Malvani dinner", "Descend to the Konkan foothills for seafood and rest before a second fort day."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Rajgad Fort trek", "Former capital before Raigad, Sanjeevani Mace legend", "A demanding but rewarding hike from Gunjavane village — Rajgad’s triple fortifications show the evolution of Maratha hill architecture."],
-      ["AFTERNOON", "Torna Fort (optional extension)", "First fort captured by Shivaji, steep ascent", "For fit trekkers, Torna’s “Prachandagad” walls offer another inscribed landscape with dramatic valley views."],
-      ["EVENING", "Pune return or hill camp", "Sahyadri sunset, trekker meals", "Many circuits base from Pune — 2–3 hours by road to trailheads."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Shivneri Fort", "Shivaji’s birthplace, Buddhist cave cells", "The birthplace fort combines military architecture with ancient cave heritage — a fitting finale to the Maratha UNESCO trail."],
-      ["AFTERNOON", "Sinhagad Fort", "Battle history, Pune overlook, kanda bhaji stalls", "A shorter climb near Pune with sweeping views of the city and ghats — popular with locals and accessible for most fitness levels."],
-      ["EVENING", "Shaniwar Wada & Pune old city", "Peshwa palace ruins, urban Maratha legacy", "End in Pune where the Maratha empire’s urban chapter survives in gates, markets, and palace walls at the foot of the Sahyadri UNESCO forts."]
+      [
+        "MORNING",
+        "Raigad Fort ropeway & Maha Darwaja",
+        "Coronation site, queen’s chambers, Sahyadri views",
+        "Begin at Shivaji Maharaj’s capital — the 1674 coronation platform, granaries, and cliff walls explain why Raigad anchors Maharashtra’s newest UNESCO serial inscription."
+      ],
+      [
+        "AFTERNOON",
+        "Takmak Tok & fort circuit",
+        "Execution cliff, panoramic Konkan views",
+        "Walk the full citadel ridge with a licensed guide. Clear weather reveals the Arabian Sea and the mountain fort network that defined Maratha strategy."
+      ],
+      [
+        "EVENING",
+        "Mahad base stay",
+        "Konkan gateway town, local Malvani dinner",
+        "Descend to the Konkan foothills for seafood and rest before a second fort day."
+      ]
     ]
   }
 ]

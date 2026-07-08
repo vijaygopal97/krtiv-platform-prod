@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Bell, ChevronDown, LogOut, Menu, Search, Settings, X } from 'lucide-react';
 import { krtivLogo } from '@/lib/krtivPaths';
-import type { User } from '@/services/authService';
+import { authService, type User } from '@/services/authService';
 
 export type DashTab = 'home' | 'smart' | 'builder' | 'saved' | 'saved-places' | 'favorites' | 'profile' | 'stats';
 
@@ -19,7 +19,6 @@ type Props = {
 
 const NAV: { label: string; tab?: DashTab; href?: string }[] = [
   { label: 'Dashboard', tab: 'home' },
-  { label: 'Explore', href: '/explore' },
   { label: 'Planner', tab: 'builder' },
   { label: 'My Trips', tab: 'saved' },
   { label: 'Saved Places', tab: 'saved-places' },
@@ -138,7 +137,7 @@ export default function DashboardNav({ user, activeTab, onTabChange, onLogout, o
                 >
                   Smart tags
                 </button>
-                {user.role === 'admin' && (
+                {authService.isAdmin() && (
                   <button
                     type="button"
                     onClick={() => {

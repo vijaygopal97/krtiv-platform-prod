@@ -47,7 +47,7 @@ export function VideoShowcase({
   return (
     <section
       id="watch"
-      className="relative bg-[color:var(--ink)] text-white py-24 md:py-32 border-t border-white/10"
+      className="relative bg-[color:var(--ink)] text-white py-12 md:py-16 border-t border-white/10"
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
         <div className="grid md:grid-cols-12 gap-10 items-end mb-12">

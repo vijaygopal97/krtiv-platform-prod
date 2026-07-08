@@ -226,29 +226,9 @@ export function AdminOverviewContent({
         </div>
       </Section>
 
+      {ga?.serverConfigured ? (
       <Section id="ga4" title="Google Analytics (GA4)">
-        {!ga?.serverConfigured ? (
-          <div className="rounded-2xl bg-white border hairline p-6 space-y-4">
-            <p className="text-sm">
-              <span className="inline-block w-2 h-2 rounded-full bg-amber-500 mr-2" />
-              GA4 Data API is not configured on the server.
-            </p>
-            <p className="text-xs text-[color:var(--ink-soft)]">
-              Site tag: <strong>{ga?.measurementId || 'G-D1XM5S3NFY'}</strong> (client-side). To show visitors
-              here, set <code className="text-[11px]">GA4_PROPERTY_ID</code>,{' '}
-              <code className="text-[11px]">GA4_CLIENT_EMAIL</code>, and{' '}
-              <code className="text-[11px]">GA4_PRIVATE_KEY</code> on the API server.
-            </p>
-            <a
-              href="https://developers.google.com/analytics/devguides/reporting/data/v1/quickstart-client-libraries"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-10 px-4 items-center rounded-full bg-[color:var(--ink)] text-white text-sm"
-            >
-              GA4 setup guide
-            </a>
-          </div>
-        ) : !gaOk ? (
+        {!gaOk ? (
           <p className="text-sm text-red-700">Connected but could not load reports. Check service account access.</p>
         ) : (
           <>
@@ -298,6 +278,7 @@ export function AdminOverviewContent({
           </>
         )}
       </Section>
+      ) : null}
 
       <Section id="hero-stats" title="Hero CMS analytics">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">

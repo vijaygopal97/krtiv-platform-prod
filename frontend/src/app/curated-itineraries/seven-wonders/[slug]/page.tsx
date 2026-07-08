@@ -70,16 +70,18 @@ export default async function TimelessIconPage({ params }: Props) {
         title={site.title}
         images={site.gallery}
       />
+      {itinerary.days.length > 0 ? (
       <ItineraryStory
         itinerary={itinerary}
         sectionId="suggested-itinerary"
-        heading="Suggested 3-day itinerary"
+        heading="Suggested itinerary"
         sidePanel="map"
         mapPanelId="itinerary-map"
         seamlessTop
         showTalkToPlanner={false}
         plannerAnchor="#timeless-smart-itinerary"
       />
+      ) : null}
       <section className="bg-[color:var(--bone)]/40 border-t hairline py-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-10 flex flex-wrap gap-4 items-center justify-between">
           <p className="text-sm text-[color:var(--ink-soft)]">

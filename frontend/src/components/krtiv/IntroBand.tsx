@@ -7,8 +7,8 @@ import { HOME_INTRO_STATS } from '@/data/homeIntroStats';
 
 export function IntroBand() {
   return (
-    <section className="relative bg-[color:var(--bone)] py-24 md:py-32 border-y hairline">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10 grid md:grid-cols-12 gap-12 items-end">
+    <section className="relative bg-[color:var(--bone)] py-12 md:py-16 border-y hairline">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-10 grid md:grid-cols-12 gap-8 items-end">
         <ScrollReveal className="md:col-span-7">
           <p className="eyebrow">
             <Editable cmsKey="home.intro.eyebrow" defaultValue="An invitation" as="span" />
@@ -32,7 +32,7 @@ export function IntroBand() {
         </ScrollReveal>
       </div>
 
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10 mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6 border-t hairline pt-10">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-10 mt-8 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-6 border-t hairline pt-6">
         {HOME_INTRO_STATS.map((stat, i) => (
           <ScrollReveal key={stat.labelKey} delay={i * 80}>
             <IntroStatCard stat={stat} index={i} />

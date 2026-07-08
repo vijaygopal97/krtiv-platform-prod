@@ -17,9 +17,9 @@ export function SignatureExperiences() {
   const compact = cards.filter((c) => c.slug !== featured?.slug).slice(0, 2);
 
   return (
-    <section className="relative bg-[color:var(--ivory)] py-24 md:py-36">
+    <section className="relative bg-[color:var(--ivory)] py-12 md:py-20">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
-        <ScrollReveal className="mb-12 md:mb-16 max-w-3xl">
+        <ScrollReveal className="mb-6 md:mb-8 max-w-3xl">
           <p className="eyebrow">Signature moments</p>
           <h2 className="display-lg mt-4 text-balance">
             Three afternoons that stay with you for years.

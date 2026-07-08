@@ -13,7 +13,7 @@ export function DestinationGallerySection({ title, images }: Props) {
   if (!gallery.length) return null;
 
   return (
-    <section className="bg-[color:var(--ivory)] py-16 md:py-24 border-t hairline" aria-labelledby="destination-gallery-heading">
+    <section className="bg-[color:var(--ivory)] py-8 md:py-12 border-t hairline" aria-labelledby="destination-gallery-heading">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
         <ScrollReveal>
           <p className="eyebrow">Gallery</p>

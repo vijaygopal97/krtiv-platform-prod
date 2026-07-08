@@ -16,7 +16,7 @@ export function CategoryActivitiesSection({ activities }: Props) {
   if (!activities.length) return null;
 
   return (
-    <section className="relative bg-[color:var(--ivory)] py-24 md:py-36 border-t hairline">
+    <section className="relative bg-[color:var(--ivory)] py-12 md:py-20 border-t hairline">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
         <div className="mb-12 md:mb-16 max-w-3xl">
           <p className="eyebrow text-[color:var(--saffron)]">On the ground</p>

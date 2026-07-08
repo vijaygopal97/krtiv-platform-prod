@@ -1,5 +1,6 @@
 import type { TimelessIconSlug } from '@/data/timelessIcons';
 import type { UnescoSiteSlug } from '@/data/unescoSites';
+import type { MonsoonTrailCategorySlug } from '@/data/monsoonTrailCategories';
 
 export const UNESCO_SITE_FACTS: Record<UnescoSiteSlug, readonly string[]> = {
   'ajanta-caves': [
@@ -42,7 +43,19 @@ export const TIMELESS_ICON_FACTS: Record<TimelessIconSlug, readonly string[]> = 
     'One of India\'s earliest known toll booths operated here over 2,000 years ago, collecting taxes from traders crossing the Western Ghats.',
   ],
   'global-vipassana-pagoda': [
+    'The Global Vipassana Pagoda dome was built without supporting pillars — among the largest stone domes of its kind in the world.',
+  ],
+  'shaniwar-wada': [
+    'Shaniwar Wada’s iconic Delhi Gate still frames Pune’s old city — the fort was the seat of the Peshwas before the great fire of 1828.',
+  ],
+  'sandhan-valley': [
+    'Sandhan Valley is often called the “Valley of Shadows” — a narrow rappelling gorge in the Bhandardara backcountry that stays cool even in summer.',
+  ],
+  'gateway-of-india': [
     'Ironically, the last British troops to leave independent India departed through the Gateway of India in 1948.',
+  ],
+  'harihar-fort': [
+    'Harihar Fort’s famous ladder-like rock steps rise at a near-vertical angle — one of the Sahyadri’s most photographed monsoon treks.',
   ],
 };
 
@@ -61,5 +74,48 @@ export function getUnescoTrailFacts(): readonly string[] {
 
 /** All quick facts for the Timeless Icons trail listing page (carousel). */
 export function getTimelessIconTrailFacts(): readonly string[] {
-  return [...new Set(Object.values(TIMELESS_ICON_FACTS).flat())];
+  const hidden = new Set(['ajanta-caves', 'ellora-caves']);
+  return [
+    ...new Set(
+      Object.entries(TIMELESS_ICON_FACTS)
+        .filter(([slug]) => !hidden.has(slug))
+        .flatMap(([, facts]) => facts),
+    ),
+  ];
+}
+
+const MONSOON_CATEGORY_FACTS: Record<MonsoonTrailCategorySlug, readonly string[]> = {
+  'must-visit-waterfalls': [
+    'Maharashtra receives over 2,500 mm of rain in parts of the Konkan — powering hundreds of seasonal waterfalls each monsoon.',
+    'Devkund’s turquoise pool is fed by a multi-tier cascade deep in Tamhini forest.',
+    'Thoseghar’s series of falls near Satara can be viewed from safe forest decks after short walks.',
+  ],
+  'scenic-monsoon-drives': [
+    'Tamhini Ghat transforms into a waterfall corridor — dozens of roadside cascades appear only during active monsoon weeks.',
+    'Malshej Ghat is famous for flamingoes in winter and rolling cloud banks in July and August.',
+    'Amboli Ghat sits on the crest of the Western Ghats — one of India’s wettest inhabited passes.',
+  ],
+  'historic-forts-in-mist': [
+    'Raigad was crowned capital of the Maratha swarajya in 1674 — its ramparts often float above monsoon cloud.',
+    'Lohagad’s “Vinchu Kata” spur becomes a knife-edge ridge walk when the mist lifts between showers.',
+    'Harishchandragad’s Konkan Kada cliff drops nearly vertically to the coastal plain — legendary among trekkers.',
+  ],
+  'walk-through-clouds': [
+    'Mahabaleshwar’s plateaus can sit entirely inside monsoon cloud for hours — visibility changes every few minutes.',
+    'Bhandardara’s Arthur Lake reflects monsoon sky when clouds part at dawn.',
+    'Amboli’s misty meadows are a classic “walk in the clouds” experience on the Goa–Maharashtra divide.',
+  ],
+  'one-day-treks-near-mumbai': [
+    'Rajmachi’s twin forts can be reached from Lonavala or Konkan villages — a favourite Mumbai monsoon day hike.',
+    'Karnala’s thumb-shaped fort rises inside a bird sanctuary less than two hours from the city.',
+    'Peb Fort (Vikatgad) rewards climbers with views over Matheran and the Ulhas valley.',
+  ],
+};
+
+export function getMonsoonTrailFacts(): readonly string[] {
+  return Object.values(MONSOON_CATEGORY_FACTS).flat();
+}
+
+export function getMonsoonCategoryFacts(slug: MonsoonTrailCategorySlug): readonly string[] {
+  return MONSOON_CATEGORY_FACTS[slug] ?? [];
 }

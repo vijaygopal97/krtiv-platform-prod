@@ -17,7 +17,7 @@ export function DestinationPracticalInfo({
   nearbyDestinations,
 }: Props) {
   return (
-    <section className="bg-white border-t hairline py-16 md:py-24">
+    <section className="bg-white border-t hairline py-8 md:py-12">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
         <div className="grid md:grid-cols-12 gap-10 lg:gap-14">
           <ScrollReveal className="md:col-span-5">

@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Rajmachi View Point", "Valley vistas, Sahyadri landscapes, photography", "Begin your Lonavala escape with sweeping views of the Western Ghats. On clear days, watch clouds drift across lush valleys and rolling hills."],
-      ["AFTERNOON", "Bhushi Dam", "Waterfront recreation, monsoon attraction, family-friendly", "Spend time at one of Lonavala's most popular spots, where cascading waters and scenic surroundings make for a refreshing experience."],
-      ["EVENING", "Lonavala Market", "Chikki shopping, local snacks, hill-town charm", "Stroll through the bustling market and sample Lonavala's famous chikki while soaking in the relaxed atmosphere of the hill station."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Karla Caves", "Ancient Buddhist caves, rock-cut architecture, heritage", "Explore one of India's finest Buddhist cave complexes, renowned for its grand prayer hall and remarkably preserved carvings."],
-      ["AFTERNOON", "Bhaja Caves", "Historic monuments, ancient sculptures, cultural heritage", "Discover a collection of rock-cut caves that offer fascinating insights into early Buddhist life and architecture."],
-      ["EVENING", "Sunset at Lion's Point", "Cliffside views, mountain sunsets, photography", "Watch the sun dip below the Sahyadri ranges as cool mountain breezes and panoramic views create an unforgettable evening."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Lohagad Fort", "Historic fortification, trekking, panoramic views", "Walk along ancient pathways to one of Maharashtra's best-preserved hill forts and relive stories from the Maratha era."],
-      ["AFTERNOON", "Pawna Lake", "Lakeside retreat, scenic landscapes, relaxation", "Unwind beside the tranquil waters of Pawna Lake, surrounded by rolling hills and picturesque countryside."],
-      ["EVENING", "Tiger Point", "Valley overlooks, sunset views, nature experience", "Conclude your journey with breathtaking views over deep valleys and dramatic cliffs, one of Lonavala's most iconic natural attractions."]
+      [
+        "MORNING",
+        "Rajmachi View Point",
+        "Valley vistas, Sahyadri landscapes, photography",
+        "Begin your Lonavala escape with sweeping views of the Western Ghats. On clear days, watch clouds drift across lush valleys and rolling hills."
+      ],
+      [
+        "AFTERNOON",
+        "Bhushi Dam",
+        "Waterfront recreation, monsoon attraction, family-friendly",
+        "Spend time at one of Lonavala's most popular spots, where cascading waters and scenic surroundings make for a refreshing experience."
+      ],
+      [
+        "EVENING",
+        "Lonavala Market",
+        "Chikki shopping, local snacks, hill-town charm",
+        "Stroll through the bustling market and sample Lonavala's famous chikki while soaking in the relaxed atmosphere of the hill station."
+      ]
     ]
   }
 ]

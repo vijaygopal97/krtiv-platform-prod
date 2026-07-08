@@ -2,25 +2,24 @@
   {
     "day": 1,
     "slots": [
-      ["MORNING", "Shri Sai Baba Samadhi Mandir", "Sacred shrine, spiritual atmosphere, Sai Baba legacy", "Begin your pilgrimage at the heart of Shirdi, where devotees from around the world gather to seek blessings at the resting place of Sai Baba."],
-      ["AFTERNOON", "Dwarkamai", "Historic mosque, sacred dhuni, spiritual significance", "Visit the place where Sai Baba spent much of his life, offering guidance and compassion to devotees. Experience the enduring flame that continues to burn to this day."],
-      ["EVENING", "Sai Baba Evening Aarti", "Devotional experience, chanting, spiritual ambience", "Participate in the soul-stirring evening aarti and immerse yourself in the devotion and faith that define Shirdi's unique spiritual character."]
-    ]
-  },
-  {
-    "day": 2,
-    "slots": [
-      ["MORNING", "Chavadi", "Historic site, Sai Baba's residence, pilgrimage landmark", "Explore the place where Sai Baba spent alternate nights during the later years of his life and learn about traditions that continue to be observed today."],
-      ["AFTERNOON", "Lendi Baug", "Sacred garden, meditation, peaceful surroundings", "Walk through the serene garden frequented by Sai Baba for meditation and reflection, offering visitors a tranquil spiritual retreat."],
-      ["EVENING", "Sai Heritage Village", "Interactive exhibits, cultural displays, family-friendly experience", "Discover stories from Sai Baba's life through immersive exhibits that recreate the social and cultural environment of his era."]
-    ]
-  },
-  {
-    "day": 3,
-    "slots": [
-      ["MORNING", "Shani Shingnapur", "Open-air shrine, unique traditions, spiritual excursion", "Take a short drive to one of Maharashtra's most fascinating pilgrimage destinations, renowned for its temple dedicated to Lord Shani and its distinctive customs."],
-      ["AFTERNOON", "Wet N Joy Water Park", "Family recreation, water rides, leisure activities", "Enjoy a refreshing break with a variety of attractions suitable for families and leisure travellers looking to balance pilgrimage with recreation."],
-      ["EVENING", "Local Market & Prasadalaya Experience", "Souvenirs, local products, community dining", "Conclude your Shirdi journey by exploring local markets and sharing a meal at the temple's prasadalaya, reflecting the spirit of service and togetherness."]
+      [
+        "MORNING",
+        "Shri Sai Baba Samadhi Mandir",
+        "Sacred shrine, spiritual atmosphere, Sai Baba legacy",
+        "Begin your pilgrimage at the heart of Shirdi, where devotees from around the world gather to seek blessings at the resting place of Sai Baba."
+      ],
+      [
+        "AFTERNOON",
+        "Dwarkamai",
+        "Historic mosque, sacred dhuni, spiritual significance",
+        "Visit the place where Sai Baba spent much of his life, offering guidance and compassion to devotees. Experience the enduring flame that continues to burn to this day."
+      ],
+      [
+        "EVENING",
+        "Sai Baba Evening Aarti",
+        "Devotional experience, chanting, spiritual ambience",
+        "Participate in the soul-stirring evening aarti and immerse yourself in the devotion and faith that define Shirdi's unique spiritual character."
+      ]
     ]
   }
 ]

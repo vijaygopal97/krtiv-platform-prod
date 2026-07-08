@@ -13,7 +13,7 @@ export function ItineraryStory({
   sidePanel = "image",
   mapPanelId = "itinerary-map",
   seamlessTop = false,
-  showTalkToPlanner = true,
+  showTalkToPlanner = false,
   plannerAnchor = '#category-smart-itinerary',
 }: {
   itinerary: CategoryItinerary;
@@ -35,7 +35,7 @@ export function ItineraryStory({
     <section
       id={sectionId}
       className={`relative bg-[color:var(--ivory)] ${
-        seamlessTop ? 'pt-4 md:pt-8 pb-24 md:pb-36' : 'py-24 md:py-36 border-t hairline'
+        seamlessTop ? 'pt-4 md:pt-8 pb-12 md:pb-20' : 'py-12 md:py-20 border-t hairline'
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-10">
@@ -51,7 +51,8 @@ export function ItineraryStory({
           </ScrollReveal>
         </div>
 
-        {/* Day selector */}
+        {/* Day selector — hidden for single-day place itineraries */}
+        {itinerary.days.length > 1 ? (
         <div className="flex items-stretch gap-2 overflow-x-auto no-scrollbar border-b hairline pb-4 mb-12 md:mb-16">
           {itinerary.days.map((d, i) => {
             const active = activeDay === i;
@@ -74,6 +75,9 @@ export function ItineraryStory({
             );
           })}
         </div>
+        ) : (
+        <div className="border-b hairline pb-4 mb-12 md:mb-16" />
+        )}
 
         {/* Active day panel */}
         <div className="grid md:grid-cols-12 gap-10 lg:gap-12">
@@ -123,10 +127,12 @@ export function ItineraryStory({
             {sidePanel === "map" ? (
               <div className="flex items-center justify-between gap-3 mb-6">
                 <div>
-                  <p className="text-[11px] tracking-[0.25em] uppercase text-[color:var(--ink-soft)]">
-                    Day {itinerary.days[activeDay].day}
-                  </p>
-                  <h3 className="font-display text-2xl md:text-3xl mt-1 text-[color:var(--ink)]">
+                  {itinerary.days.length > 1 ? (
+                    <p className="text-[11px] tracking-[0.25em] uppercase text-[color:var(--ink-soft)]">
+                      Day {itinerary.days[activeDay].day}
+                    </p>
+                  ) : null}
+                  <h3 className={`font-display text-2xl md:text-3xl ${itinerary.days.length > 1 ? 'mt-1' : ''} text-[color:var(--ink)]`}>
                     {itinerary.days[activeDay].location}
                   </h3>
                 </div>
@@ -172,7 +178,7 @@ export function ItineraryStory({
             </ol>
 
             <div
-              className={`mt-12 pt-6 border-t hairline${showTalkToPlanner ? ' flex flex-wrap gap-3' : ''}`}
+              className={`mt-12 pt-6 border-t hairline flex flex-wrap gap-3${showTalkToPlanner ? '' : ' justify-center'}`}
             >
               <a
                 href={plannerAnchor}

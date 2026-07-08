@@ -7,6 +7,7 @@ import { curatedExperiencePath, type ExperienceSlug } from '@/data/curatedExperi
 import { monsoonTrailPath, type MonsoonTrailSlug } from '@/data/monsoonTrails';
 import { timelessIconPath, type TimelessIconSlug } from '@/data/timelessIcons';
 import { unescoSitePath, type UnescoSiteSlug } from '@/data/unescoSites';
+import { wineTrailPath, type WineTrailSlug } from '@/data/wineTrailDestinations';
 import { weekendGetawayPath, type WeekendGetawaySlug } from '@/data/weekendGetaways';
 import { PlaceFavoriteButton } from '@/components/places/PlaceFavoriteButton';
 import { resolveSaveSlug } from '@/lib/savePlaceSlug';
@@ -14,7 +15,7 @@ import { resolveSaveSlug } from '@/lib/savePlaceSlug';
 type Props = {
   spotlights: CuratedSpotlight[];
   /** When set, cards link to full destination-style guides */
-  trailSlug?: 'unesco' | 'seven-wonders' | 'weekend-getaways' | 'nature-trails' | 'monsoon-trails';
+  trailSlug?: 'unesco' | 'seven-wonders' | 'weekend-getaways' | 'nature-trails' | 'monsoon-trails' | 'wine-trail';
 };
 
 function detailHref(trail: Props['trailSlug'], slug: string): string | undefined {
@@ -23,6 +24,7 @@ function detailHref(trail: Props['trailSlug'], slug: string): string | undefined
   if (trail === 'nature-trails') return curatedExperiencePath('nature-trails', slug as ExperienceSlug);
   if (trail === 'monsoon-trails') return monsoonTrailPath(slug as MonsoonTrailSlug);
   if (trail === 'seven-wonders') return timelessIconPath(slug as TimelessIconSlug);
+  if (trail === 'wine-trail') return wineTrailPath(slug as WineTrailSlug);
   return undefined;
 }
 

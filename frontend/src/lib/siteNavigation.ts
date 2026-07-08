@@ -5,7 +5,9 @@ export const CURATED_ITINERARIES_LABEL = 'Curated Itineraries';
 /** @deprecated Use CURATED_ITINERARIES_LABEL — kept for existing imports */
 export const PLACES_TO_GO_LABEL = CURATED_ITINERARIES_LABEL;
 
-export const THINGS_TO_DO_HREF = '/explore#explore-by-categories';
+export const THINGS_TO_DO_HREF = '/things-to-do#explore-by-categories';
+export const EXPLORE_PHOTOS_LABEL = 'Explore';
+export const EXPLORE_PHOTOS_HREF = '/explore';
 export const CURATED_ITINERARIES_HREF = '/places-to-go';
 
 /** Home + header — AI trip planner (no login). */
@@ -95,13 +97,15 @@ export const CURATED_NAV: CuratedNavItem[] = [
     label: 'Timeless Icons of Maharashtra',
     href: '/curated-itineraries/seven-wonders',
     children: [
-      { label: 'Ajanta Caves', href: '/curated-itineraries/seven-wonders/ajanta-caves', detail: 'Ancient Buddhist murals' },
-      { label: 'Ellora Caves', href: '/curated-itineraries/seven-wonders/ellora-caves', detail: 'Monolithic Kailasa' },
+      { label: 'Daulatabad Fort', href: '/curated-itineraries/seven-wonders/daulatabad-fort', detail: 'Deccan citadel' },
+      { label: 'Gateway of India', href: '/curated-itineraries/seven-wonders/gateway-of-india', detail: 'Harbour monument' },
+      { label: 'Global Vipassana Pagoda', href: '/curated-itineraries/seven-wonders/global-vipassana-pagoda', detail: 'Stone meditation dome' },
+      { label: 'Harihar Fort', href: '/curated-itineraries/seven-wonders/harihar-fort', detail: 'Sahyadri ladder trek' },
+      { label: 'Kaas Plateau', href: '/curated-itineraries/seven-wonders/kas-plateau', detail: 'Valley of flowers' },
       { label: 'Lonar Crater', href: '/curated-itineraries/seven-wonders/lonar-crater', detail: 'Meteorite impact lake' },
       { label: 'Raigad Fort', href: '/curated-itineraries/seven-wonders/raigad-fort', detail: 'Maratha capital' },
-      { label: 'Kaas Plateau', href: '/curated-itineraries/seven-wonders/kas-plateau', detail: 'Valley of flowers' },
-      { label: 'Daulatabad Fort', href: '/curated-itineraries/seven-wonders/daulatabad-fort', detail: 'Deccan citadel' },
-      { label: 'Global Vipassana Pagoda', href: '/curated-itineraries/seven-wonders/global-vipassana-pagoda', detail: 'Stone meditation dome' },
+      { label: 'Sandhan Valley', href: '/curated-itineraries/seven-wonders/sandhan-valley', detail: 'Valley of Shadows' },
+      { label: 'Shaniwar Wada', href: '/curated-itineraries/seven-wonders/shaniwar-wada', detail: 'Peshwa seat · Pune' },
     ],
   },
   {
@@ -125,6 +129,12 @@ export const CURATED_NAV: CuratedNavItem[] = [
     slug: 'wine-trail',
     label: 'Wine Trail',
     href: '/curated-itineraries/wine-trail',
+    children: [
+      { label: 'Boutique Vineyards', href: '/curated-itineraries/wine-trail/boutique-vineyards', detail: 'Estate stays & small lots' },
+      { label: 'Konkan Heritage Brews', href: '/curated-itineraries/wine-trail/konkan-heritage-brews', detail: 'Coastal feni & stills' },
+      { label: 'Nashik', href: '/curated-itineraries/wine-trail/nashik', detail: 'Godavari wine country' },
+      { label: 'Pune', href: '/curated-itineraries/wine-trail/pune', detail: 'Urban cellar circuit' },
+    ],
   },
   {
     slug: 'nature-trails',
@@ -160,6 +170,7 @@ export function destinationPath(slug: string) {
 export function isActiveNavPath(pathname: string, href: string) {
   const path = href.split('#')[0];
   if (path === '/explore') return pathname === '/explore';
+  if (path === '/things-to-do') return pathname === '/things-to-do';
   if (path === '/places-to-go') return pathname === '/places-to-go' || pathname.startsWith('/places-to-go/');
   if (path.startsWith('/curated-itineraries')) {
     return pathname === path || pathname.startsWith(`${path}/`);

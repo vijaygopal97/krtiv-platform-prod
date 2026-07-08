@@ -52,9 +52,9 @@ const COORDS: Array<{ match: RegExp; lat: number; lng: number; label?: string }>
   { match: /mumbai/i, lat: 19.076, lng: 72.8777, label: 'Mumbai' },
   { match: /nashik/i, lat: 19.9975, lng: 73.7898, label: 'Nashik' },
   { match: /nagpur|orange country/i, lat: 21.1458, lng: 79.0882, label: 'Nagpur' },
-  { match: /aurangabad|chhatrapati sambhaji/i, lat: 19.8762, lng: 75.3433, label: 'Aurangabad' },
+  { match: /aurangabad|chhatrapati sambhaji/i, lat: 19.8762, lng: 75.3433, label: 'Chhatrapati Sambhajinagar' },
   { match: /pandharpur/i, lat: 17.679, lng: 75.331, label: 'Pandharpur' },
-  { match: /shani shingnapur/i, lat: 19.75, lng: 74.85, label: 'Shani Shingnapur' },
+  { match: /shani\s*shingn?apur|shani\s*shinganpur/i, lat: 19.75, lng: 74.85, label: 'Shani Shingnapur' },
   { match: /karnala/i, lat: 18.883, lng: 73.12, label: 'Karnala' },
   { match: /malvan/i, lat: 16.05, lng: 73.47, label: 'Malvan' },
 ];
@@ -69,35 +69,45 @@ function lookup(text: string) {
   return null;
 }
 
-function resolveDayCoords(day: CategoryItinerary['days'][number]) {
-  const genericCity = /^(mumbai|pune|nashik|nagpur|kolhapur|alibaug|lonavala|shirdi|mahabaleshwar)$/i;
-  if (!genericCity.test(day.location.trim())) {
-    const fromLocation = lookup(day.location);
-    if (fromLocation) {
-      return {
-        lat: fromLocation.lat,
-        lng: fromLocation.lng,
-        label: fromLocation.label || day.location,
-      };
-    }
+type ResolvedCoords = { lat: number; lng: number; label: string };
+
+const GENERIC_CITY = /^(mumbai|pune|nashik|nagpur|kolhapur|alibaug|lonavala|shirdi|mahabaleshwar)$/i;
+
+function resolveTextCoords(text: string, labelFallback: string): ResolvedCoords | null {
+  const hit = lookup(text);
+  if (!hit) return null;
+  return { lat: hit.lat, lng: hit.lng, label: hit.label || labelFallback };
+}
+
+function resolveActivityCoords(
+  activity: CategoryItinerary['days'][number]['activities'][number],
+): ResolvedCoords | null {
+  const shortTitle = activity.title.split(/[,&]/)[0].trim();
+  // Prefer destination of an en-route / A → B travel title for map pins
+  const arrowDest = activity.title.match(/(?:→|->| to )\s*([^()]+?)(?:\s*\(|$)/i);
+  const destHint = arrowDest?.[1]?.replace(/\btravel\b/gi, '').trim() || '';
+  return (
+    (destHint ? resolveTextCoords(destHint, destHint) : null) ||
+    resolveTextCoords(activity.title, shortTitle) ||
+    resolveTextCoords(activity.description, shortTitle) ||
+    resolveTextCoords(activity.details, shortTitle)
+  );
+}
+
+/** Day-level fallback when an activity has no direct geo match (e.g. "Caves 2, 16 & 17" at Ajanta). */
+function resolveDayLocationCoords(day: CategoryItinerary['days'][number]): ResolvedCoords | null {
+  if (!GENERIC_CITY.test(day.location.trim())) {
+    const fromLocation = resolveTextCoords(day.location, day.location);
+    if (fromLocation) return fromLocation;
   }
 
-  for (const a of day.activities) {
-    const fromActivity = lookup(a.title) || lookup(a.description) || lookup(a.details);
-    if (fromActivity) {
-      return {
-        lat: fromActivity.lat,
-        lng: fromActivity.lng,
-        label: fromActivity.label || a.title.split(/[,&]/)[0].trim(),
-      };
-    }
+  for (const activity of day.activities) {
+    const fromActivity = resolveActivityCoords(activity);
+    if (fromActivity) return fromActivity;
   }
 
-  const fallback = lookup(day.location);
-  if (fallback) {
-    return { lat: fallback.lat, lng: fallback.lng, label: fallback.label || day.location };
-  }
-  return null;
+  const fallback = resolveTextCoords(day.location, day.location);
+  return fallback;
 }
 
 export type GeoMapPoint = {
@@ -105,7 +115,11 @@ export type GeoMapPoint = {
   lng: number;
   label: string;
   day: CategoryItinerary['days'][number];
-  index: number;
+  /** Index of the itinerary day (0-based). */
+  dayIndex: number;
+  /** Index of the stop within that day (0-based). */
+  stopIndex: number;
+  time?: string;
 };
 
 /** @deprecated SVG projection — use getItineraryGeoPoints */
@@ -134,15 +148,48 @@ function spreadOverlappingPins(points: GeoMapPoint[]): GeoMapPoint[] {
   });
 }
 
-export function getItineraryGeoPoints(itinerary: CategoryItinerary): GeoMapPoint[] {
-  const raw = itinerary.days
-    .map((d, idx) => {
-      const c = resolveDayCoords(d);
-      if (!c) return null;
-      return { ...c, day: d, index: idx };
-    })
-    .filter(Boolean) as GeoMapPoint[];
+function getDayActivityGeoPoints(
+  day: CategoryItinerary['days'][number],
+  dayIndex: number,
+): GeoMapPoint[] {
+  const dayFallback = resolveDayLocationCoords(day);
+  const raw: GeoMapPoint[] = [];
+
+  day.activities.forEach((activity, stopIndex) => {
+    const resolved =
+      resolveActivityCoords(activity) ||
+      (dayFallback
+        ? {
+            ...dayFallback,
+            label: activity.title.split(/[,&]/)[0].trim() || dayFallback.label,
+          }
+        : null);
+    if (!resolved) return;
+    raw.push({
+      ...resolved,
+      day,
+      dayIndex,
+      stopIndex,
+      time: activity.time,
+    });
+  });
+
   return spreadOverlappingPins(raw);
+}
+
+/** All resolvable stops for one itinerary day (morning, afternoon, evening, …). */
+export function getItineraryGeoPoints(
+  itinerary: CategoryItinerary,
+  dayIndex = 0,
+): GeoMapPoint[] {
+  const day = itinerary.days[dayIndex];
+  if (!day) return [];
+  return getDayActivityGeoPoints(day, dayIndex);
+}
+
+/** Whether any day in the itinerary has at least one mappable stop. */
+export function itineraryHasMapPoints(itinerary: CategoryItinerary): boolean {
+  return itinerary.days.some((_, i) => getItineraryGeoPoints(itinerary, i).length > 0);
 }
 
 /** Backward-compatible alias used by MaharashtraMapVisual / MaharashtraMap */
@@ -172,7 +219,7 @@ export function parsedItineraryToMapShape(parsed: ParsedItinerary): CategoryItin
         activities: d.slots.map((s) => ({
           time: s.time,
           title: s.location || s.activities,
-          duration: s.duration,
+          duration: [s.travelTime, s.duration].filter(Boolean).join(' · '),
           description: s.activities,
           details: `${s.why} ${s.location}`.trim(),
           icon: '📍',

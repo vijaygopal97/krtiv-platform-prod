@@ -140,9 +140,9 @@ export const CATEGORY_ITINERARIES: Record<string, CategoryItinerary> = {
         { time: "Afternoon", title: "Aga Khan Palace", duration: "2.5 hrs", description: "Freedom struggle museum, gardens", details: "A pivotal site in India's freedom movement, in unexpected Italianate.", icon: "◆" },
         { time: "Evening", title: "Raja Dinkar Kelkar Museum", duration: "2 hrs", description: "20,000+ artifacts, traditional crafts", details: "One of India's finest object museums — every cabinet is a story.", icon: "●" },
       ]),
-      day(3, "Aurangabad", "https://images.pexels.com/photos/3581368/pexels-photo-3581368.jpeg?auto=compress&cs=tinysrgb&w=1600", [
+      day(3, "Chhatrapati Sambhajinagar", "https://images.pexels.com/photos/3581368/pexels-photo-3581368.jpeg?auto=compress&cs=tinysrgb&w=1600", [
         { time: "Morning", title: "Ajanta Caves", duration: "5 hrs", description: "UNESCO Buddhist caves, ancient paintings", details: "2nd-century BCE rock-cut viharas with sculpture and pigment intact.", icon: "▲" },
-        { time: "Afternoon", title: "Bibi Ka Maqbara", duration: "2 hrs", description: "Mughal architecture, gardens", details: "The 'Taj of the Deccan' in soft Aurangabad light.", icon: "◆" },
+        { time: "Afternoon", title: "Bibi Ka Maqbara", duration: "2 hrs", description: "Mughal architecture, gardens", details: "The 'Taj of the Deccan' in soft Chhatrapati Sambhajinagar light.", icon: "◆" },
         { time: "Evening", title: "Panchakki & Old City", duration: "2 hrs", description: "Medieval water mill, bazaar, Himroo cloth", details: "Quiet engineering marvel followed by a slow market walk.", icon: "●" },
       ]),
     ],
@@ -265,7 +265,7 @@ export const CATEGORY_ITINERARIES: Record<string, CategoryItinerary> = {
     accent: "Celebrations",
     region: "Statewide",
     days: [
-      day(1, "Udaipur of the East — Aurangabad", categoryImage('weddings.jpg'), [
+      day(1, "Udaipur of the East — Chhatrapati Sambhajinagar", categoryImage('weddings.jpg'), [
         { time: "Morning", title: "Palace Venue Tour", duration: "3 hrs", description: "Heirloom suites, ballroom, gardens", details: "Begin with a palace built for ceremony.", icon: "▲" },
         { time: "Afternoon", title: "Bibi Ka Maqbara at Dusk", duration: "2 hrs", description: "Photography, location scouting", details: "The 'Taj of the Deccan' as a portrait backdrop.", icon: "◆" },
         { time: "Evening", title: "Curated Tasting", duration: "2 hrs", description: "Marathwada cuisine flight", details: "Sample the regional menu your guests will remember.", icon: "●" },
